@@ -12,10 +12,10 @@ meta-role-play-frontend/
 │  ├─ index.html
 ├─ src/
 │  ├─ @types/
-│  │  ├─ global.d.ts [ In this moment file are using just mor declae CEF-object into window-interface ]
+│  │  ├─ global.d.ts [ In this moment file are using just for declare CEF-object into window-interface ]
 │  ├─ components/
 │  ├─ hooks/
-│  │  ├─ state.ts [ Consider wrappers for Redux-hooks with typification. Dispatch or select state only with it.  ]
+│  │  ├─ state.ts [ Contains wrappers for Redux-hooks with typification. Dispatch or select state only with it.  ]
 │  ├─ store/
 │  │  ├─ store.ts [ Redux store initialization ] 
 │  ├─ App.tsx [ Root Component ] 
