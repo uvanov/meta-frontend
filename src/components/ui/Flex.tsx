@@ -45,8 +45,8 @@ const StyledFlex = styled('div', { shouldForwardProp })<FlexProps>`
   align-items: ${({ alignItems }) => alignItems};
   justify-content: ${({ justifyContent }) => justifyContent};
   flex-wrap: ${({ wrap }) => ((typeof wrap === 'boolean' && wrap) ? 'wrap' : wrap)};
-  ${({ fullHeight }) => fullHeight && `height: 100%;`};
-  ${({ fullWidth }) => fullWidth && `width: 100%;`};
+  ${({ fullHeight }) => fullHeight && 'height: 100%;'};
+  ${({ fullWidth }) => fullWidth && 'width: 100%;'};
   
   ${({ gap }) => gap !== DEFAULT_GAP && css`
     --gapX: ${(typeof gap === 'object' ? gap.x : gap) || DEFAULT_GAP};
@@ -88,5 +88,5 @@ export const Flex: React.FC<FlexProps> = (
     >
       {children}
     </StyledFlex>
-  )
+  );
 };

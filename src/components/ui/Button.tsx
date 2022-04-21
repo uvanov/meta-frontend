@@ -25,18 +25,18 @@ const BaseButton = styled.button<{ fullWidth: boolean, large: boolean }>`
   
   ${({ fullWidth }) => fullWidth && css`width: 100%`}
   ${({ large }) => large && css`padding: 39px;`}
-`
+`;
 
 const DefaultButtonVariant = () => css`
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(7px);
-`
+`;
 
 const DangerButtonVariant = () => css`
   background: #FF3E3E;
   box-shadow: 0px 49px 106px -32px #FF3E3E, inset 0px 0px 24px rgba(255, 169, 169, 0.55);
   font-weight: 500;
-`
+`;
 
 const ButtonArrowLabel = styled.div`
   position: absolute;
@@ -47,7 +47,7 @@ const ButtonArrowLabel = styled.div`
   padding: 19px;
   background: rgba(205, 56, 56, 0.4);
   border-radius: 8px;
-`
+`;
 
 // Constants
 // Создаём карту вариантов кнопок, чтобы потом ссылаться благодаря ключам на блоки стилей.

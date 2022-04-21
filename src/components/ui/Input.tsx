@@ -5,12 +5,12 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 // Local modules
-import { Flex } from "./index";
+import { Flex } from './index';
 
 // Assets
 import EyeIcon  from '../../assets/images/eye-icon.svg';
 import EyeCrossedIcon  from '../../assets/images/eye-crossed-icon.svg';
-import ErrorHintBackgroundImage from '../../assets/images/error-hint-background.png'
+import ErrorHintBackgroundImage from '../../assets/images/error-hint-background.png';
 
 // Styled Components
 const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
@@ -58,7 +58,7 @@ const StyledInput = styled.input`
 const StyledInputVisibilityControlWrapper = styled.div`
   margin-left: auto;
   cursor: pointer;
-`
+`;
 
 const ErrorHintWrapper = styled(Flex)`
   position: absolute;
@@ -72,7 +72,7 @@ const ErrorHintWrapper = styled(Flex)`
   background-image: url(${ ErrorHintBackgroundImage });
   background-size: cover;
   background-repeat: no-repeat;
-`
+`;
 
 // Constants
 const CONFIG = {
@@ -115,16 +115,16 @@ export const Input: React.FC<InputProps> = (
 
   return (
     <StyledInputWrapper
-      alignItems='center'
-      gap='26px'
+      alignItems="center"
+      gap="26px"
       isValid={ isValid }
     >
       <StyledInputIconWrapper>
         <Icon/>
       </StyledInputIconWrapper>
       <Flex
-        direction='column'
-        gap='3px'
+        direction="column"
+        gap="3px"
       >
         <StyledInputLabel>
           { label }
@@ -144,7 +144,7 @@ export const Input: React.FC<InputProps> = (
           >
             <img
               src={ isInputValueHidden ? EyeCrossedIcon : EyeIcon }
-              alt=''
+              alt=""
             />
           </StyledInputVisibilityControlWrapper>
         )
@@ -153,7 +153,7 @@ export const Input: React.FC<InputProps> = (
       {
         !isValid && (
           <ErrorHintWrapper
-            gap='12px'
+            gap="12px"
           >
             { invalidErrorText }
           </ErrorHintWrapper>
