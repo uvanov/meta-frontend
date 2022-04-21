@@ -3,10 +3,14 @@ import { Button } from './Button';
 import { Flex } from './Flex';
 import { Input } from './Input';
 import { Typography } from './Typography';
+import { MarginContainer } from './MarginContainer';
+import { Relative } from './Relative';
 
 export {
   Flex,
   Button,
   Input,
-  Typography
+  Typography,
+  MarginContainer,
+  Relative
 };
