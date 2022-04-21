@@ -1,34 +1,41 @@
 /** @jsxImportSource @emotion/react */
 // Import modules
-import React, { FunctionComponent, SVGProps, useState } from 'react';
+import React, {FunctionComponent, SVGProps, useState} from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import {css} from '@emotion/react';
 
 // Local modules
-import { Flex } from './index';
+import {
+  Flex,
+  Typography
+} from './index';
 
 // Assets
-import EyeIcon  from '../../assets/images/eye-icon.svg';
-import EyeCrossedIcon  from '../../assets/images/eye-crossed-icon.svg';
+import EyeIcon from '../../assets/images/eye-icon.svg';
+import EyeCrossedIcon from '../../assets/images/eye-crossed-icon.svg';
 import ErrorHintBackgroundImage from '../../assets/images/error-hint-background.png';
+import WarningIcon from '../../assets/images/warning-icon.svg';
+
 
 // Styled Components
 const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
-  position:relative;
+  position: relative;
   background-color: #1B1A23;
   border: 2px solid transparent;
   border-radius: 9px;
   padding: 17px 27px 17px 17px;
   
+  font-family: Montserrat, sans-serif;
+  
   box-sizing: border-box;
   transition: border .1s;
   
-  ${({ isValid }) => !isValid && css`
+  ${({isValid}) => !isValid && css`
     border: 2px solid #FF3E3E;
   `}
 `;
 
-const StyledInputIconWrapper = styled.div`
+const StyledInputIconWrapper = styled(Flex)`
   background: rgba(20, 19, 27, 0.56);
   border-radius: 5px;
   padding: 20px;
@@ -37,12 +44,12 @@ const StyledInputIconWrapper = styled.div`
 const StyledInputLabel = styled.span`
   font-size: 14px;
   color: #817D8E;
-  font-family: Montserrat, sans-serif;
+  font-family: inherit;
   font-weight: 500;
 `;
 
 const StyledInput = styled.input`
-  font-family: Montserrat, sans-serif;
+  font-family: inherit;
   font-weight: 600;
   font-size: 18px;
   background-color: transparent;
@@ -60,7 +67,7 @@ const StyledInputVisibilityControlWrapper = styled.div`
   cursor: pointer;
 `;
 
-const ErrorHintWrapper = styled(Flex)`
+const ErrorHintWrapper = styled(Flex)<{ show: boolean }>`
   position: absolute;
   left: 100%;
   
@@ -69,9 +76,26 @@ const ErrorHintWrapper = styled(Flex)`
   padding: 16px 24px 16px 46px;
   box-sizing: border-box;
   
-  background-image: url(${ ErrorHintBackgroundImage });
+  background-image: url(${ErrorHintBackgroundImage});
   background-size: cover;
   background-repeat: no-repeat;
+  
+  transform: translateX(100px);
+  opacity: 0;
+  
+  ${({ show }) => show && css`
+    transform: translateX(0);
+    opacity: 1;
+  `}
+  
+  transition: transform .2s ease, opacity .2s ease;
+`;
+
+const ErrorHintIconWrapper = styled(Flex)`
+  min-width: 56px;
+  height: 56px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
 `;
 
 // Constants
@@ -117,9 +141,12 @@ export const Input: React.FC<InputProps> = (
     <StyledInputWrapper
       alignItems="center"
       gap="26px"
-      isValid={ isValid }
+      isValid={isValid}
     >
-      <StyledInputIconWrapper>
+      <StyledInputIconWrapper
+        justifyContent="center"
+        alignItems="center"
+      >
         <Icon/>
       </StyledInputIconWrapper>
       <Flex
@@ -127,12 +154,12 @@ export const Input: React.FC<InputProps> = (
         gap="3px"
       >
         <StyledInputLabel>
-          { label }
+          {label}
         </StyledInputLabel>
         <StyledInput
-          type={ isInputValueHidden ? 'password' : 'text' }
-          placeholder={ placeholder ? placeholder : CONFIG.DEFAULT_PLACEHOLDER }
-          value={ value ? value : '' }
+          type={isInputValueHidden ? 'password' : 'text'}
+          placeholder={placeholder ? placeholder : CONFIG.DEFAULT_PLACEHOLDER}
+          value={value ? value : ''}
           onChange={onChange}
         />
       </Flex>
@@ -143,7 +170,7 @@ export const Input: React.FC<InputProps> = (
             onClick={() => changeInputValueVisibility()}
           >
             <img
-              src={ isInputValueHidden ? EyeCrossedIcon : EyeIcon }
+              src={isInputValueHidden ? EyeCrossedIcon : EyeIcon}
               alt=""
             />
           </StyledInputVisibilityControlWrapper>
@@ -151,13 +178,42 @@ export const Input: React.FC<InputProps> = (
       }
 
       {
-        !isValid && (
-          <ErrorHintWrapper
-            gap="12px"
+
+        <ErrorHintWrapper
+          gap="12px"
+          alignItems="center"
+          show={ !isValid }
+        >
+          <ErrorHintIconWrapper
+            justifyContent="center"
+            alignItems="center"
           >
-            { invalidErrorText }
-          </ErrorHintWrapper>
-        )
+            <img
+              src={WarningIcon}
+              alt=""
+            />
+          </ErrorHintIconWrapper>
+
+          <Flex
+            direction="column"
+            gap="1px"
+          >
+            <Typography
+              variant="middle"
+              color="black"
+              bold
+            >
+              Ошибка
+            </Typography>
+            <Typography
+              variant="small"
+              color="black"
+            >
+              {invalidErrorText}
+            </Typography>
+          </Flex>
+        </ErrorHintWrapper>
+
       }
 
     </StyledInputWrapper>
