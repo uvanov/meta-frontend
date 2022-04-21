@@ -66,7 +66,8 @@ export const Flex: React.FC<FlexProps> = (
     gap,
     inline,
     justifyContent,
-    wrap
+    wrap,
+    ...remainingProps
   }) => {
 
   let flexPropsObject = {
@@ -83,6 +84,7 @@ export const Flex: React.FC<FlexProps> = (
   return (
     <StyledFlex
       { ...flexPropsObject }
+      { ...remainingProps }
     >
       {children}
     </StyledFlex>
