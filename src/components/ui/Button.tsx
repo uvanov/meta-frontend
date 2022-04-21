@@ -61,6 +61,7 @@ interface ButtonProps {
   variant: keyof typeof BUTTON_VARIANTS_MAP; // Создаём литерал, на основе параметров из BUTTON_VARIANTS_MAP
   large: boolean;
   fullWidth: boolean;
+  onClick?: () => void;
 }
 
 // Exports
