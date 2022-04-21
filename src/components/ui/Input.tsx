@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 // Import modules
-import React, {FunctionComponent, SVGProps, useState} from 'react';
+import React, { FunctionComponent, SVGProps, useState } from 'react';
 import styled from '@emotion/styled';
-import {css} from '@emotion/react';
+import { css } from '@emotion/react';
 
 // Local modules
 import {
@@ -30,7 +30,7 @@ const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
   box-sizing: border-box;
   transition: border .1s;
   
-  ${({isValid}) => !isValid && css`
+  ${({ isValid }) => !isValid && css`
     border: 2px solid #FF3E3E;
   `}
 `;
@@ -139,39 +139,39 @@ export const Input: React.FC<InputProps> = (
 
   return (
     <StyledInputWrapper
-      alignItems="center"
-      gap="26px"
-      isValid={isValid}
+      alignItems='center'
+      gap='26px'
+      isValid={ isValid }
     >
       <StyledInputIconWrapper
-        justifyContent="center"
-        alignItems="center"
+        justifyContent='center'
+        alignItems='center'
       >
         <Icon/>
       </StyledInputIconWrapper>
       <Flex
-        direction="column"
-        gap="3px"
+        direction='column'
+        gap='3px'
       >
         <StyledInputLabel>
           {label}
         </StyledInputLabel>
         <StyledInput
-          type={isInputValueHidden ? 'password' : 'text'}
-          placeholder={placeholder ? placeholder : CONFIG.DEFAULT_PLACEHOLDER}
-          value={value ? value : ''}
-          onChange={onChange}
+          type={ isInputValueHidden ? 'password' : 'text' }
+          placeholder={ placeholder ? placeholder : CONFIG.DEFAULT_PLACEHOLDER }
+          value={ value ? value : '' }
+          onChange={ onChange }
         />
       </Flex>
 
       {
         variant === 'password' && (
           <StyledInputVisibilityControlWrapper
-            onClick={() => changeInputValueVisibility()}
+            onClick={ () => changeInputValueVisibility() }
           >
             <img
-              src={isInputValueHidden ? EyeCrossedIcon : EyeIcon}
-              alt=""
+              src={ isInputValueHidden ? EyeCrossedIcon : EyeIcon }
+              alt=''
             />
           </StyledInputVisibilityControlWrapper>
         )
@@ -180,34 +180,34 @@ export const Input: React.FC<InputProps> = (
       {
 
         <ErrorHintWrapper
-          gap="12px"
-          alignItems="center"
+          gap='12px'
+          alignItems='center'
           show={ !isValid }
         >
           <ErrorHintIconWrapper
-            justifyContent="center"
-            alignItems="center"
+            justifyContent='center'
+            alignItems='center'
           >
             <img
-              src={WarningIcon}
-              alt=""
+              src={ WarningIcon }
+              alt=''
             />
           </ErrorHintIconWrapper>
 
           <Flex
-            direction="column"
-            gap="1px"
+            direction='column'
+            gap='1px'
           >
             <Typography
-              variant="middle"
-              color="black"
+              variant='middle'
+              color='black'
               bold
             >
               Ошибка
             </Typography>
             <Typography
-              variant="small"
-              color="black"
+              variant='small'
+              color='black'
             >
               {invalidErrorText}
             </Typography>
