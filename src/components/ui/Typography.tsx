@@ -45,11 +45,15 @@ const paragraph = css`
 
 const middle = css`
   font-size: 18px;
-`
+`;
+
+const small = css`
+  font-size: 14px;
+`;
 
 // Constants
 const TYPOGRAPHY_VARIANT_MAP = {
-  title, subtitle, paragraph, middle
+  title, subtitle, paragraph, middle, small
 };
 
 // Types
