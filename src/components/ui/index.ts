@@ -2,9 +2,11 @@
 import { Button } from './Button';
 import { Flex } from './Flex';
 import { Input } from './Input';
+import { Typography } from './Typography';
 
 export {
   Flex,
   Button,
-  Input
+  Input,
+  Typography
 };
