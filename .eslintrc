@@ -1,0 +1,12 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "quotes": ["error", "single"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "indent": ["warn", 2],
+    "semi": ["warn", "always"],
+    "max-len": ["error", {
+      "code": 120
+    }]
+  }
+}
