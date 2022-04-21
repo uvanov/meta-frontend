@@ -72,7 +72,7 @@ export const Button: React.FC<ButtonProps> = ({ children, variant, ...remainingP
   return (
     <BaseButton
       css={ styleVariant }
-      {...remainingProps}
+      { ...remainingProps }
     >
       { children }
 
