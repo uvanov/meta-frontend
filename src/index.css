@@ -3,8 +3,13 @@
 body {
   margin: 0;
   background-color: #929292;
+  overflow: hidden;
 }
 
 ul, input{
   padding: 0;
+}
+
+p {
+  margin: 0;
 }
