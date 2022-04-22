@@ -11,10 +11,10 @@ import {
 } from './index';
 
 // Assets
-import EyeIcon from '../../assets/images/eye-icon.svg';
-import EyeCrossedIcon from '../../assets/images/eye-crossed-icon.svg';
-import ErrorHintBackgroundImage from '../../assets/images/error-hint-background.png';
-import WarningIcon from '../../assets/images/warning-icon.svg';
+import EyeIcon from '../../assets/images/input/eye-icon.svg';
+import EyeCrossedIcon from '../../assets/images/input/eye-crossed-icon.svg';
+import ErrorHintBackgroundImage from '../../assets/images/input/error-hint-background.png';
+import WarningIcon from '../../assets/images/input/warning-icon.svg';
 
 // Styled Components
 const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
