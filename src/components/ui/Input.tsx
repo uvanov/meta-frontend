@@ -16,7 +16,6 @@ import EyeCrossedIcon from '../../assets/images/eye-crossed-icon.svg';
 import ErrorHintBackgroundImage from '../../assets/images/error-hint-background.png';
 import WarningIcon from '../../assets/images/warning-icon.svg';
 
-
 // Styled Components
 const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
   position: relative;
@@ -154,7 +153,7 @@ export const Input: React.FC<InputProps> = (
         gap='3px'
       >
         <StyledInputLabel>
-          {label}
+          { label }
         </StyledInputLabel>
         <StyledInput
           type={ isInputValueHidden ? 'password' : 'text' }
@@ -193,7 +192,6 @@ export const Input: React.FC<InputProps> = (
               alt=''
             />
           </ErrorHintIconWrapper>
-
           <Flex
             direction='column'
             gap='1px'
@@ -213,9 +211,7 @@ export const Input: React.FC<InputProps> = (
             </Typography>
           </Flex>
         </ErrorHintWrapper>
-
       }
-
     </StyledInputWrapper>
   );
 };
