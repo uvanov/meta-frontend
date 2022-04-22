@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 // Local modules
 import { App } from './App';
+import './index.css';
 import { store } from './store/store';
 
 // Render App
