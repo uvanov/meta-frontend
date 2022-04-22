@@ -1,4 +1,4 @@
-import "@emotion/react";
+import '@emotion/react';
 // Import local modules
 import { CEF } from '../CEF';
 import { themeConfig } from '../lib/theme';
@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-declare module "@emotion/react" {
+declare module '@emotion/react' {
   export interface Theme extends themeConfig {}
 }
 

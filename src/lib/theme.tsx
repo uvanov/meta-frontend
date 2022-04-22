@@ -2,14 +2,9 @@
 import React from 'react';
 import {
   css,
-  Global, Theme,
+  Global,
   ThemeProvider
 } from '@emotion/react';
-
-
-
-
-
 
 // Init Theme Config
 export const themeConfig = {
@@ -62,7 +57,6 @@ export const themeConfig = {
     darkgray: '#14131b'
   }
 };
-
 
 // Create custom ThemeProvider
 export const Provider: React.FC = ({ children }) => (
