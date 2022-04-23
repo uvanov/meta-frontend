@@ -3,6 +3,7 @@ import React from 'react';
 import {
   css,
   Global,
+  Theme,
   ThemeProvider
 } from '@emotion/react';
 
@@ -58,9 +59,13 @@ export const themeConfig = {
   }
 };
 
+interface Props {
+  theme: Theme;
+}
+
 // Create custom ThemeProvider
-export const Provider: React.FC = ({ children }) => (
-  <ThemeProvider theme={ themeConfig }>
+export const Provider: React.FC<Props> = ({ children, theme = themeConfig }) => (
+  <ThemeProvider theme={ theme }>
     <Global
       styles={ (theme) => {
         // @ts-ignore

@@ -1,7 +1,8 @@
+import React from 'react';
 import '@emotion/react';
 // Import local modules
-import { CEF } from '../CEF';
-import { themeConfig } from '../lib/theme';
+import { CEF } from './CEF';
+import { themeConfig } from './lib/theme';
 
 // Change Window structure
 declare global {
