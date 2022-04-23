@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 // Local modules
+import { useAppDispatch, useAppSelector } from '../../../hooks/state';
 import { PageSwitcher } from './components/PageSwitcher';
+import { Registration } from './components/Registration';
+import { WelcomeBackground } from './components/WelcomeBackground';
+import { Flex } from '../../ui';
 
 // Assets
 import AuthenticationBackgroundImage from '../../../assets/images/authentication/authentication-background-image.jpg';
@@ -11,7 +15,7 @@ import AuthenticationWelcomeImage from '../../../assets/images/authentication/au
 
 
 // Styled Components
-const AuthenticationBackground = styled.div`
+const AuthenticationBackground = styled(Flex)`
   position: absolute;
   top: 0;
   right: 0;
@@ -22,14 +26,6 @@ const AuthenticationBackground = styled.div`
   background-repeat: no-repeat;
 `;
 
-const AuthenticationWelcome = styled.img`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-`;
-
 // Types
 type ViewType = 'registration' | 'authorization' | 'recovery';
 
@@ -37,10 +33,28 @@ type ViewType = 'registration' | 'authorization' | 'recovery';
 export const Authentication = () => {
 
   const [view, setView] = useState<ViewType>('registration');
+  const isShown = useAppSelector(state => state.authentication.isShown);
 
   return (
-    <AuthenticationBackground>
-      <PageSwitcher/>
-    </AuthenticationBackground>
+    <>
+      {
+        isShown && (
+          <AuthenticationBackground
+            justifyContent='center'
+            alignItems='center'
+          >
+            <PageSwitcher/>
+            <Flex
+              justifyContent='center'
+              alignItems='center'
+            >
+              <WelcomeBackground/>
+              <Registration/>
+            </Flex>
+
+          </AuthenticationBackground>
+        )
+      }
+    </>
   );
 };

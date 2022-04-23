@@ -15,6 +15,9 @@ const StyledPageSwitcher = styled.div`
   grid-template-columns: repeat(2, 1fr);
 
   position: absolute;
+  top: 0;
+  left: 0;
+  
   width: 100vh;    
   height: 87px;
   transform-origin: left top;
