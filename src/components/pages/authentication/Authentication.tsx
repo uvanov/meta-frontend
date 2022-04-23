@@ -1,13 +1,14 @@
 // Import modules
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 // Local modules
-
+import { PageSwitcher } from './components/PageSwitcher';
 
 // Assets
 import AuthenticationBackgroundImage from '../../../assets/images/authentication/authentication-background-image.jpg';
 import AuthenticationWelcomeImage from '../../../assets/images/authentication/authentication-welcome-background.png';
+
 
 // Styled Components
 const AuthenticationBackground = styled.div`
@@ -21,17 +22,6 @@ const AuthenticationBackground = styled.div`
   background-repeat: no-repeat;
 `;
 
-const AuthenticationPageSwitcher = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-
-  width: 100vh;
-  height: 50px;
-  transform: rotate(-90deg);
-  background-color: red;
-`;
-
 const AuthenticationWelcome = styled.img`
   position: absolute;
   top: 0;
@@ -39,7 +29,6 @@ const AuthenticationWelcome = styled.img`
   bottom: 0;
   left: 0;
 `;
-
 
 // Types
 type ViewType = 'registration' | 'authorization' | 'recovery';
@@ -51,9 +40,7 @@ export const Authentication = () => {
 
   return (
     <AuthenticationBackground>
-      <AuthenticationPageSwitcher>
-
-      </AuthenticationPageSwitcher>
+      <PageSwitcher/>
     </AuthenticationBackground>
   );
 };
