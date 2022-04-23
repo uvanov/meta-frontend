@@ -33,21 +33,21 @@ const BaseTypography = styled.p<Omit<TypographyProps, 'variant'>>`
   color: ${({ color, theme }) => color === 'gray' ? theme.palette.gray : color};
 `;
 
-const title: VariantFunction = ({ typography: { size} }) => css`
+const title: VariantFunction = ({ typography: { size } }) => css`
   font-weight: 800;
   font-size: ${ size.title };
 `;
 
-const subtitle: VariantFunction = ({ typography: { size} }) => css`
+const subtitle: VariantFunction = ({ typography: { size } }) => css`
   font-weight: 600;
   font-size: ${ size.subtitle };
 `;
 
-const middle: VariantFunction = ({ typography: { size} }) => css`
+const middle: VariantFunction = ({ typography: { size } }) => css`
   font-size: ${ size.middle };
 `;
 
-const small: VariantFunction = ({ typography: { size} }) => css`
+const small: VariantFunction = ({ typography: { size } }) => css`
   font-size: ${ size.small };
 `;
 

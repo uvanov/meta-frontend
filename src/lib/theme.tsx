@@ -67,9 +67,9 @@ interface Props {
 export const Provider: React.FC<Props> = ({ children, theme = themeConfig }) => (
   <ThemeProvider theme={ theme }>
     <Global
-      styles={(theme) => {
+      styles={ (theme) => {
         return css``;
-      }}
+      } }
     />
     { children }
   </ThemeProvider>
