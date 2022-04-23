@@ -60,18 +60,16 @@ export const themeConfig = {
 };
 
 interface Props {
-  theme: Theme;
+  theme?: Theme;
 }
 
 // Create custom ThemeProvider
 export const Provider: React.FC<Props> = ({ children, theme = themeConfig }) => (
   <ThemeProvider theme={ theme }>
     <Global
-      styles={ (theme) => {
-        // @ts-ignore
-        console.log(theme.palette);
+      styles={(theme) => {
         return css``;
-      } }
+      }}
     />
     { children }
   </ThemeProvider>

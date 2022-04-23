@@ -11,8 +11,10 @@ declare global {
   }
 }
 
+// Expand Theme type
+type ThemeConfig = typeof themeConfig;
 declare module '@emotion/react' {
-  export interface Theme extends themeConfig {}
+  export interface Theme extends ThemeConfig {}
 }
 
 

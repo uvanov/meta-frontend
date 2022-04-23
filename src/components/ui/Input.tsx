@@ -2,7 +2,10 @@
 // Import modules
 import React, { FunctionComponent, SVGProps, useState } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import {
+  css,
+  Theme
+} from '@emotion/react';
 
 // Local modules
 import {
@@ -19,18 +22,16 @@ import WarningIcon from '../../assets/images/input/warning-icon.svg';
 // Styled Components
 const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
   position: relative;
-  background-color: #1B1A23;
+  background-color: ${({ theme }) => theme.palette.bluegray};
   border: 2px solid transparent;
   border-radius: 9px;
   padding: 17px 27px 17px 17px;
   
-  font-family: Montserrat, sans-serif;
-  
   box-sizing: border-box;
   transition: border .1s;
   
-  ${({ isValid }) => !isValid && css`
-    border: 2px solid #FF3E3E;
+  ${({ isValid, theme }) => !isValid && css`
+    border: 2px solid ${ theme.palette.red };
   `}
 `;
 
@@ -41,8 +42,8 @@ const StyledInputIconWrapper = styled(Flex)`
 `;
 
 const StyledInputLabel = styled.span`
-  font-size: 14px;
-  color: #817D8E;
+  font-size: ${({ theme }) => theme.typography.size.small};
+  color: ${({ theme }) => theme.palette.gray};
   font-family: inherit;
   font-weight: 500;
 `;
@@ -50,14 +51,14 @@ const StyledInputLabel = styled.span`
 const StyledInput = styled.input`
   font-family: inherit;
   font-weight: 600;
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.typography.size.middle};
   background-color: transparent;
   border: 0;
   outline: 0;
-  color: #817D8E;
+  color: ${({ theme }) => theme.palette.gray};
   
   &::placeholder {
-    color: #817D8E;
+    color: ${({ theme }) => theme.palette.gray};
   }
 `;
 
@@ -113,7 +114,7 @@ interface InputProps {
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isValid: boolean;
-  invalidErrorText?: string
+  invalidErrorText?: string;
 }
 
 // Exports
