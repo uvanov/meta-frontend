@@ -18,21 +18,22 @@ import { ReactComponent as KeyIcon } from '../../../../assets/images/authenticat
 import { ReactComponent as DiscountIcon } from '../../../../assets/images/authentication/discount-icon.svg';
 
 // Styled Components
+const StyledFormWindow = styled(FormWindow)`
+  padding-top: 98px;
+  padding-bottom: 98px;
+`;
 
 // Exports
-export const Registration = () => {
+export const Authorization = () => {
 
   const [loginValue, setLoginValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [repeatPasswordValue, setRepeatPasswordValue] = useState('');
-  const [promoValue, setPromoValue] = useState('');
 
-  let values = {loginValue, emailValue, passwordValue, repeatPasswordValue, promoValue};
+  let values = {loginValue, passwordValue};
 
   return (
-    <FormWindow
-      title='РЕГИСТРАЦИЯ'
+    <StyledFormWindow
+      title='АВТОРИЗАЦИЯ'
       subtitle='ВНИМАТЕЛЬНО ВВОДИТЕ ЛИЧНЫЕ ДАННЫЕ, ОТВЕТСТВЕННОСТЬ ЗА ВАШ АККАУНТ НЕСЕТЕ ТОЛЬКО ВЫ.'
     >
       <Flex
@@ -50,16 +51,6 @@ export const Registration = () => {
           onChange={ event => setLoginValue(event.target.value) }
         />
         <Input
-          variant='text'
-          label='Почта'
-          placeholder='Ваша почта'
-          Icon={ EmailIcon }
-          fullWidth
-          isValid={ true }
-          value={ emailValue }
-          onChange={ event => setEmailValue(event.target.value) }
-        />
-        <Input
           variant='password'
           label='Пароль'
           placeholder='Ваш пароль'
@@ -69,36 +60,22 @@ export const Registration = () => {
           value={ passwordValue }
           onChange={ event => setPasswordValue(event.target.value) }
         />
-        <Input
-          variant='password'
-          label='Повторите пароль'
-          placeholder='Ваш пароль'
-          Icon={ KeyIcon }
-          fullWidth
-          isValid={ true }
-          value={ repeatPasswordValue }
-          onChange={ event => setRepeatPasswordValue(event.target.value) }
-        />
-        <Input
-          variant='text'
-          label='Промокод'
-          placeholder='Ваш промокод'
-          Icon={ DiscountIcon }
-          fullWidth
-          isValid={ true }
-          value={ promoValue }
-          onChange={ event => setPromoValue(event.target.value) }
-          invalidErrorText='Немного текста'
-        />
         <Button
           variant='danger'
           large={ true }
           fullWidth={ true }
           onClick={ () => console.log(values) }
         >
-          ЗАРЕГИСТРИРОВАТЬСЯ
+          ВОЙТИ
+        </Button>
+        <Button
+          variant='default'
+          fullWidth={ true }
+          onClick={ () => console.log(values) }
+        >
+          ЗАБЫЛ ПАРОЛЬ
         </Button>
       </Flex>
-    </FormWindow>
+    </StyledFormWindow>
   );
 };
