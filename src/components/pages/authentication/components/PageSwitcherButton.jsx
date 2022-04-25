@@ -8,7 +8,7 @@ import {
 } from '../../../ui';
 
 // Styled Components
-const StyledButton = styled.button<{ variant: SwitcherButtonVariant }>`
+const StyledButton = styled.button`
   width: 100%;
   border: 0;
   outline: 0;
@@ -23,17 +23,9 @@ const StyledButton = styled.button<{ variant: SwitcherButtonVariant }>`
   `}
 `;
 
-// Types
-type SwitcherButtonVariant = 'default' | 'red';
-interface SwitcherButtonProps {
-  variant: SwitcherButtonVariant;
-  iconSrc?: string;
-  text: string
-  onClick?: () => void;
-}
 
 // Exports
-export const PageSwitcherButton: React.FC<SwitcherButtonProps> = (
+export const PageSwitcherButton = (
   {
     variant,
     iconSrc,

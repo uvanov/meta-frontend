@@ -4,6 +4,9 @@ import styled from '@emotion/styled';
 
 // Local components
 import { PageSwitcherButton } from './PageSwitcherButton';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/state';
+import { authenticationSlice } from '../../../../store/slices/AuthenticationSlice';
+
 
 // Assets
 import AuthorizationButtonIcon from '../../../../assets/images/authentication/authorization-button-icon.svg';
@@ -41,17 +44,34 @@ const StyledPageSwitcher = styled.div`
 
 // Exports
 export const PageSwitcher = () => {
+
+  const authenticationView = useAppSelector(state => state.authentication.view);
+  const dispatch = useAppDispatch();
+  const { setAuthenticationView } = authenticationSlice.actions;
+
+  const switchView = (view) => {
+    // Предотвращение мисскликов игрока, чтобы не было лишних ре-рендеров
+    if(authenticationView === view){
+      return;
+    }
+
+    dispatch(setAuthenticationView({ view }));
+  };
+
+
   return (
     <StyledPageSwitcher>
       <PageSwitcherButton
         variant='default'
         text='АВТОРИЗАЦИЯ'
         iconSrc={ AuthorizationButtonIcon }
+        onClick={ () => switchView('authorization') }
       />
       <PageSwitcherButton
         variant='red'
         text='РЕГИСТРАЦИЯ'
         iconSrc={ RegistrationButtonIcon }
+        onClick={ () => switchView('registration') }
       />
     </StyledPageSwitcher>
   );
