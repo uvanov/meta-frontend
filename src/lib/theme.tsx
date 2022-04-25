@@ -55,6 +55,7 @@ export const themeConfig = {
     orange: '#FFA14A',
     gray: '#817D8E',
     bluegray: '#1D1C28',
+    darkbluegray: '#1B1A23',
     darkgray: '#14131b'
   }
 };
