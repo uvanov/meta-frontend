@@ -30,6 +30,12 @@ const BaseTypography = styled.p<Omit<TypographyProps, 'variant'>>`
     font-weight: bold;
   `}
   
+   ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+  `}
+  
+  
+  
   color: ${({ color, theme }) => color === 'gray' ? theme.palette.gray : color};
 `;
 
@@ -68,6 +74,7 @@ interface TypographyProps {
   uppercase?: boolean;
   underline?: boolean;
   bold?: boolean;
+  fullWidth?: boolean;
 }
 
 // Exports

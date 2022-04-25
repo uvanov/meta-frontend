@@ -20,7 +20,7 @@ import ErrorHintBackgroundImage from '../../assets/images/input/error-hint-backg
 import WarningIcon from '../../assets/images/input/warning-icon.svg';
 
 // Styled Components
-const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
+const StyledInputWrapper = styled.div<{ isValid: boolean }>`
   position: relative;
   background-color: ${({ theme }) => theme.palette.bluegray};
   border: 2px solid transparent;
@@ -139,6 +139,8 @@ export const Input: React.FC<InputProps> = (
 
   return (
     <StyledInputWrapper
+      as={ Flex }
+      // @ts-ignore
       alignItems='center'
       gap='26px'
       isValid={ isValid }

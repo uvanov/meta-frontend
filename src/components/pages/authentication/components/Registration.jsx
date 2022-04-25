@@ -51,7 +51,7 @@ export const Registration = () => {
         variant='text'
         label='Логин'
         Icon={ UserIcon }
-        isValid={ false }
+        isValid={ "false" }
         value={ loginValue }
         onChange={ event => setLoginValue(event.target.value) }
       />
