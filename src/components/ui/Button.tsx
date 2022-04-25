@@ -8,7 +8,7 @@ import { css } from '@emotion/react';
 import { ReactComponent as ArrowRight } from '../../assets/images/arrow-right.svg';
 
 // Styled Components
-const BaseButton = styled.button<{ fullWidth: boolean, large: boolean }>`
+const BaseButton = styled.button<{ fullWidth: boolean, large?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@ const BUTTON_VARIANTS_MAP = {
 // Interfaces
 interface ButtonProps {
   variant: keyof typeof BUTTON_VARIANTS_MAP; // Создаём литерал, на основе параметров из BUTTON_VARIANTS_MAP
-  large: boolean;
+  large?: boolean;
   fullWidth: boolean;
   onClick?: () => void;
 }

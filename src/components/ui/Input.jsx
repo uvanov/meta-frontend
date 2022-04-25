@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 // Import modules
-import React, { FunctionComponent, SVGProps, useState } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import {
   css,
@@ -20,9 +20,13 @@ import ErrorHintBackgroundImage from '../../assets/images/input/error-hint-backg
 import WarningIcon from '../../assets/images/input/warning-icon.svg';
 
 // Styled Components
-const StyledInputWrapper = styled.div<{ isValid: boolean }>`
+const StyledInputWrapper = styled(Flex, {
+  shouldForwardProp(prop){
+    return prop !== 'isValid';
+  }
+})`
   position: relative;
-  background-color: ${({ theme }) => theme.palette.bluegray};
+  background-color: ${({ theme }) => theme.palette.darkbluegray};
   border: 2px solid transparent;
   border-radius: 9px;
   padding: 17px 27px 17px 17px;
@@ -33,12 +37,18 @@ const StyledInputWrapper = styled.div<{ isValid: boolean }>`
   ${({ isValid, theme }) => !isValid && css`
     border: 2px solid ${ theme.palette.red };
   `}
+  
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+  `}
+ 
 `;
 
 const StyledInputIconWrapper = styled(Flex)`
-  background: rgba(20, 19, 27, 0.56);
+  width: 61px;
+  height: 61px;
+  background-color: ${({ theme }) => theme.palette.darkgray};
   border-radius: 5px;
-  padding: 20px;
 `;
 
 const StyledInputLabel = styled.span`
@@ -67,7 +77,11 @@ const StyledInputVisibilityControlWrapper = styled.div`
   cursor: pointer;
 `;
 
-const ErrorHintWrapper = styled(Flex)<{ show: boolean }>`
+const ErrorHintWrapper = styled(Flex, {
+  shouldForwardProp(prop){
+    return prop !== 'isValid';
+  }
+})`
   position: absolute;
   left: 100%;
   
@@ -103,30 +117,17 @@ const CONFIG = {
   DEFAULT_PLACEHOLDER: 'Placeholder'
 };
 
-// Interfaces
-type InputVariantsType = 'text' | 'password';
-
-interface InputProps {
-  variant: InputVariantsType;
-  label: string;
-  value: string;
-  Icon: FunctionComponent<SVGProps<SVGSVGElement>> | string;
-  placeholder?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isValid: boolean;
-  invalidErrorText?: string;
-}
-
 // Exports
-export const Input: React.FC<InputProps> = (
+export const Input = (
   {
     variant,
-    label,
+    label = 'Label',
     Icon,
-    placeholder,
+    placeholder = 'Placeholder',
     value,
     onChange,
-    isValid,
+    isValid = true,
+    fullWidth = false,
     invalidErrorText
   }) => {
 
@@ -139,11 +140,10 @@ export const Input: React.FC<InputProps> = (
 
   return (
     <StyledInputWrapper
-      as={ Flex }
-      // @ts-ignore
       alignItems='center'
       gap='26px'
       isValid={ isValid }
+      fullWidth={ fullWidth }
     >
       <StyledInputIconWrapper
         justifyContent='center'
@@ -180,7 +180,6 @@ export const Input: React.FC<InputProps> = (
       }
 
       {
-
         <ErrorHintWrapper
           gap='12px'
           alignItems='center'
