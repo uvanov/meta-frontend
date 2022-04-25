@@ -14,6 +14,8 @@ const StyledWelcomeBackground = styled.div`
   background-image: url(${WelcomeBackgroundImage});
   background-size: cover;
   background-repeat: no-repeat;
+  
+  margin-left: -250px;
 `;
 
 // Exports
