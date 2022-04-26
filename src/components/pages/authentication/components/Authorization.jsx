@@ -112,6 +112,7 @@ export const Authorization = () => {
             value={ formik.values.login }
             placeholder='Ваш логин'
             onChange={ formik.handleChange }
+            onBlur={ formik.handleBlur }
             Icon={ UserIcon }
             fullWidth
             isValid={ isLoginValid }
@@ -125,6 +126,7 @@ export const Authorization = () => {
             value={ formik.values.password }
             placeholder='Ваш пароль'
             onChange={ formik.handleChange }
+            onBlur={ formik.handleBlur }
             Icon={ KeyIcon }
             fullWidth
             isValid={ isPasswordValid }
