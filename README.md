@@ -27,3 +27,41 @@ meta-role-play-frontend/
  While developing, i'll try to leave some comments. Hope it will be helpful.
  But if u are in a totally pizdec - just message me by Telegram: @uvanov_tg
 ```
+
+<br>
+
+## CEF-Execute API 
+I created a small api, which can help you to interact with Redux-store and React interfaces. 
+You can see a global object into window, called "CEF'. There is his methods list. 
+
+### Authentication
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| Visibility | Change visibility of authentication interface | visibility: `boolean` |
+| Clear | Clear server errors from one of the windows ( can't clear client-side validation errors ) | interfaceToClear: **string** (`authorization`, `registration`, `recovery`)|
+
+<br>
+
+#### Authentication.Authorization
+
+| Method | Description | Parameters |   
+|---|---|---|
+| Error | Display error to one of the inputs | field: **string** (`login`, `password`), text: **string**| 
+
+<br>
+
+#### Authentication.Registration
+
+| Method | Description | Parameters |   
+|---|---|---|
+| Error | Display error to one of the inputs | field: **string** (`login`, `email`, `password`, `repeatPassword`, `promo`), text: **string**| 
+
+<br>
+
+#### Authentication.Recovery
+
+| Method | Description | Parameters |   
+|---|---|---|
+| Error | Display error to one of the inputs | field: **string** (`email`, `code`), text: **string**| 
+
