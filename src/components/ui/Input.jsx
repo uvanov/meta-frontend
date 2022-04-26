@@ -128,7 +128,8 @@ export const Input = (
     onChange,
     isValid = true,
     fullWidth = false,
-    invalidErrorText
+    errorText,
+    ...remainingProps
   }) => {
 
   const isVariantPassword = variant === 'password';
@@ -163,6 +164,7 @@ export const Input = (
           placeholder={ placeholder ? placeholder : CONFIG.DEFAULT_PLACEHOLDER }
           value={ value ? value : '' }
           onChange={ onChange }
+          { ...remainingProps }
         />
       </Flex>
 
@@ -209,7 +211,7 @@ export const Input = (
               variant='small'
               color='black'
             >
-              {invalidErrorText}
+              { errorText }
             </Typography>
           </Flex>
         </ErrorHintWrapper>
