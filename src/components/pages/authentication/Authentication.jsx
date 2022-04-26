@@ -11,8 +11,8 @@ import { Flex } from '../../ui';
 
 // Assets
 import AuthenticationBackgroundImage from '../../../assets/images/authentication/authentication-background-image.jpg';
-import AuthenticationWelcomeImage from '../../../assets/images/authentication/authentication-welcome-background.png';
-
+import { Authorization } from './components/Authorization';
+import { Recovery } from './components/Recovery';
 
 // Styled Components
 const AuthenticationBackground = styled(Flex)`
@@ -26,14 +26,18 @@ const AuthenticationBackground = styled(Flex)`
   background-repeat: no-repeat;
 `;
 
-// Types
-type ViewType = 'registration' | 'authorization' | 'recovery';
 
 // Exports
 export const Authentication = () => {
 
-  const [view, setView] = useState<ViewType>('registration');
   const isShown = useAppSelector(state => state.authentication.isShown);
+  const view = useAppSelector(state => state.authentication.view);
+
+  const VIEW_MAP = {
+    registration: <Registration/>,
+    authorization: <Authorization/>,
+    recovery: <Recovery/>,
+  };
 
   return (
     <>
@@ -48,10 +52,9 @@ export const Authentication = () => {
               justifyContent='center'
               alignItems='center'
             >
+              { VIEW_MAP[view] }
               <WelcomeBackground/>
-              <Registration/>
             </Flex>
-
           </AuthenticationBackground>
         )
       }
