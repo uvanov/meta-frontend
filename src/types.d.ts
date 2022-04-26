@@ -5,9 +5,11 @@ import { CEF } from './CEF';
 import { themeConfig } from './lib/theme';
 
 // Change Window structure
+type CefType = typeof CEF;
+
 declare global {
   interface Window {
-    CEF: typeof CEF
+    CEF: CefType
   }
 }
 
