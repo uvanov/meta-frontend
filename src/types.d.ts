@@ -1,4 +1,3 @@
-import React from 'react';
 import '@emotion/react';
 // Import local modules
 import { CEF } from './CEF';

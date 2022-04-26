@@ -18,5 +18,5 @@ export const useCheckForErrors = (params) => {
     return [false, errorFromStore];
   }
 
-  return [true, '']
+  return [true, ''];
 };

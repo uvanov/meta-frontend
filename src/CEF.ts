@@ -1,5 +1,4 @@
 // Import modules
-import { useAppDispatch } from './hooks/state';
 import { store } from './store/store';
 
 // Import slices
@@ -28,7 +27,7 @@ export const CEF = {
       dispatch(setAuthenticationVisibility({ visibility }));
     },
     Clear(interfaceToClear: InterfacesListType){
-      dispatch(clearErrors({ interface: interfaceToClear }))
+      dispatch(clearErrors({ interface: interfaceToClear }));
     },
     Authorization: {
       Error(field: AuthorizationFieldType, text: string){
