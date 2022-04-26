@@ -48,9 +48,10 @@ const initialState = {
   }
 };
 
-type AuthorizationFieldType = keyof typeof initialState.inputs.authorization;
-type RegistrationFieldType = keyof typeof initialState.inputs.registration;
-type RecoveryFieldType = keyof typeof initialState.inputs.recovery;
+export type AuthorizationFieldType = keyof typeof initialState.inputs.authorization;
+export type RegistrationFieldType = keyof typeof initialState.inputs.registration;
+export type RecoveryFieldType = keyof typeof initialState.inputs.recovery;
+export type InterfacesListType = keyof typeof initialState.inputs;
 
 // Init Authentication Slice
 export const authenticationSlice = createSlice({
@@ -61,17 +62,27 @@ export const authenticationSlice = createSlice({
       state.isShown = action.payload.visibility;
     },
     setAuthenticationView(state, action: PayloadAction<{ view: ViewType }>){
-      console.log(1)
       state.view = action.payload.view;
     },
     setAuthorizationError(state, action: PayloadAction<{ field: AuthorizationFieldType, value: string }>){
-      state.inputs.authorization[action.payload.field].errorText = action.payload.field;
+      state.inputs.authorization[action.payload.field].errorText = action.payload.value;
     },
     setRegistrationError(state, action: PayloadAction<{ field: RegistrationFieldType, value: string }>){
-      state.inputs.registration[action.payload.field].errorText = action.payload.field;
+      state.inputs.registration[action.payload.field].errorText = action.payload.value;
     },
     setRecoveryError(state, action: PayloadAction<{ field: RecoveryFieldType, value: string }>){
-      state.inputs.recovery[action.payload.field].errorText = action.payload.field;
+      state.inputs.recovery[action.payload.field].errorText = action.payload.value;
+    },
+    clearErrors(state, action: PayloadAction<{ interface: InterfacesListType }>){
+
+      for(const key in state.inputs[action.payload.interface]){
+        // @ts-ignore
+        if(state.inputs[action.payload.interface].hasOwnProperty(key)){
+        // @ts-ignore
+          state.inputs[action.payload.interface][key].errorText = '';
+        }
+
+      }
     }
   }
 });
