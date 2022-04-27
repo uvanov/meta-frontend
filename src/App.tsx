@@ -1,5 +1,5 @@
 // Import modules
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 // Local modules
 import { CEF } from './CEF';
