@@ -34,8 +34,6 @@ const BaseTypography = styled.p<Omit<TypographyProps, 'variant'>>`
     width: 100%;
   `}
   
-  
-  
   color: ${({ color, theme }) => color === 'gray' ? theme.palette.gray : color};
 `;
 

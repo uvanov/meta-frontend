@@ -18,6 +18,7 @@ export const themeConfig = {
     },
     fonts: {
       montserrat: {
+        globalFontFamily: 'Montserrat, system-ui',
         medium: {
           src: '/fonts/montserrat/Montserrat-Medium.ttf',
           fontName: 'Montserrat Medium',
@@ -69,7 +70,51 @@ export const Provider: React.FC<Props> = ({ children, theme = themeConfig }) => 
   <ThemeProvider theme={ theme }>
     <Global
       styles={ (theme) => {
-        return css``;
+        return css`
+
+          @font-face {
+            font-family: ${ theme.typography.fonts.montserrat.medium.fontName };
+            src: ${ theme.typography.fonts.montserrat.medium.src }
+          }
+          
+          @font-face {
+            font-family: ${ theme.typography.fonts.montserrat.semibold.fontName };
+            src: ${ theme.typography.fonts.montserrat.semibold.src }
+          }
+          
+          @font-face {
+            font-family: ${ theme.typography.fonts.montserrat.bold.fontName };
+            src: ${ theme.typography.fonts.montserrat.bold.src }
+          }
+          
+          @font-face {
+            font-family: ${ theme.typography.fonts.montserrat.extrabold.fontName };
+            src: ${ theme.typography.fonts.montserrat.extrabold.src }
+          }
+          
+          body {
+            margin: 0;
+            overflow: hidden;
+          }
+          
+          * {
+            font-family: ${ theme.typography.fonts.montserrat.globalFontFamily };
+          }
+          
+          #root {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+          }
+          
+          ul, input{
+            padding: 0;
+          }
+          
+          p {
+            margin: 0;
+          }
+        `;
       } }
     />
     { children }

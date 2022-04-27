@@ -112,9 +112,6 @@ export const Registration = () => {
     interface: 'registration'
   });
 
-
-
-
   return (
     <FormWindow
       title='РЕГИСТРАЦИЯ'

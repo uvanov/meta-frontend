@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import {
-  css,
-  Theme
+  css
 } from '@emotion/react';
 
 // Local modules
@@ -41,7 +40,6 @@ const StyledInputWrapper = styled(Flex, {
   ${({ fullWidth }) => fullWidth && css`
     width: 100%;
   `}
- 
 `;
 
 const StyledInputIconWrapper = styled(Flex)`

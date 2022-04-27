@@ -1,7 +1,11 @@
 // Import modules
 import React from 'react';
 import styled from '@emotion/styled';
-import { Flex, MarginContainer, Typography } from '../../../ui';
+import {
+  Flex,
+  MarginContainer,
+  Typography
+} from '../../../ui';
 
 // Styled Components
 const StyledFormWindow = styled(Flex)`

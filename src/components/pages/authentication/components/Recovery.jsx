@@ -3,7 +3,6 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useCheckForErrors } from '../../../../hooks';
 
 // Local modules
 import { FormWindow } from './FormWindow';
@@ -12,13 +11,13 @@ import {
   Flex,
   Button
 } from '../../../ui';
+import { useCheckForErrors } from '../../../../hooks';
+import { useAppDispatch } from '../../../../hooks/state';
+import { authenticationSlice } from '../../../../store/slices/AuthenticationSlice';
 
 // Assets
 import { ReactComponent as EmailIcon } from '../../../../assets/images/authentication/email-icon.svg';
 import { ReactComponent as CodeIcon } from '../../../../assets/images/authentication/code-icon.svg';
-import { useAppDispatch } from '../../../../hooks/state';
-import { authenticationSlice } from '../../../../store/slices/AuthenticationSlice';
-
 
 // Styled Components
 const StyledFormWindow = styled(FormWindow)`

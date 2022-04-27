@@ -6,7 +6,6 @@ import { Provider as ThemeProvider } from './lib/theme';
 
 // Local modules
 import { App } from './App';
-import './index.css';
 import { store } from './store/store';
 
 // Render App

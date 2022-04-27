@@ -4,7 +4,10 @@ import styled from '@emotion/styled';
 
 // Local components
 import { PageSwitcherButton } from './PageSwitcherButton';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/state';
+import {
+  useAppDispatch,
+  useAppSelector
+} from '../../../../hooks/state';
 import { authenticationSlice } from '../../../../store/slices/AuthenticationSlice';
 
 
