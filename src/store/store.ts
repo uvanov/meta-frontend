@@ -1,9 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  combineReducers
+} from '@reduxjs/toolkit';
+import authenticationSlice from './slices/AuthenticationSlice';
+
+const rootReducer = combineReducers({
+  authentication: authenticationSlice
+});
 
 export const store = configureStore({
-  reducer: {
-
-  },
+  reducer: rootReducer
 });
 
 export type AppDispatch = typeof store.dispatch;

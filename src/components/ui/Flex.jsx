@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 // Функция-проверяющий на то, нужно ли прокидывать проп на сам html-элемент, или это проп для стилей.
-function shouldForwardProp(prop: string) {
+function shouldForwardProp(prop) {
   return !([
     'gap',
     'wrap',
@@ -20,17 +20,6 @@ function shouldForwardProp(prop: string) {
 // Constants.
 const DEFAULT_GAP = '0px';
 
-// Styled Components
-interface FlexProps {
-  inline?: boolean;
-  direction?: string;
-  alignItems?: string;
-  justifyContent?: string;
-  wrap?: boolean | string;
-  fullWidth?: boolean;
-  fullHeight?: boolean;
-  gap?: { x: number; y: number } | string;
-}
 
 /*
   Конструкция может показаться сложной.
@@ -39,7 +28,7 @@ interface FlexProps {
 
   Сам копомнент из себя представляет "флекс-конструктор", для того чтобы не повторять каждый раз стили флекса.
  */
-const StyledFlex = styled('div', { shouldForwardProp })<FlexProps>`
+const StyledFlex = styled('div', { shouldForwardProp })`
   display: ${({ inline }) => (inline ? 'inline-flex' : 'flex')};
   flex-direction: ${({ direction }) => direction};
   align-items: ${({ alignItems }) => alignItems};
@@ -56,14 +45,14 @@ const StyledFlex = styled('div', { shouldForwardProp })<FlexProps>`
 `;
 
 // Exports
-export const Flex: React.FC<FlexProps> = (
+export const Flex = (
   {
     children,
     fullWidth,
     fullHeight,
     alignItems,
     direction,
-    gap,
+    gap ,
     inline,
     justifyContent,
     wrap,

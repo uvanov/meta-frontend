@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
 // Import modules
-import React, { FunctionComponent, SVGProps, useState } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import {
+  css
+} from '@emotion/react';
 
 // Local modules
 import {
@@ -11,38 +13,45 @@ import {
 } from './index';
 
 // Assets
-import EyeIcon from '../../assets/images/eye-icon.svg';
-import EyeCrossedIcon from '../../assets/images/eye-crossed-icon.svg';
-import ErrorHintBackgroundImage from '../../assets/images/error-hint-background.png';
-import WarningIcon from '../../assets/images/warning-icon.svg';
+import EyeIcon from '../../assets/images/input/eye-icon.svg';
+import EyeCrossedIcon from '../../assets/images/input/eye-crossed-icon.svg';
+import ErrorHintBackgroundImage from '../../assets/images/input/error-hint-background.png';
+import WarningIcon from '../../assets/images/input/warning-icon.svg';
 
 // Styled Components
-const StyledInputWrapper = styled(Flex)<{ isValid: boolean }>`
+const StyledInputWrapper = styled(Flex, {
+  shouldForwardProp(prop){
+    return prop !== 'isValid';
+  }
+})`
   position: relative;
-  background-color: #1B1A23;
+  background-color: ${({ theme }) => theme.palette.darkbluegray};
   border: 2px solid transparent;
   border-radius: 9px;
   padding: 17px 27px 17px 17px;
   
-  font-family: Montserrat, sans-serif;
-  
   box-sizing: border-box;
   transition: border .1s;
   
-  ${({ isValid }) => !isValid && css`
-    border: 2px solid #FF3E3E;
+  ${({ isValid, theme }) => !isValid && css`
+    border: 2px solid ${ theme.palette.red };
+  `}
+  
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
   `}
 `;
 
 const StyledInputIconWrapper = styled(Flex)`
-  background: rgba(20, 19, 27, 0.56);
+  width: 61px;
+  height: 61px;
+  background-color: ${({ theme }) => theme.palette.darkgray};
   border-radius: 5px;
-  padding: 20px;
 `;
 
 const StyledInputLabel = styled.span`
-  font-size: 14px;
-  color: #817D8E;
+  font-size: ${({ theme }) => theme.typography.size.small};
+  color: ${({ theme }) => theme.palette.gray};
   font-family: inherit;
   font-weight: 500;
 `;
@@ -50,14 +59,14 @@ const StyledInputLabel = styled.span`
 const StyledInput = styled.input`
   font-family: inherit;
   font-weight: 600;
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.typography.size.middle};
   background-color: transparent;
   border: 0;
   outline: 0;
-  color: #817D8E;
+  color: ${({ theme }) => theme.palette.gray};
   
   &::placeholder {
-    color: #817D8E;
+    color: ${({ theme }) => theme.palette.gray};
   }
 `;
 
@@ -66,7 +75,11 @@ const StyledInputVisibilityControlWrapper = styled.div`
   cursor: pointer;
 `;
 
-const ErrorHintWrapper = styled(Flex)<{ show: boolean }>`
+const ErrorHintWrapper = styled(Flex, {
+  shouldForwardProp(prop){
+    return prop !== 'isValid';
+  }
+})`
   position: absolute;
   left: 100%;
   
@@ -102,31 +115,19 @@ const CONFIG = {
   DEFAULT_PLACEHOLDER: 'Placeholder'
 };
 
-// Interfaces
-type InputVariantsType = 'text' | 'password';
-
-interface InputProps {
-  variant: InputVariantsType;
-  label: string;
-  value: string;
-  Icon: FunctionComponent<SVGProps<SVGSVGElement>> | string;
-  placeholder?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isValid: boolean;
-  invalidErrorText?: string
-}
-
 // Exports
-export const Input: React.FC<InputProps> = (
+export const Input = (
   {
     variant,
-    label,
+    label = 'Label',
     Icon,
-    placeholder,
+    placeholder = 'Placeholder',
     value,
     onChange,
-    isValid,
-    invalidErrorText
+    isValid = true,
+    fullWidth = false,
+    errorText,
+    ...remainingProps
   }) => {
 
   const isVariantPassword = variant === 'password';
@@ -141,6 +142,7 @@ export const Input: React.FC<InputProps> = (
       alignItems='center'
       gap='26px'
       isValid={ isValid }
+      fullWidth={ fullWidth }
     >
       <StyledInputIconWrapper
         justifyContent='center'
@@ -160,6 +162,7 @@ export const Input: React.FC<InputProps> = (
           placeholder={ placeholder ? placeholder : CONFIG.DEFAULT_PLACEHOLDER }
           value={ value ? value : '' }
           onChange={ onChange }
+          { ...remainingProps }
         />
       </Flex>
 
@@ -177,7 +180,6 @@ export const Input: React.FC<InputProps> = (
       }
 
       {
-
         <ErrorHintWrapper
           gap='12px'
           alignItems='center'
@@ -207,7 +209,7 @@ export const Input: React.FC<InputProps> = (
               variant='small'
               color='black'
             >
-              {invalidErrorText}
+              { errorText }
             </Typography>
           </Flex>
         </ErrorHintWrapper>

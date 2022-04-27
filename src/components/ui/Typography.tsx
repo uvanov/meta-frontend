@@ -2,7 +2,11 @@
 // Import modules
 import React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import {
+  css,
+  Theme
+} from '@emotion/react';
+import { SerializedStyles } from '@emotion/utils';
 
 // Styled Components
 const BaseTypography = styled.p<Omit<TypographyProps, 'variant'>>`
@@ -26,31 +30,38 @@ const BaseTypography = styled.p<Omit<TypographyProps, 'variant'>>`
     font-weight: bold;
   `}
   
-  color: ${({ color }) => color === 'gray' ? '#817D8E' : color};
+   ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+  `}
+  
+  color: ${({ color, theme }) => color === 'gray' ? theme.palette.gray : color};
 `;
 
-const title = css`
+const title: VariantFunction = ({ typography: { size } }) => css`
   font-weight: 800;
-  font-size: 36px;
+  font-size: ${ size.title };
 `;
 
-const subtitle = css`
+const subtitle: VariantFunction = ({ typography: { size } }) => css`
   font-weight: 600;
-  font-size: 24px;
+  font-size: ${ size.subtitle };
 `;
 
-const middle = css`
-  font-size: 18px;
+const middle: VariantFunction = ({ typography: { size } }) => css`
+  font-size: ${ size.middle };
 `;
 
-const small = css`
-  font-size: 14px;
+const small: VariantFunction = ({ typography: { size } }) => css`
+  font-size: ${ size.small };
 `;
 
 // Constants
 const TYPOGRAPHY_VARIANT_MAP = {
   title, subtitle, middle, small
 };
+
+// Этот тип нужен для функций, чтобы нормально можно было работать с темой
+type VariantFunction = (theme: Theme) => SerializedStyles;
 
 // Types
 interface TypographyProps {
@@ -61,6 +72,7 @@ interface TypographyProps {
   uppercase?: boolean;
   underline?: boolean;
   bold?: boolean;
+  fullWidth?: boolean;
 }
 
 // Exports
