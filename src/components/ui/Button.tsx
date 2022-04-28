@@ -8,7 +8,7 @@ import { css } from '@emotion/react';
 import { ReactComponent as ArrowRight } from '../../assets/images/arrow-right.svg';
 
 // Styled Components
-const BaseButton = styled.button<{ fullWidth: boolean, large?: boolean }>`
+const BaseButton = styled.button<{ fullWidth?: boolean, large?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,13 +38,13 @@ const DangerButtonVariant = () => css`
   font-weight: 500;
 `;
 
-const ButtonArrowLabel = styled.div`
+const ButtonArrowLabel = styled.div<{ large: boolean }>`
   position: absolute;
   right: 21px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 19px;
+  padding: ${({ large }) => large ? '19px' : '12px'};
   background: rgba(205, 56, 56, 0.4);
   border-radius: 8px;
 `;
@@ -60,12 +60,12 @@ const BUTTON_VARIANTS_MAP = {
 interface ButtonProps {
   variant: keyof typeof BUTTON_VARIANTS_MAP; // Создаём литерал, на основе параметров из BUTTON_VARIANTS_MAP
   large?: boolean;
-  fullWidth: boolean;
+  fullWidth?: boolean;
   onClick?: () => void;
 }
 
 // Exports
-export const Button: React.FC<ButtonProps> = ({ children, variant, ...remainingProps }) => {
+export const Button: React.FC<ButtonProps> = ({ children, variant, large, ...remainingProps }) => {
 
   const styleVariant = BUTTON_VARIANTS_MAP[variant];
 
@@ -73,12 +73,13 @@ export const Button: React.FC<ButtonProps> = ({ children, variant, ...remainingP
     <BaseButton
       css={ styleVariant }
       { ...remainingProps }
+      large={ large }
     >
       { children }
 
       {
         variant === 'danger' && (
-          <ButtonArrowLabel>
+          <ButtonArrowLabel large={ large ? large : false } >
             <ArrowRight/>
           </ButtonArrowLabel>
         )
