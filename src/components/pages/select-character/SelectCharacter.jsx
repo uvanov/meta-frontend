@@ -7,7 +7,7 @@ import {
   Flex,
   Typography
 } from '@ui/index';
-import { CharacterCard } from './components/CharacterCard';
+import { UsedCharacterCard } from '@pages/select-character/components/UsedCharacterCard';
 
 // Assets
 import HelicopterBackground from '@images/helicopter-background.jpg';
@@ -61,6 +61,7 @@ const SelectCharacterGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   column-gap: 30px;
+  row-gap: 35px;
 `;
 
 const SelectCharacterTitle = styled(Typography)`
@@ -77,7 +78,6 @@ const SelectCharacterTitle = styled(Typography)`
     opacity: .5;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: ${({ theme }) => theme.palette.gray};
-   
   }
 `;
 
@@ -127,9 +127,6 @@ const SocialClubUserAvatar = styled.div`
   }
 `;
 
-
-
-
 // Exports
 export const SelectCharacter = () => {
   return (
@@ -165,9 +162,38 @@ export const SelectCharacter = () => {
           </Typography>
           <SocialClubUserAvatar backgroundSrc={ AvatarSource }/>
         </SocialClubUserLabel>
+
+          <UsedCharacterCard
+            index={ 1 }
+            name='Alex Mirchestein'
+            cash={ 10000 }
+            bank={ 720000000 }
+            fraction='lspd'
+            work={ null }
+            status='example'
+          />
+
+          <UsedCharacterCard
+            index={ 2 }
+            name='Ruslan Bulgakovskiy'
+            cash={ 150000 }
+            bank={ 101256123 }
+            fraction={ null }
+            work='Водитель мусоровоза'
+            status='example'
+          />
+
+          <UsedCharacterCard
+            index={ 2 }
+            name='Ruslan Bulgakovskiy'
+            cash={ 150000 }
+            bank={ 101256123 }
+            fraction={ null }
+            work='Водитель мусоровоза'
+            status='example'
+          />
         </SelectCharacterGrid>
       </SelectCharacterWrapper>
     </>
-
   );
 };

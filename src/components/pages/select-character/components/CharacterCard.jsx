@@ -7,16 +7,16 @@ import { addHexAlpha } from '@lib/utils';
 
 // Styled Components
 const StyledCharacterCard = styled.div`
-  padding: 32px 27px 48px 21px;
-  background: linear-gradient(180deg, ${({ theme }) => addHexAlpha(theme.palette.bluegray, 0.1)}, 0%, 
-                                      ${({ theme }) => theme.palette.bluegray} 100%);
+  padding: 32px 37px 48px 21px;
+  background: linear-gradient(180deg, ${({ theme }) => theme.palette.bluegray}, 
+                                      ${({ theme }) => addHexAlpha(theme.palette.bluegray, 0.1)});
   border-radius: 38px;
 `;
 
 // Exports
-export const CharacterCard = ({ children }) => {
+export const CharacterCard = ({ children, ...remainigProps }) => {
   return (
-    <StyledCharacterCard>
+    <StyledCharacterCard { ...remainigProps }>
       { children }
     </StyledCharacterCard>
   );
