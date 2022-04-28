@@ -38,13 +38,13 @@ const DangerButtonVariant = () => css`
   font-weight: 500;
 `;
 
-const ButtonArrowLabel = styled.div<{ large: boolean }>`
+const ButtonArrowLabel = styled.div`
   position: absolute;
   right: 21px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: ${({ large }) => large ? '19px' : '12px'};
+  padding: 19px;
   background: rgba(205, 56, 56, 0.4);
   border-radius: 8px;
 `;
@@ -79,7 +79,7 @@ export const Button: React.FC<ButtonProps> = ({ children, variant, large, ...rem
 
       {
         variant === 'danger' && (
-          <ButtonArrowLabel large={ large ? large : false } >
+          <ButtonArrowLabel>
             <ArrowRight/>
           </ButtonArrowLabel>
         )
