@@ -6,7 +6,9 @@
     "indent": ["warn", 2],
     "semi": ["warn", "always"],
     "max-len": ["error", {
-      "code": 120
+      "code": 120,
+      "ignoreUrls": true,
+      "ignoreComments": true
     }],
     "object-curly-spacing": ["warn", "always"],
     "react/jsx-curly-spacing": [2, {
