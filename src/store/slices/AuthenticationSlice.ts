@@ -9,7 +9,7 @@ type ViewType = 'registration' | 'authorization' | 'recovery';
 
 // Initial state
 const initialState = {
-  isShown: true,
+  isShown: false,
   view: 'registration',
   inputs: {
     authorization: {
