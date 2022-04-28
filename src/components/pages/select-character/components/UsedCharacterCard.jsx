@@ -19,7 +19,7 @@ import { ReactComponent as UserIcon } from '@images/authentication/authorization
 // Styled Components
 const StyledCharacterCard = styled(CharacterCard)`
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 5fr;
   column-gap: 30px;
   row-gap: 21px;
 `;
