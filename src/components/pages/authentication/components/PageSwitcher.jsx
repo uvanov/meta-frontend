@@ -12,8 +12,8 @@ import { authenticationSlice } from '../../../../store/slices/AuthenticationSlic
 
 
 // Assets
-import AuthorizationButtonIcon from '../../../../assets/images/authentication/authorization-button-icon.svg';
-import RegistrationButtonIcon from '../../../../assets/images/authentication/registration-button-icon.svg';
+import AuthorizationButtonIcon from '@images/icons/user-icon.svg';
+import RegistrationButtonIcon from '@images/icons/registration-button-icon.svg';
 
 // Styled Components
 const StyledPageSwitcher = styled.div`

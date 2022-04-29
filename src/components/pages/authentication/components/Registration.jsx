@@ -13,10 +13,10 @@ import {
 import { useCheckForErrors } from '../../../../hooks';
 
 // Assets
-import { ReactComponent as UserIcon } from '../../../../assets/images/authentication/authorization-button-icon.svg';
-import { ReactComponent as EmailIcon } from '../../../../assets/images/authentication/email-icon.svg';
-import { ReactComponent as KeyIcon } from '../../../../assets/images/authentication/key-icon.svg';
-import { ReactComponent as DiscountIcon } from '../../../../assets/images/authentication/discount-icon.svg';
+import { ReactComponent as UserIcon } from '@images/icons/user-icon.svg';
+import { ReactComponent as EmailIcon } from '@images/icons/email-icon.svg';
+import { ReactComponent as KeyIcon } from '@images/icons/key-icon.svg';
+import { ReactComponent as DiscountIcon } from '@images/icons/discount-icon.svg';
 
 // Styled Components
 
