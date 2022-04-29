@@ -13,10 +13,10 @@ import {
 } from './index';
 
 // Assets
-import EyeIcon from '../../assets/images/input/eye-icon.svg';
-import EyeCrossedIcon from '../../assets/images/input/eye-crossed-icon.svg';
-import ErrorHintBackgroundImage from '../../assets/images/input/error-hint-background.png';
-import WarningIcon from '../../assets/images/input/warning-icon.svg';
+import EyeIcon from '@images/icons/eye-icon.svg';
+import EyeCrossedIcon from '@images/icons/eye-crossed-icon.svg';
+import WarningIcon from '@images/icons/warning-icon.svg';
+import ErrorHintBackgroundImage from '@images/input/error-hint-background.png';
 
 // Styled Components
 const StyledInputWrapper = styled(Flex, {
