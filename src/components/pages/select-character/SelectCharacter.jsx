@@ -13,6 +13,7 @@ import { UsedCharacterCard } from '@pages/select-character/components/UsedCharac
 import HelicopterBackground from '@images/helicopter-background.jpg';
 import StripesBackground from '@images/select-character/stripes-background.png';
 import AvatarSource from '@images/authentication/authentication-background-image.jpg';
+import { UnusedCharacterCard } from '@pages/select-character/components/UnusedCharacterCard';
 
 // Styled Components
 const HelicopterBackgroundLayer = styled.div`
@@ -62,22 +63,26 @@ const SelectCharacterGrid = styled.div`
   align-items: center;
   column-gap: 30px;
   row-gap: 35px;
+  
+  max-width: 90%;
 `;
 
 const SelectCharacterTitle = styled(Typography)`
+  width: fit-content;
   position: relative;
+  white-space: nowrap;
   
   &::before{
     content: "ВЫБОР ПЕРСОНАЖА";
     position: absolute;
-    left: 102%;
+    left: calc(100% + 6px);
     
     white-space: nowrap;
     
     color: transparent;
     opacity: .5;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: ${({ theme }) => theme.palette.gray};
+    -webkit-text-stroke-color: ${ ({ theme }) => theme.palette.gray };
   }
 `;
 
@@ -92,7 +97,7 @@ const SocialClubUserLabel = styled.div`
   justify-self: flex-end;
   grid-column: 3 / 4;
   
-  background-color: ${({ theme }) => theme.palette.bluegray};
+  background-color: ${ ({ theme }) => theme.palette.bluegray };
   padding: 14px 14px 14px 36px;
   border-radius: 38px;
 `;
@@ -102,7 +107,7 @@ const SocialClubUserAvatar = styled.div`
   transform-style: preserve-3d;
   width: 50px;
   height: 50px;
-  box-shadow: 0px 15px 59px -10px ${({ theme }) => theme.palette.red};
+  box-shadow: 0px 15px 59px -10px ${ ({ theme }) => theme.palette.red };
   border-radius: 100%;
   
   background-image: url(${ props => props.backgroundSrc });
@@ -122,7 +127,7 @@ const SocialClubUserAvatar = styled.div`
     transform: translate(-50%, -50%) translateZ(-1px); 
     width: 55px;
     height: 55px;
-    background: linear-gradient(${({ theme }) => theme.palette.red}, ${({ theme }) => theme.palette.orange});
+    background: linear-gradient(${ ({ theme }) => theme.palette.red }, ${ ({ theme }) => theme.palette.orange });
     border-radius: 100%;
   }
 `;
@@ -146,22 +151,22 @@ export const SelectCharacter = () => {
             ВЫБОР ПЕРСОНАЖА
           </SelectCharacterTitle>
           <SocialClubUserLabel>
-          <Typography
-            variant='small'
-            color='gray'
-          >
-            SocialClub
-          </Typography>
-          <Typography
-            // Social Club Nickname
-            variant='middle'
-            color='white'
-            bold
-          >
-            &#123; user &#125;
-          </Typography>
-          <SocialClubUserAvatar backgroundSrc={ AvatarSource }/>
-        </SocialClubUserLabel>
+            <Typography
+              variant='small'
+              color='gray'
+            >
+              SocialClub
+            </Typography>
+            <Typography
+              // Social Club Nickname
+              variant='middle'
+              color='white'
+              bold
+            >
+              &#123; user &#125;
+            </Typography>
+            <SocialClubUserAvatar backgroundSrc={ AvatarSource }/>
+          </SocialClubUserLabel>
 
           <UsedCharacterCard
             index={ 1 }
@@ -182,15 +187,9 @@ export const SelectCharacter = () => {
             work='Водитель мусоровоза'
             status='example'
           />
-
-          <UsedCharacterCard
+          <UnusedCharacterCard
+            variant='locked'
             index={ 2 }
-            name='Ruslan Bulgakovskiy'
-            cash={ 150000 }
-            bank={ 101256123 }
-            fraction={ null }
-            work='Водитель мусоровоза'
-            status='example'
           />
         </SelectCharacterGrid>
       </SelectCharacterWrapper>

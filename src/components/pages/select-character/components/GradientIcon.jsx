@@ -18,7 +18,7 @@ const StyledGradientIcon = styled(Flex)`
     transform: scale(1.5);
     
     path {
-      fill: rgba(0, 0, 0, 0.32)
+      fill: rgba(0, 0, 0, 1)
     } 
   }
 `;

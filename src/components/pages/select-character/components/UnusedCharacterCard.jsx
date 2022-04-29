@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 // Local modules
 import { CharacterCard } from './CharacterCard';
+import { GradientIcon } from './GradientIcon';
 import {
   Button,
   Flex,
@@ -12,8 +13,9 @@ import {
 } from '@ui/index';
 
 // Assets
-import { ReactComponent as UserIcon } from '@images/authentication/authorization-button-icon.svg';
-import { GradientIcon } from '@pages/select-character/components/GradientIcon';
+import { ReactComponent as UserIcon } from '@images/icons/user-icon.svg';
+import { ReactComponent as LockIcon } from '@images/icons/lock-icon.svg';
+import { addHexAlpha } from '@lib/utils';
 
 // Styled Components
 const StyledCharacterCard = styled(CharacterCard)`
@@ -50,8 +52,16 @@ const SecondRowWrapper = styled.div`
   height: min-content;
 `;
 
+const UnlockButton = styled(Button)`
+  background-color: ${({ theme }) => addHexAlpha(theme.palette.white, 0.1)};
+  box-shadow: unset;
+`;
+
 // Exports
 export const UnusedCharacterCard = ({ variant, index }) => {
+
+  const isSlotUnlocked = variant !== 'locked';
+
   return (
     <StyledCharacterCard>
 
@@ -69,7 +79,7 @@ export const UnusedCharacterCard = ({ variant, index }) => {
         justifyContent='center'
       >
         <MarginContainer bottom='26px'>
-          <GradientIcon Icon={ UserIcon }/>
+          <GradientIcon Icon={ isSlotUnlocked ? UserIcon : LockIcon }/>
         </MarginContainer>
 
         <Flex
@@ -82,16 +92,21 @@ export const UnusedCharacterCard = ({ variant, index }) => {
             align='center'
             bold
           >
-            Новый персонаж
+            { isSlotUnlocked ? 'Новый персонаж' : 'Этот персонаж пока заблокирован' }
           </Typography>
           <Typography
             variant='small'
             color='gray'
             align='center'
           >
-            Создайте нового персонажа
-            и пишите новую историю
-            с чистого листа.
+            {
+              isSlotUnlocked
+              ?
+                'Создайте нового персонажа и пишите новую историю с чистого листа.'
+              :
+                'Вы можете разблокировать этого персонажа за виртуальную валюту'
+            }
+
           </Typography>
 
         </Flex>
@@ -116,16 +131,31 @@ export const UnusedCharacterCard = ({ variant, index }) => {
             align='center'
             bold
           >
-            Бесплатно
+            {  isSlotUnlocked ? 'Бесплатно' : '700 M-Coins'}
           </Typography>
         </Flex>
         <MarginContainer top='18px'>
-          <Button
-            variant='danger'
-            fullWidth
-          >
-            Создать персонажа
-          </Button>
+          {
+            isSlotUnlocked
+            ?
+              (
+                <Button
+                  variant='danger'
+                  fullWidth
+                >
+                Создать персонажа
+                </Button>
+              )
+            :
+              (
+                <UnlockButton
+                  variant='danger'
+                  fullWidth
+                >
+                  Создать персонажа
+                </UnlockButton>
+              )
+          }
         </MarginContainer>
       </SecondRowWrapper>
     </StyledCharacterCard>

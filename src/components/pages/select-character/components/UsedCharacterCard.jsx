@@ -14,7 +14,7 @@ import {
 import { numberWithSpaces } from '@lib/utils';
 
 // Assets
-import { ReactComponent as UserIcon } from '@images/authentication/authorization-button-icon.svg'
+import { ReactComponent as UserIcon } from '@images/icons/user-icon.svg'
 
 // Styled Components
 const StyledCharacterCard = styled(CharacterCard)`
