@@ -20,6 +20,7 @@ interface Character {
 
 interface InitialState {
   isShown: boolean;
+  selectedCharacterIndex: number;
   showModal: boolean;
   characters: Character[];
 }
@@ -27,6 +28,7 @@ interface InitialState {
 // Init state
 const initialState: InitialState = {
   isShown: true,
+  selectedCharacterIndex: 0,
   showModal: false,
   characters: [
     {
@@ -43,14 +45,14 @@ const initialState: InitialState = {
     },
     {
       data: {
-        name: '',
-        cash: 0,
-        bank: 0,
+        name: 'Sergio Alvarez',
+        cash: 120124,
+        bank: 153201,
         fraction: '',
         job: '',
-        status: '',
+        status: 'Example Status',
       },
-      empty: true,
+      empty: false,
       blocked: false
     },
     {
@@ -80,6 +82,9 @@ export const selectCharacterSlice = createSlice({
     },
     setCharacters(state, action: PayloadAction<{ characters: Character[] }>){
       state.characters = action.payload.characters;
+    },
+    setSelectedCharacterIndex(state, action: PayloadAction<{ index: number }>){
+      state.selectedCharacterIndex = action.payload.index;
     }
   }
 });
