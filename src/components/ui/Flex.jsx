@@ -29,53 +29,24 @@ const DEFAULT_GAP = '0px';
   Сам копомнент из себя представляет "флекс-конструктор", для того чтобы не повторять каждый раз стили флекса.
  */
 const StyledFlex = styled('div', { shouldForwardProp })`
-  display: ${({ inline }) => (inline ? 'inline-flex' : 'flex')};
-  flex-direction: ${({ direction }) => direction};
-  align-items: ${({ alignItems }) => alignItems};
-  justify-content: ${({ justifyContent }) => justifyContent};
-  flex-wrap: ${({ wrap }) => ((typeof wrap === 'boolean' && wrap) ? 'wrap' : wrap)};
-  ${({ fullHeight }) => fullHeight && 'height: 100%;'};
-  ${({ fullWidth }) => fullWidth && 'width: 100%;'};
+  display: ${ ({ inline }) => (inline ? 'inline-flex' : 'flex') };
+  flex-direction: ${ ({ direction }) => direction };
+  align-items: ${ ({ alignItems }) => alignItems };
+  justify-content: ${ ({ justifyContent }) => justifyContent };
+  flex-wrap: ${ ({ wrap }) => ((typeof wrap === 'boolean' && wrap) ? 'wrap' : wrap) };
+  ${ ({ fullHeight }) => fullHeight && 'height: 100%;' };
+  ${ ({ fullWidth }) => fullWidth && 'width: 100%;' };
   
-  ${({ gap }) => gap !== DEFAULT_GAP && css`
-    --gapX: ${(typeof gap === 'object' ? gap.x : gap) || DEFAULT_GAP};
-    --gapY: ${(typeof gap === 'object' ? gap.y : gap) || DEFAULT_GAP};
+  ${ ({ gap }) => gap !== DEFAULT_GAP && css`
+    --gapX: ${ (typeof gap === 'object' ? gap.x : gap) || DEFAULT_GAP };
+    --gapY: ${ (typeof gap === 'object' ? gap.y : gap) || DEFAULT_GAP };
     gap: var(--gapY) var(--gapX);
-  `}
+  ` }
 `;
 
 // Exports
-export const Flex = (
-  {
-    children,
-    fullWidth,
-    fullHeight,
-    alignItems,
-    direction,
-    gap ,
-    inline,
-    justifyContent,
-    wrap,
-    ...remainingProps
-  }) => {
-
-  let flexPropsObject = {
-    fullWidth,
-    fullHeight,
-    alignItems,
-    direction,
-    gap,
-    inline,
-    justifyContent,
-    wrap
-  };
-
-  return (
-    <StyledFlex
-      { ...flexPropsObject }
-      { ...remainingProps }
-    >
-      {children}
-    </StyledFlex>
-  );
-};
+export const Flex = (props) => (
+  <StyledFlex
+    { ...props }
+  />
+);
