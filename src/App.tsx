@@ -5,12 +5,10 @@ import React, { useEffect } from 'react';
 import { CEF } from './CEF';
 import { Authentication } from './components/pages/authentication/Authentication';
 
+window.CEF = CEF;
+
 // Exports
 export const App = () => {
-
-  useEffect(() => {
-    window.CEF = CEF;
-  }, []);
 
   return (
     <>
