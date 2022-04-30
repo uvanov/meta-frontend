@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 
 // Types 
-interface Character {
+export interface CharacterType {
   data: {
     name: string;
     cash: number;
@@ -22,7 +22,7 @@ interface InitialState {
   isShown: boolean;
   selectedCharacterIndex: number;
   showModal: boolean;
-  characters: Character[];
+  characters: CharacterType[];
 }
 
 // Init state
@@ -30,57 +30,20 @@ const initialState: InitialState = {
   isShown: true,
   selectedCharacterIndex: 0,
   showModal: false,
-  characters: [
-    {
-      data: {
-        name: 'Michael Norton',
-        cash: 512,
-        bank: 1000000,
-        fraction: '',
-        job: '',
-        status: 'Example Status',
-      },
-      empty: false,
-      blocked: false
-    },
-    {
-      data: {
-        name: 'Sergio Alvarez',
-        cash: 120124,
-        bank: 153201,
-        fraction: '',
-        job: '',
-        status: 'Example Status',
-      },
-      empty: false,
-      blocked: false
-    },
-    {
-      data: {
-        name: '',
-        cash: 0,
-        bank: 0,
-        fraction: '',
-        job: '',
-        status: '',
-      },
-      empty: true,
-      blocked: true
-    }
-  ]
+  characters: []
 };
 
 export const selectCharacterSlice = createSlice({
   name: 'selectCharacter',
   initialState,
   reducers: {
-    setVisibility(state, action: PayloadAction<{ visibility: boolean }>) {
+    setSelectCharacterVisibility(state, action: PayloadAction<{ visibility: boolean }>) {
       state.isShown = action.payload.visibility;
     },
     setModalVisibility(state, action: PayloadAction<{ modalVisibility: boolean }>) {
       state.showModal = action.payload.modalVisibility;
     },
-    setCharacters(state, action: PayloadAction<{ characters: Character[] }>){
+    setCharacters(state, action: PayloadAction<{ characters: CharacterType[] }>){
       state.characters = action.payload.characters;
     },
     setSelectedCharacterIndex(state, action: PayloadAction<{ index: number }>){
