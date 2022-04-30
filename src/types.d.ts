@@ -1,7 +1,7 @@
 import '@emotion/react';
 // Import local modules
 import { CEF } from './CEF';
-import { themeConfig } from './lib/theme';
+import { themeConfig } from '@lib/theme';
 
 // Change Window structure
 type CefType = typeof CEF;
