@@ -1,5 +1,5 @@
 // Import modules
-import { store } from './store/store';
+import { store } from '@store/store';
 
 // Import slices
 import {
@@ -8,11 +8,11 @@ import {
   RegistrationFieldType,
   RecoveryFieldType,
   InterfacesListType
-} from './store/slices/AuthenticationSlice';
+} from '@store/slices/AuthenticationSlice';
 
 // Destruct actions
 const {
-  setAuthenticationVisibility,
+  setVisibility,
   setAuthorizationError,
   setRecoveryError,
   setRegistrationError,
@@ -24,7 +24,7 @@ const dispatch = store.dispatch;
 export const CEF = {
   Authentication: {
     Visibility(visibility: boolean){
-      dispatch(setAuthenticationVisibility({ visibility }));
+      dispatch(setVisibility({ visibility }));
     },
     Clear(interfaceToClear: InterfacesListType){
       dispatch(clearErrors({ interface: interfaceToClear }));

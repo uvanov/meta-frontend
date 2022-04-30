@@ -5,8 +5,8 @@ import React, { useEffect } from 'react';
 import { CEF } from './CEF';
 
 // UIs
-import { Authentication } from './components/pages/authentication/Authentication';
-import { SelectCharacter } from './components/pages/select-character/SelectCharacter';
+import { Authentication } from '@pages/authentication/Authentication';
+import { SelectCharacter } from '@pages/select-character/SelectCharacter';
 
 // Exports
 export const App = () => {
