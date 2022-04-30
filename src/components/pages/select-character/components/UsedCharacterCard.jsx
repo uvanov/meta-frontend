@@ -15,6 +15,8 @@ import { numberWithSpaces, capitalizeFirstLetter } from '@lib/utils';
 
 // Assets
 import { ReactComponent as UserIcon } from '@images/icons/user-icon.svg'
+import { useAppDispatch } from '@hooks/state';
+import { selectCharacterSlice } from '@store/slices/SelectCharacterSlice';
 
 // Styled Components
 const StyledCharacterCard = styled(CharacterCard)`
@@ -64,8 +66,15 @@ export const UsedCharacterCard = (
     status
   }) => {
 
+  const dispatch = useAppDispatch();
+  const {
+    setSelectedCharacterIndex,
+    setModalVisibility
+  } = selectCharacterSlice.actions;
+
   const chooseCharacterHandler = (index) => {
-    global.mp.trigger('client.choosePerson',  index);
+    dispatch(setSelectedCharacterIndex({ index: index }));
+    dispatch(setModalVisibility({ modalVisibility: true }));
   };
 
   return (
@@ -86,11 +95,11 @@ export const UsedCharacterCard = (
         alignItems='center'
       >
         <VerticalText
-          index={ index }
+          index={ index + 1 }
           variant='title'
           color='#252333'
         >
-          ПЕРСОНАЖ #{ index }
+          ПЕРСОНАЖ #{ index + 1 }
         </VerticalText>
       </Flex>
       <Flex

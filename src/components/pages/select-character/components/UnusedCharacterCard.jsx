@@ -68,11 +68,11 @@ export const UnusedCharacterCard = ({ variant, index }) => {
     <StyledCharacterCard>
 
       <VerticalText
-        index={ index }
+        index={ index + 1 }
         variant='title'
         color='#252333'
       >
-        ПЕРСОНАЖ #{ index }
+        ПЕРСОНАЖ #{ index + 1 }
       </VerticalText>
 
       <Flex
