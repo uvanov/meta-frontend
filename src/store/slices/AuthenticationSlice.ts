@@ -58,7 +58,7 @@ export const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: {
-    setAuthenticationVisibility(state, action: PayloadAction<{ visibility: boolean }>) {
+    setVisibility(state, action: PayloadAction<{ visibility: boolean }>) {
       state.isShown = action.payload.visibility;
     },
     setAuthenticationView(state, action: PayloadAction<{ view: ViewType }>){
