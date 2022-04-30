@@ -7,13 +7,14 @@ import {
   Flex,
   Typography
 } from '@ui/index';
-import { UsedCharacterCard } from '@pages/select-character/components/UsedCharacterCard';
+import { UsedCharacterCard } from './components/UsedCharacterCard';
+import { UnusedCharacterCard } from './components/UnusedCharacterCard';
+import { useAppSelector } from '@hooks/state';
 
 // Assets
 import HelicopterBackground from '@images/helicopter-background.jpg';
 import StripesBackground from '@images/select-character/stripes-background.png';
 import AvatarSource from '@images/authentication/authentication-background-image.jpg';
-import { UnusedCharacterCard } from '@pages/select-character/components/UnusedCharacterCard';
 
 // Styled Components
 const HelicopterBackgroundLayer = styled.div`
@@ -134,65 +135,77 @@ const SocialClubUserAvatar = styled.div`
 
 // Exports
 export const SelectCharacter = () => {
+
+  const isShown = useAppSelector(state => state.selectCharacter.isShown);
+  const characters = useAppSelector(state => state.selectCharacter.characters);
+
   return (
     <>
-      <HelicopterBackgroundLayer/>
-      <StripesBackgroundLayer/>
-      <ToneBackgroundLayer/>
-      <SelectCharacterWrapper
-        alignItems='center'
-        justifyContent='center'
-      >
-        <SelectCharacterGrid>
-          <SelectCharacterTitle
-            variant='title'
-            color='white'
-          >
-            ВЫБОР ПЕРСОНАЖА
-          </SelectCharacterTitle>
-          <SocialClubUserLabel>
-            <Typography
-              variant='small'
-              color='gray'
+      {
+        isShown && (
+          <>
+            <HelicopterBackgroundLayer/>
+            <StripesBackgroundLayer/>
+            <ToneBackgroundLayer/>
+            <SelectCharacterWrapper
+              alignItems='center'
+              justifyContent='center'
             >
-              SocialClub
-            </Typography>
-            <Typography
-              // Social Club Nickname
-              variant='middle'
-              color='white'
-              bold
-            >
-              &#123; user &#125;
-            </Typography>
-            <SocialClubUserAvatar backgroundSrc={ AvatarSource }/>
-          </SocialClubUserLabel>
+              <SelectCharacterGrid>
+                <SelectCharacterTitle
+                  variant='title'
+                  color='white'
+                >
+                  ВЫБОР ПЕРСОНАЖА
+                </SelectCharacterTitle>
+                <SocialClubUserLabel>
+                  <Typography
+                    variant='small'
+                    color='gray'
+                  >
+                    SocialClub
+                  </Typography>
+                  <Typography
+                    // Social Club Nickname
+                    variant='middle'
+                    color='white'
+                    bold
+                  >
+                    &#123; user &#125;
+                  </Typography>
+                  <SocialClubUserAvatar backgroundSrc={ AvatarSource }/>
+                </SocialClubUserLabel>
 
-          <UsedCharacterCard
-            index={ 1 }
-            name='Alex Mirchestein'
-            cash={ 10000 }
-            bank={ 720000000 }
-            fraction='lspd'
-            work={ null }
-            status='example'
-          />
 
-          <UsedCharacterCard
-            index={ 2 }
-            name='Ruslan Bulgakovskiy'
-            cash={ 150000 }
-            bank={ 101256123 }
-            fraction={ null }
-            work='Водитель мусоровоза'
-            status='example'
-          />
-          <UnusedCharacterCard
-            variant='locked'
-            index={ 2 }
-          />
-        </SelectCharacterGrid>
-      </SelectCharacterWrapper>
+                {
+                  characters.map((character, index) => {
+                    if(character.empty){
+                      return (
+                        <UnusedCharacterCard
+                          index={ index + 1 }
+                          variant={ character.blocked ? 'locked' : undefined }
+                        />
+                      )
+                    } else {
+                      return (
+                        <UsedCharacterCard
+                          index={ index + 1 }
+                          name={ character.data.name }
+                          bank={ character.data.bank }
+                          cash={ character.data.cash }
+                          fraction={ character.data.fraction }
+                          work={ character.data.work }
+                          status={ character.data.status }
+                        />
+                      )
+                    }
+                  })
+                }
+              </SelectCharacterGrid>
+            </SelectCharacterWrapper>
+          </>
+        )
+      }
     </>
-  );
-};
+  )
+}

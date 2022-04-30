@@ -11,7 +11,7 @@ import {
   Flex,
   Button
 } from '@ui/index';
-import { numberWithSpaces } from '@lib/utils';
+import { numberWithSpaces, capitalizeFirstLetter } from '@lib/utils';
 
 // Assets
 import { ReactComponent as UserIcon } from '@images/icons/user-icon.svg'
@@ -25,7 +25,6 @@ const StyledCharacterCard = styled(CharacterCard)`
 `;
 
 const Name = styled(Typography)`
-  width: 1px;
   max-width: 300px;
   text-overflow: fade;
   align-self: center;
@@ -101,7 +100,7 @@ export const UsedCharacterCard = (
         <DataSection name='Наличные' value={ `$${ numberWithSpaces(cash) }` }/>
         <DataSection name='Деньги в банке' value={ `$${ numberWithSpaces(bank) }` }/>
         <DataSection name='Фракция' value={ fraction ? fraction.toUpperCase() : 'Отсутствует' }/>
-        <DataSection name='Работа' value={ work ? work : 'Безработный' }/>
+        <DataSection name='Работа' value={ work ? capitalizeFirstLetter(work) : 'Безработный' }/>
         <DataSection name='Статус' value={ status }/>
 
         <StyledButton

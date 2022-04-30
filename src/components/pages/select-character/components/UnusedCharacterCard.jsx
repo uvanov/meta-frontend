@@ -23,6 +23,8 @@ const StyledCharacterCard = styled(CharacterCard)`
   grid-template-columns: 1fr 5fr;
   grid-template-rows: 3fr 1fr;
   align-self: stretch;
+  
+  padding-right: 77px;
 `;
 
 const VerticalText = styled(Typography)`
@@ -70,7 +72,7 @@ export const UnusedCharacterCard = ({ variant, index }) => {
         variant='title'
         color='#252333'
       >
-        ПЕРСОНАЖ #2
+        ПЕРСОНАЖ #{ index }
       </VerticalText>
 
       <Flex
