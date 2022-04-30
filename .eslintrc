@@ -13,7 +13,7 @@
     "object-curly-spacing": ["warn", "always"],
     "react/jsx-curly-spacing": [2, {
       "when": "always",
-      "allowMultiline": false
+      "allowMultiline": true
     }]
   }
 }
