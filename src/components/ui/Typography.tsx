@@ -66,7 +66,7 @@ type VariantFunction = (theme: Theme) => SerializedStyles;
 // Types
 interface TypographyProps {
   variant: keyof typeof TYPOGRAPHY_VARIANT_MAP;
-  color: 'black' | 'white' | 'gray';
+  color: string;
   align?: 'left' | 'center' | 'right';
   wrap?: 'normal' | 'no-wrap' | 'pre' | 'pre-wrap' | 'pre-line' | 'break-spaces';
   uppercase?: boolean;
