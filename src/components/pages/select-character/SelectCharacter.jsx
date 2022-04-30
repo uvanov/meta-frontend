@@ -5,16 +5,18 @@ import styled from '@emotion/styled';
 // Local modules
 import {
   Flex,
-  Typography
+  Typography,
+  Modal, MarginContainer, Button
 } from '@ui/index';
 import { UsedCharacterCard } from './components/UsedCharacterCard';
 import { UnusedCharacterCard } from './components/UnusedCharacterCard';
-import { useAppSelector } from '@hooks/state';
+import { useAppDispatch, useAppSelector } from '@hooks/state';
 
 // Assets
 import HelicopterBackground from '@images/helicopter-background.jpg';
 import StripesBackground from '@images/select-character/stripes-background.png';
 import AvatarSource from '@images/authentication/authentication-background-image.jpg';
+import { selectCharacterSlice } from '@store/slices/SelectCharacterSlice';
 
 // Styled Components
 const HelicopterBackgroundLayer = styled.div`
@@ -133,11 +135,31 @@ const SocialClubUserAvatar = styled.div`
   }
 `;
 
+const StyledModal = styled(Modal)`
+  width: 500px;
+`;
+
 // Exports
 export const SelectCharacter = () => {
 
+  const dispatch = useAppDispatch();
+  const { setModalVisibility } = selectCharacterSlice.actions;
+
   const isShown = useAppSelector(state => state.selectCharacter.isShown);
+  const isModalShown = useAppSelector(state => state.selectCharacter.showModal);
   const characters = useAppSelector(state => state.selectCharacter.characters);
+
+  const selectedCharacterIndex = useAppSelector(state => state.selectCharacter.selectedCharacterIndex);
+  const selectedCharacterName = characters[selectedCharacterIndex]?.data.name;
+
+  const closeModal = () => {
+    dispatch(setModalVisibility({ modalVisibility: false }));
+  };
+
+  const chooseCharacter = () => {
+    global.mp.trigger('client.choosePerson', selectedCharacterIndex);
+  };
+
 
   return (
     <>
@@ -178,34 +200,84 @@ export const SelectCharacter = () => {
 
 
                 {
-                  characters.map((character, index) => {
-                    if(character.empty){
-                      return (
-                        <UnusedCharacterCard
-                          index={ index + 1 }
-                          variant={ character.blocked ? 'locked' : undefined }
-                        />
-                      )
-                    } else {
-                      return (
-                        <UsedCharacterCard
-                          index={ index + 1 }
-                          name={ character.data.name }
-                          bank={ character.data.bank }
-                          cash={ character.data.cash }
-                          fraction={ character.data.fraction }
-                          work={ character.data.work }
-                          status={ character.data.status }
-                        />
-                      )
-                    }
-                  })
+                  characters.length
+                  ?
+                    characters.map((character, index) => {
+                      if (character.empty) {
+                        return (
+                          <UnusedCharacterCard
+                            index={ index }
+                            variant={ character.blocked ? 'locked' : undefined }
+                          />
+                        );
+                      } else {
+                        return (
+                          <UsedCharacterCard
+                            index={ index }
+                            name={ character.data.name }
+                            bank={ character.data.bank }
+                            cash={ character.data.cash }
+                            fraction={ character.data.fraction }
+                            work={ character.data.work }
+                            status={ character.data.status }
+                          />
+                        );
+                      }
+                    })
+                  :
+                    <Typography
+                      variant='middle'
+                      color='red'
+                    >
+                      Ошибка загрузки персонажей
+                    </Typography>
                 }
               </SelectCharacterGrid>
             </SelectCharacterWrapper>
+            <StyledModal
+              title='ВХОД В ИГРУ'
+              isModalShown={ isModalShown }
+            >
+              <MarginContainer bottom='30px'>
+                <Typography
+                  variant='small'
+                  color='gray'
+                  align='center'
+                >
+                  Вы уверены, что хотите войти в игру персонажем
+                </Typography>
+                <Typography
+                  variant='small'
+                  color='gray'
+                  align='center'
+                  bold
+                >
+                  { selectedCharacterName }
+                </Typography>
+              </MarginContainer>
+
+              <Flex
+                direction='column'
+                alignItems='stretch'
+                gap='20px'
+              >
+                <Button
+                  variant='danger'
+                  onClick={ () => chooseCharacter() }
+                >
+                  Войти в игру
+                </Button>
+                <Button
+                  variant='default'
+                  onClick={ () => closeModal() }
+                >
+                  Вернуться в меню
+                </Button>
+              </Flex>
+            </StyledModal>
           </>
         )
       }
     </>
-  )
-}
+  );
+};
