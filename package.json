@@ -1,5 +1,6 @@
 {
   "name": "meta-role-play",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,9 +24,9 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "browserslist": {
@@ -41,6 +42,8 @@
     ]
   },
   "devDependencies": {
-    "@types/ragemp-cef": "github:eisengrind/types-ragemp-cef"
+    "@types/ragemp-cef": "github:eisengrind/types-ragemp-cef",
+    "react-app-rewire-alias": "^1.1.7",
+    "react-app-rewired": "^2.2.1"
   }
 }

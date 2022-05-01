@@ -3,16 +3,16 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 // Local modules
-import { useAppSelector } from '../../../hooks/state';
+import { useAppSelector } from '@hooks/state';
 import { Authorization } from './components/Authorization';
 import { Recovery } from './components/Recovery';
 import { PageSwitcher } from './components/PageSwitcher';
 import { Registration } from './components/Registration';
 import { WelcomeBackground } from './components/WelcomeBackground';
-import { Flex } from '../../ui';
+import { Flex } from '@ui/index';
 
 // Assets
-import AuthenticationBackgroundImage from '../../../assets/images/authentication/authentication-background-image.jpg';
+import AuthenticationBackgroundImage from '@images/authentication/authentication-background-image.jpg';
 
 // Styled Components
 const AuthenticationBackground = styled(Flex)`

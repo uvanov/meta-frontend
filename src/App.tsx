@@ -3,7 +3,10 @@ import React, { useEffect } from 'react';
 
 // Local modules
 import { CEF } from './CEF';
-import { Authentication } from './components/pages/authentication/Authentication';
+
+// UIs
+import { Authentication } from '@pages/authentication/Authentication';
+import { SelectCharacter } from '@pages/select-character/SelectCharacter';
 
 window.CEF = CEF;
 
@@ -13,6 +16,7 @@ export const App = () => {
   return (
     <>
       <Authentication/>
+      <SelectCharacter/>
     </>
   );
 };

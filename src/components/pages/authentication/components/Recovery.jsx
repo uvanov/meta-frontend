@@ -10,14 +10,14 @@ import {
   Input,
   Flex,
   Button
-} from '../../../ui';
-import { useCheckForErrors } from '../../../../hooks';
-import { useAppDispatch } from '../../../../hooks/state';
-import { authenticationSlice } from '../../../../store/slices/AuthenticationSlice';
+} from '@ui/index';
+import { useCheckForErrors } from '@hooks/index';
+import { useAppDispatch } from '@hooks/state';
+import { authenticationSlice } from '@store/slices/AuthenticationSlice';
 
 // Assets
-import { ReactComponent as EmailIcon } from '../../../../assets/images/authentication/email-icon.svg';
-import { ReactComponent as CodeIcon } from '../../../../assets/images/authentication/code-icon.svg';
+import { ReactComponent as EmailIcon } from '@images/icons/email-icon.svg';
+import { ReactComponent as CodeIcon } from '@images/icons/code-icon.svg';
 
 // Styled Components
 const StyledFormWindow = styled(FormWindow)`

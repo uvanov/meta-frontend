@@ -24,10 +24,10 @@ const StyledMargin = styled.div<MarginProps>`
 
 // Types
 interface MarginProps {
-  top?: number | string;
-  right?: number | string;
-  left?: number | string;
-  bottom?: number | string;
+  top?: string;
+  right?: string;
+  left?: string;
+  bottom?: string;
 }
 
 // Exports

@@ -3,9 +3,11 @@ import {
   combineReducers
 } from '@reduxjs/toolkit';
 import authenticationSlice from './slices/AuthenticationSlice';
+import selectCharacterSlice from './slices/SelectCharacterSlice';
 
 const rootReducer = combineReducers({
-  authentication: authenticationSlice
+  authentication: authenticationSlice,
+  selectCharacter: selectCharacterSlice
 });
 
 export const store = configureStore({

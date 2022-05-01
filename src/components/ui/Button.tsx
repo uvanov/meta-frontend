@@ -2,13 +2,16 @@
 // Import modules
 import React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import {
+  css,
+  Theme
+} from '@emotion/react';
 
 // Assets
-import { ReactComponent as ArrowRight } from '../../assets/images/arrow-right.svg';
+import { ReactComponent as ArrowRight } from '@images/icons/arrow-right.svg';
 
 // Styled Components
-const BaseButton = styled.button<{ fullWidth: boolean, large?: boolean }>`
+const BaseButton = styled.button<{ fullWidth?: boolean, large?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,9 +35,9 @@ const DefaultButtonVariant = () => css`
   backdrop-filter: blur(7px);
 `;
 
-const DangerButtonVariant = () => css`
-  background: #FF3E3E;
-  box-shadow: 0px 49px 106px -32px #FF3E3E, inset 0px 0px 24px rgba(255, 169, 169, 0.55);
+const DangerButtonVariant = (theme: Theme) => css`
+  background: ${ theme.palette.red };
+  box-shadow: 0 49px 106px -32px ${ theme.palette.red }, inset 0px 0px 24px rgba(255,169,169,0.55);
   font-weight: 500;
 `;
 
@@ -45,7 +48,7 @@ const ButtonArrowLabel = styled.div`
   justify-content: center;
   align-items: center;
   padding: 19px;
-  background: rgba(205, 56, 56, 0.4);
+  background: rgb(229, 47, 47, 0.8);
   border-radius: 8px;
 `;
 
@@ -60,12 +63,12 @@ const BUTTON_VARIANTS_MAP = {
 interface ButtonProps {
   variant: keyof typeof BUTTON_VARIANTS_MAP; // Создаём литерал, на основе параметров из BUTTON_VARIANTS_MAP
   large?: boolean;
-  fullWidth: boolean;
+  fullWidth?: boolean;
   onClick?: () => void;
 }
 
 // Exports
-export const Button: React.FC<ButtonProps> = ({ children, variant, ...remainingProps }) => {
+export const Button: React.FC<ButtonProps> = ({ children, variant, large, ...remainingProps }) => {
 
   const styleVariant = BUTTON_VARIANTS_MAP[variant];
 
@@ -73,6 +76,7 @@ export const Button: React.FC<ButtonProps> = ({ children, variant, ...remainingP
     <BaseButton
       css={ styleVariant }
       { ...remainingProps }
+      large={ large }
     >
       { children }
 

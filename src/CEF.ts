@@ -1,5 +1,5 @@
 // Import modules
-import { store } from './store/store';
+import { store } from '@store/store';
 
 // Import slices
 import {
@@ -8,7 +8,11 @@ import {
   RegistrationFieldType,
   RecoveryFieldType,
   InterfacesListType
-} from './store/slices/AuthenticationSlice';
+} from '@store/slices/AuthenticationSlice';
+import {
+  selectCharacterSlice,
+  CharacterType
+} from '@store/slices/SelectCharacterSlice';
 
 // Destruct actions
 const {
@@ -18,6 +22,10 @@ const {
   setRegistrationError,
   clearErrors
 } = authenticationSlice.actions;
+const {
+  setSelectCharacterVisibility,
+  setCharacters
+} = selectCharacterSlice.actions;
 
 const dispatch = store.dispatch;
 
@@ -43,6 +51,14 @@ export const CEF = {
       Error(field: RecoveryFieldType, text: string){
         dispatch(setRecoveryError({ field, value: text }));
       }
+    }
+  },
+  SelectCharacter: {
+    Visibility(visibility: boolean){
+      dispatch(setSelectCharacterVisibility({ visibility }));
+    },
+    SetUserCharacters(characters: CharacterType[]){
+      dispatch(setCharacters({ characters }));
     }
   }
 };

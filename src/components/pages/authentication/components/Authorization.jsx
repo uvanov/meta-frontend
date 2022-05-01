@@ -13,8 +13,8 @@ import {
 } from '../../../ui';
 
 // Assets
-import { ReactComponent as UserIcon } from '../../../../assets/images/authentication/authorization-button-icon.svg';
-import { ReactComponent as KeyIcon } from '../../../../assets/images/authentication/key-icon.svg';
+import { ReactComponent as UserIcon } from '@images/icons/user-icon.svg';
+import { ReactComponent as KeyIcon } from '@images/icons/key-icon.svg';
 import { useAppDispatch } from '../../../../hooks/state';
 import { authenticationSlice } from '../../../../store/slices/AuthenticationSlice';
 import { useCheckForErrors } from '../../../../hooks';

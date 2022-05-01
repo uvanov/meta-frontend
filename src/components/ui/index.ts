@@ -5,6 +5,7 @@ import { Input } from './Input';
 import { Typography } from './Typography';
 import { MarginContainer } from './MarginContainer';
 import { Relative } from './Relative';
+import { Modal } from './Modal';
 
 export {
   Flex,
@@ -12,5 +13,6 @@ export {
   Input,
   Typography,
   MarginContainer,
-  Relative
+  Relative,
+  Modal
 };

@@ -65,3 +65,14 @@ You can see a global object into window, called "CEF'. There is his methods list
 |---|---|---|
 | Error | Display error to one of the inputs | field: **string** (`email`, `code`), text: **string**| 
 
+<br><br>
+
+### SelectCharacter
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| Visibility | Change visibility of authentication interface | visibility: `boolean` |
+| SetUserCharacters | Send user's character list to CEF | characters: Array `({ data: { name: string, cash: number, bank: number, fraction: string, job: string, status: string }, empty: boolean, blocked: boolean })` |
+<br>
+
+**( If `empty` or `blocked` are true, other string-parameters must be empty string and number-parameters must equal 0  )**
