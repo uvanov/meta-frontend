@@ -229,7 +229,7 @@ export const SelectCharacter = () => {
                       variant='middle'
                       color='red'
                     >
-                      Ошибка загрузки персонажей
+                      Список персонажей пуст.
                     </Typography>
                 }
               </SelectCharacterGrid>
