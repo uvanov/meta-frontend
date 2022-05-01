@@ -22,9 +22,7 @@ const ModalBackground = styled(Flex, {
   right: 0;
   bottom: 0;
   left: 0;
-  
   background-color: ${({ theme }) => addHexAlpha(theme.palette.black, 0.8)};
-  
   transition: opacity .3s;
   opacity: 0;
   z-index: -1000;
@@ -55,9 +53,7 @@ export const Modal: React.FC<ModalProps> = (
     title,
     isModalShown,
     ...remainingProps
-
   }) => {
-
 
   return (
     <ModalBackground
@@ -75,7 +71,6 @@ export const Modal: React.FC<ModalProps> = (
         <Typography variant='title' color='gray'>
           { title }
         </Typography>
-
         <MarginContainer
           top='16px'
           bottom='30px'

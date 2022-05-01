@@ -37,7 +37,7 @@ const DefaultButtonVariant = () => css`
 
 const DangerButtonVariant = (theme: Theme) => css`
   background: ${ theme.palette.red };
-  box-shadow: 0px 49px 106px -32px ${ theme.palette.red }, inset 0px 0px 24px rgba(255,169,169,0.55);
+  box-shadow: 0 49px 106px -32px ${ theme.palette.red }, inset 0px 0px 24px rgba(255,169,169,0.55);
   font-weight: 500;
 `;
 

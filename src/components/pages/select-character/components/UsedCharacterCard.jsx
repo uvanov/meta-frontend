@@ -42,7 +42,6 @@ const VerticalText = styled(Typography)`
     content: "#${ ({ index }) => index }";
     margin-bottom: 10px;
     white-space: nowrap;
-    
     color: transparent;
     opacity: .5;
     -webkit-text-stroke-width: 1px;
@@ -111,7 +110,6 @@ export const UsedCharacterCard = (
         <DataSection name='Фракция' value={ fraction ? fraction.toUpperCase() : 'Отсутствует' }/>
         <DataSection name='Работа' value={ work ? capitalizeFirstLetter(work) : 'Безработный' }/>
         <DataSection name='Статус' value={ status }/>
-
         <StyledButton
           variant='danger'
           onClick={ () => chooseCharacterHandler(index) }
@@ -119,7 +117,6 @@ export const UsedCharacterCard = (
           Выбрать персонажа
         </StyledButton>
       </Flex>
-
     </StyledCharacterCard>
   );
 };

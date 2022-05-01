@@ -7,8 +7,9 @@ import { Flex } from '@ui/index';
 
 // Styled Components
 const StyledGradientIcon = styled(Flex)`
-  background: linear-gradient(152.87deg, ${ ({ theme }) => theme.palette.red } -40.12%, 
-                                         ${ ({ theme }) => theme.palette.orange } 148.17%);
+  background: linear-gradient(152.87deg, 
+                              ${ ({ theme }) => theme.palette.red } -40.12%,                         
+                              ${ ({ theme }) => theme.palette.orange } 148.17%);
   box-shadow: 0px 15px 59px -15px #ff6b43;
   border-radius: 10px;
   width: 65px;

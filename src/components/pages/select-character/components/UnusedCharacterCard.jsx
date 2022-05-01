@@ -23,7 +23,6 @@ const StyledCharacterCard = styled(CharacterCard)`
   grid-template-columns: 1fr 5fr;
   grid-template-rows: 3fr 1fr;
   align-self: stretch;
-  
   padding-right: 77px;
 `;
 
@@ -40,7 +39,6 @@ const VerticalText = styled(Typography)`
     content: "#${ ({ index }) => index }";
     margin-bottom: 10px;
     white-space: nowrap;
-    
     color: transparent;
     opacity: .5;
     -webkit-text-stroke-width: 1px;
@@ -66,7 +64,6 @@ export const UnusedCharacterCard = ({ variant, index }) => {
 
   return (
     <StyledCharacterCard>
-
       <VerticalText
         index={ index + 1 }
         variant='title'
@@ -74,7 +71,6 @@ export const UnusedCharacterCard = ({ variant, index }) => {
       >
         ПЕРСОНАЖ #{ index + 1 }
       </VerticalText>
-
       <Flex
         direction='column'
         alignItems='center'
@@ -83,7 +79,6 @@ export const UnusedCharacterCard = ({ variant, index }) => {
         <MarginContainer bottom='26px'>
           <GradientIcon Icon={ isSlotUnlocked ? UserIcon : LockIcon }/>
         </MarginContainer>
-
         <Flex
           direction='column'
           gap='10px'
@@ -108,13 +103,9 @@ export const UnusedCharacterCard = ({ variant, index }) => {
               :
                 'Вы можете разблокировать этого персонажа за виртуальную валюту'
             }
-
           </Typography>
-
         </Flex>
       </Flex>
-
-
       <SecondRowWrapper>
         <Flex
           direction='column'

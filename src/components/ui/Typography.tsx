@@ -60,10 +60,10 @@ const TYPOGRAPHY_VARIANT_MAP = {
   title, subtitle, middle, small
 };
 
+// Types
 // Этот тип нужен для функций, чтобы нормально можно было работать с темой
 type VariantFunction = (theme: Theme) => SerializedStyles;
 
-// Types
 interface TypographyProps {
   variant: keyof typeof TYPOGRAPHY_VARIANT_MAP;
   color: string;

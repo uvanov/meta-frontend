@@ -9,8 +9,8 @@ import {
   Input,
   Flex,
   Button
-} from '../../../ui';
-import { useCheckForErrors } from '../../../../hooks';
+} from '@ui/index';
+import { useCheckForErrors } from '@hooks/index';
 
 // Assets
 import { ReactComponent as UserIcon } from '@images/icons/user-icon.svg';
