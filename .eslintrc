@@ -1,6 +1,7 @@
 {
   "extends": "react-app",
   "rules": {
+    "@typescript-eslint/no-unused-vars": ["warn"],
     "quotes": ["error", "single"],
     "jsx-quotes": ["error", "prefer-single"],
     "indent": ["warn", 2],
