@@ -6,7 +6,10 @@ import { css } from '@emotion/react';
 // Styled Components
 const StyledGrid = styled.div<GridProps>`
   display: grid;
-  grid-template-columns: repeat(${(props) => props.columns}, 1fr);
+  grid-template-columns: repeat(
+      ${(props) => props.columns}, 
+      ${(props) => props.columnWidth ? props.columnWidth : '1fr'}
+  );
   
   ${(props) => props.rows && css`
     grid-template-rows: repeat(${ props.rows }, 1fr);
@@ -35,6 +38,7 @@ const StyledGrid = styled.div<GridProps>`
 // Types
 interface GridProps {
   columns: number;
+  columnWidth?: string;
   rows?: number;
   columnGap?: number;
   rowGap?: number;
