@@ -15,14 +15,30 @@ import { addHexAlpha } from '@lib/utils';
 const InputWrapper = styled(Flex)`
   padding: 20px 28px;
   background: ${ ({ theme }) => addHexAlpha(theme.palette.bluegray, 0.5) };
-  width: fit-content;
+  border-radius: 9px;
 `;
 
+const StyledSlider = styled(Slider)`
+  width: unset;
+  grid-column: 1 / 3;
+`;
 
 // Exports
-export const RangeInput = ({ label, staticTitle, value, setValue }) => {
+export const RangeInput = (
+  {
+    label,
+    title,
+    value,
+    onChange,
+    axis = 'x',
+    step = 1,
+    min = 0,
+    max = 100
+  }) => {
 
-  const [title, setTitle] = useState(staticTitle ? staticTitle : '');
+  const sliderSettings = axis === 'x'
+    ? { x: value, xmin: min, xmax: max, xstep: step }
+    : { y: value, ymin: min, ymax: max, ystep: step };
 
   return (
     <InputWrapper
@@ -31,7 +47,8 @@ export const RangeInput = ({ label, staticTitle, value, setValue }) => {
     >
       <Grid
         columns={ 2 }
-        columnGap={ 16 }
+        rowGap={ 13 }
+        fullWidth
       >
         <Typography
           variant='small'
@@ -43,14 +60,28 @@ export const RangeInput = ({ label, staticTitle, value, setValue }) => {
         <Typography
           variant='small'
           color='white'
+          align='right'
         >
           { title }
         </Typography>
 
-        <Slider
-          axis='x'
-          x={ value }
-          onChange={ ({ x }) => setValue(x) }
+        <StyledSlider
+          axis={ axis }
+          { ...sliderSettings }
+
+          styles={ {
+            track: {
+              backgroundColor: '#16141C'
+            },
+            active: {
+              backgroundColor: '#FFA14A'
+            },
+            thumb: {
+              width: 12,
+              height: 12
+            }
+          } }
+          onChange={ event => onChange(event) }
         />
       </Grid>
     </InputWrapper>
