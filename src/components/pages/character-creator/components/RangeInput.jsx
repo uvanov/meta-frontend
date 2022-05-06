@@ -31,6 +31,7 @@ const StyledSlider = styled(Slider)`
 export const RangeInput = (
   {
     label,
+    name,
     title,
     value,
     onChange,
@@ -85,7 +86,11 @@ export const RangeInput = (
               height: 12
             }
           } }
-          onChange={ event => onChange(event) }
+          onChange={ event => {
+            onChange(event);
+            let data = JSON.stringify({ title: name, data: event[axis].toFixed(1) });
+            global.mp.trigger('client.changesCharacter', data);
+          } }
         />
       </Grid>
     </InputWrapper>

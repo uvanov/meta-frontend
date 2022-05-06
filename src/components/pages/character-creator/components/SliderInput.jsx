@@ -26,7 +26,11 @@ const Slider = styled(Flex)`
   grid-column: 1 / 3;
 `;
 
-const Button = styled(Flex)`
+const Button = styled(Flex, {
+  shouldForwardProp(prop){
+    return prop !== 'rotated'
+  }
+})`
   width: 28px;
   height: 28px;
   border-radius: 3px;
@@ -50,6 +54,7 @@ export const SliderInput = (
   {
     label,
     value,
+    name,
     max,
     onDecrement,
     onIncrement
@@ -78,7 +83,11 @@ export const SliderInput = (
           <Button
             justifyContent='center'
             alignItems='center'
-            onClick={ onDecrement }
+            onClick={ () => {
+              onDecrement();
+              let data = JSON.stringify({ title: name, data: value.toFixed(1) });
+              global.mp.trigger('client.changesCharacter', data);
+            } }
           >
             <Arrow/>
           </Button>
@@ -94,7 +103,11 @@ export const SliderInput = (
             justifyContent='center'
             alignItems='center'
             rotated
-            onClick={ onIncrement }
+            onClick={ () => {
+              onIncrement();
+              let data = JSON.stringify({ title: name, data: value });
+              global.mp.trigger('client.changesCharacter', data);
+            } }
           >
             <Arrow/>
           </Button>

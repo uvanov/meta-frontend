@@ -14,6 +14,7 @@ export const FacialStructure = ({ state, setState }) => {
       <RangeInput
         label='Ширина челюсти'
         title='Меньше / больше'
+        name='jawWidth'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -23,6 +24,7 @@ export const FacialStructure = ({ state, setState }) => {
       <RangeInput
         label='Высота целюсти'
         title='Меньше / больше'
+        name='jawHeight'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -32,6 +34,7 @@ export const FacialStructure = ({ state, setState }) => {
       <RangeInput
         label='Длина подбородка'
         title='Меньше / больше'
+        name='chinLength'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -41,6 +44,7 @@ export const FacialStructure = ({ state, setState }) => {
       <RangeInput
         label='Выступ подбородка'
         title='Меньше / больше'
+        name='chinJut'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -50,6 +54,7 @@ export const FacialStructure = ({ state, setState }) => {
       <RangeInput
         label='Ширина подбородка'
         title='Меньше / больше'
+        name='chinWidth'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -59,6 +64,7 @@ export const FacialStructure = ({ state, setState }) => {
       <RangeInput
         label='Форма подбородка'
         title='Меньше / больше'
+        name='chinShape'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }

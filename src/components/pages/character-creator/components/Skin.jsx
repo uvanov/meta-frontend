@@ -14,6 +14,7 @@ export const Skin = ({ state, setState }) => {
       <RangeInput
         label='Дефекты кожи'
         title={ `${ state.skinDefect } (${ defaultValues.defects.max })` }
+        name='skinDefect'
         min={ defaultValues.defects.min }
         max={ defaultValues.defects.max }
         step={ defaultValues.step }
@@ -23,6 +24,7 @@ export const Skin = ({ state, setState }) => {
       <RangeInput
         label='Старение кожи'
         title={ `${ state.skinAging } (${ defaultValues.aging.max })` }
+        name='skinAging'
         min={ defaultValues.aging.min }
         max={ defaultValues.aging.max }
         step={ defaultValues.step }
@@ -32,6 +34,7 @@ export const Skin = ({ state, setState }) => {
       <RangeInput
         label='Тип кожи'
         title={ `${ state.skinType } (${ defaultValues.types.max })` }
+        name='skinType'
         min={ defaultValues.types.min }
         max={ defaultValues.types.max }
         step={ defaultValues.step }

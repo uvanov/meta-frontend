@@ -31,6 +31,7 @@ export const Dna = ({ state, setState }) => {
       />
       <RangeInput
         label='Мать'
+        name='motherIndex'
         title={ defaultValues.mother.list[state.motherIndex] }
         min={ defaultValues.mother.min }
         max={ defaultValues.mother.max }
@@ -40,6 +41,7 @@ export const Dna = ({ state, setState }) => {
       />
       <RangeInput
         label='Отец'
+        name='fatherIndex'
         title={ defaultValues.father.list[state.fatherIndex] }
         min={ defaultValues.father.min }
         max={ defaultValues.father.max }
@@ -50,6 +52,7 @@ export const Dna = ({ state, setState }) => {
       <RangeInput
         label='Схожесть с мамой'
         title='Меньше / Больше'
+        name='motherSimilarity'
         min={ defaultValues.parentSimilarity.min }
         max={ defaultValues.parentSimilarity.max }
         step={ defaultValues.parentSimilarity.step }
@@ -59,6 +62,7 @@ export const Dna = ({ state, setState }) => {
       <RangeInput
         label='Схожесть с отцом'
         title='Меньше / Больше'
+        name='fatherSimilarity'
         min={ defaultValues.parentSimilarity.min }
         max={ defaultValues.parentSimilarity.max }
         step={ defaultValues.parentSimilarity.step }

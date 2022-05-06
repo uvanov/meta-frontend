@@ -25,6 +25,7 @@ export const Hair = ({ state, setState }) => {
     <>
       <SliderInput
         label='Причёска'
+        name='hair'
         value={ state.hair }
         max={ defaultValues.max }
         onDecrement={ () => decrement('hair') }
@@ -32,6 +33,7 @@ export const Hair = ({ state, setState }) => {
       />
       <SliderInput
         label='Брови'
+        name='eyebrows'
         value={ state.eyebrows }
         max={ defaultValues.max }
         onDecrement={ () => decrement('eyebrows') }
@@ -39,6 +41,7 @@ export const Hair = ({ state, setState }) => {
       />
       <SliderInput
         label='Растительность на лице'
+        name='facialHair'
         value={ state.facialHair }
         max={ defaultValues.max }
         onDecrement={ () => decrement('facialHair') }

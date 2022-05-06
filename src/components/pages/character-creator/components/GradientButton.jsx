@@ -51,9 +51,12 @@ const TabButtonText = styled(Typography)`
 `
 
 // Exports
-export const GradientButton = ({ Icon, active, children }) => {
+export const GradientButton = ({ Icon, active, children, ...remainingProps }) => {
   return (
-    <StyledTabSwitchButton active={ active }>
+    <StyledTabSwitchButton
+      active={ active }
+      { ...remainingProps }
+    >
       <Icon/>
       {
         children && (

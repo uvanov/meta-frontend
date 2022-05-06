@@ -14,6 +14,7 @@ export const Face = ({ state, setState }) => {
       <RangeInput
         label='Ширина носа'
         title='Меньше / больше'
+        name='noseWidth'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -23,6 +24,7 @@ export const Face = ({ state, setState }) => {
       <RangeInput
         label='Высота носа'
         title='Меньше / больше'
+        name='noseHeight'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -32,6 +34,7 @@ export const Face = ({ state, setState }) => {
       <RangeInput
         label='Длина носа'
         title='Меньше / больше'
+        name='noseLength'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -41,6 +44,7 @@ export const Face = ({ state, setState }) => {
       <RangeInput
         label='Переносица'
         title='Меньше / больше'
+        name='noseBridge'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -50,6 +54,7 @@ export const Face = ({ state, setState }) => {
       <RangeInput
         label='Разрез глаз'
         title='Меньше / больше'
+        name='eyeSection'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
@@ -59,6 +64,7 @@ export const Face = ({ state, setState }) => {
       <RangeInput
         label='Объём губ'
         title='Меньше / больше'
+        name='lipsSize'
         min={ defaultValues.min }
         max={ defaultValues.max }
         step={ defaultValues.step }
