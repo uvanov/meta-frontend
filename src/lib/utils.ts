@@ -16,7 +16,7 @@ export function getRandomFromRange(min: number, max: number, round?: true) {
   if (round) {
     return Math.round(result);
   } else {
-    return parseFloat(result.toFixed(1))
+    return parseFloat(result.toFixed(1));
   }
 };
 
