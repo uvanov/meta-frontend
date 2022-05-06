@@ -15,8 +15,15 @@ import { Skin } from './components/Skin';
 import { Face } from './components/Face';
 import { FacialStructure } from './components/FacialStructure';
 import { Hair } from './components/Hair';
-import { useAppSelector } from '@hooks/state';
-import { getRandomFromRange } from '@lib/utils';
+import {
+  useAppDispatch,
+  useAppSelector
+} from '@hooks/state';
+import { characterCreatorSlice } from '@store/slices/CharacterCreatorSlice';
+import {
+  getRandomFromRange,
+  matchToEnglishAlphabet
+} from '@lib/utils';
 
 // Assets
 import { ReactComponent as DnaIcon } from '@images/character-creator/dna-icon.svg';
@@ -81,6 +88,12 @@ const RandomizeButton = styled(Flex)`
 export const CharacterCreator = () => {
 
   // TODO: Переделать все компоненты нахуй. Перевести этот стейт на useReducer, перенести все страницы формы на диспатчи.
+  const dispatch = useAppDispatch();
+  const {
+    setNameValid,
+    setSurnameValid
+  } = characterCreatorSlice.actions;
+
   const [formState, setFormState] = useState({
     name: '',
     surname: '',
@@ -111,7 +124,6 @@ export const CharacterCreator = () => {
   const isShown = useAppSelector(state => state.characterCreator.isShown);
 
   const randomizeFormData = () => {
-
     let randomizedData = {
       motherIndex: getRandomFromRange(0, MOTHER_INDEX_MAX, true),
       fatherIndex: getRandomFromRange(0, FATHER_INDEX_MAX, true),
@@ -143,6 +155,30 @@ export const CharacterCreator = () => {
     setActiveTab(tabName);
     global.mp.trigger('client.changeTab', tabIndex);
   };
+  const submitCharacter = () => {
+    let isNameValid = formState.name.trim().length > 3 && matchToEnglishAlphabet(formState.name.trim());
+    let isSurnameValid = formState.surname.trim().length > 3 && matchToEnglishAlphabet(formState.surname.trim());
+
+    if( !isNameValid || !isSurnameValid ){
+      if( !isNameValid ){
+        dispatch(setNameValid({ valid: false }));
+      } else {
+        dispatch(setNameValid({ valid: true }));
+      }
+
+      if( !isSurnameValid ){
+        dispatch(setSurnameValid({ valid: false }));
+      } else {
+        dispatch(setSurnameValid({ valid: true }));
+      }
+
+      return console.log({isNameValid, isSurnameValid});
+    } else {
+      dispatch(setNameValid({ valid: true }));
+      dispatch(setSurnameValid({ valid: true }));
+      return global.mp.trigger('client.saveCharacter',  JSON.stringify(formState));
+    }
+  }
 
   const MOTHER_INDEX_MAX = useAppSelector(state => state.characterCreator.values.dna.mother.max);
   const FATHER_INDEX_MAX = useAppSelector(state => state.characterCreator.values.dna.father.max);
@@ -232,6 +268,7 @@ export const CharacterCreator = () => {
                 <Button
                   variant='danger'
                   fullWidth
+                  onClick={ submitCharacter }
                 >
                   СОХРАНИТЬ ПЕРСОНАЖА
                 </Button>
