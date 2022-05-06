@@ -1,0 +1,105 @@
+// Import modules
+import React from 'react';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+
+// Local modules
+import {
+  Flex,
+  Grid,
+  Typography
+} from '@ui/index';
+import { addHexAlpha } from '@lib/utils';
+import { GradientButton } from './GradientButton';
+
+// Assets
+import { ReactComponent as Arrow } from '@images/icons/arrow-left-icon.svg';
+
+// Styled Components
+const InputWrapper = styled(Flex)`
+  padding: 20px 28px 23px 28px;
+  background: ${ ({ theme }) => addHexAlpha(theme.palette.bluegray, 0.5) };
+  border-radius: 9px;
+`;
+
+const Slider = styled(Flex)`
+  grid-column: 1 / 3;
+`;
+
+const Button = styled(Flex)`
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  background: ${({ theme }) => css`
+    linear-gradient(
+      138.31deg, 
+      ${ theme.palette.red } -55%, 
+      ${ theme.palette.orange } 206.03%
+    );
+  `}
+  cursor: pointer;
+  ${({ rotated }) => rotated && 'transform: rotate(180deg);'}
+  
+  &:hover{
+    background: ${({ theme }) => theme.palette.white};
+  }
+`
+
+// Exports
+export const SliderInput = (
+  {
+    label,
+    value,
+    max,
+    onDecrement,
+    onIncrement
+  }) => {
+
+  return (
+    <InputWrapper
+      justifyContent='center'
+      alignItems='center'
+    >
+      <Grid
+        columns={ 2 }
+        rowGap={ 13 }
+        fullWidth
+      >
+        <Typography
+          variant='small'
+          color='gray'
+        >
+          { label }
+        </Typography>
+
+        <Slider
+          justifyContent='space-between'
+        >
+          <Button
+            justifyContent='center'
+            alignItems='center'
+            onClick={ onDecrement }
+          >
+            <Arrow/>
+          </Button>
+
+          <Typography
+            variant='small'
+            color='white'
+          >
+            { `${value} (${max})` }
+          </Typography>
+
+          <Button
+            justifyContent='center'
+            alignItems='center'
+            rotated
+            onClick={ onIncrement }
+          >
+            <Arrow/>
+          </Button>
+        </Slider>
+      </Grid>
+    </InputWrapper>
+  );
+};

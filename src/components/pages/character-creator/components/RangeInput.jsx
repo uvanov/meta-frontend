@@ -13,7 +13,7 @@ import { addHexAlpha } from '@lib/utils';
 
 // Styled Components
 const InputWrapper = styled(Flex)`
-  padding: 20px 28px;
+  padding: 20px 28px 33px 28px;
   background: ${ ({ theme }) => addHexAlpha(theme.palette.bluegray, 0.5) };
   border-radius: 9px;
 `;
@@ -21,6 +21,10 @@ const InputWrapper = styled(Flex)`
 const StyledSlider = styled(Slider)`
   width: unset;
   grid-column: 1 / 3;
+  
+  > div {
+    transition: all .2s;
+  }
 `;
 
 // Exports

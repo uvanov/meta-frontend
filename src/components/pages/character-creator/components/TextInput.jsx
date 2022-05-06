@@ -36,8 +36,12 @@ const StyledTextInput = styled.input`
   }
 `;
 
+const InputFlex = styled(Flex)`
+  grid-column: 1 / 3;
+`
+
 const ValidationFlex = styled(Flex)`
-  grid-column: 2 / 3;
+  grid-column: 3 / 4;
   grid-row: 1 / 3;
 `
 
@@ -76,10 +80,10 @@ export const TextInput = (
       alignItems='center'
     >
       <Grid
-        columns={ 2 }
+        columns={ 3 }
         fullWidth
       >
-        <Flex
+        <InputFlex
           direction='column'
           gap='7px'
         >
@@ -90,10 +94,10 @@ export const TextInput = (
             type='text'
             placeholder={ placeholder }
             value={ value }
-            onChange={ onChange }
+            onChange={ event => onChange(event) }
             { ...remainingProps }
           />
-        </Flex>
+        </InputFlex>
         <ValidationFlex
           justifyContent='flex-end'
           alignItems='center'
