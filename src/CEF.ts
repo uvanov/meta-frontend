@@ -13,6 +13,7 @@ import {
   selectCharacterSlice,
   CharacterType
 } from '@store/slices/SelectCharacterSlice';
+import { characterCreatorSlice } from '@store/slices/CharacterCreatorSlice';
 
 // Destruct actions
 const {
@@ -26,6 +27,11 @@ const {
   setSelectCharacterVisibility,
   setCharacters
 } = selectCharacterSlice.actions;
+const {
+  setCharacterCreatorVisibility,
+  setSurnameValid,
+  setNameValid
+} = characterCreatorSlice.actions;
 
 const dispatch = store.dispatch;
 
@@ -59,6 +65,17 @@ export const CEF = {
     },
     SetUserCharacters(characters: CharacterType[]){
       dispatch(setCharacters({ characters }));
+    }
+  },
+  CharacterCreator: {
+    Visibility(visibility: boolean){
+      dispatch(setCharacterCreatorVisibility({ visibility }));
+    },
+    SetNameValid(valid: boolean){
+      dispatch(setNameValid({ valid }));
+    },
+    SetSurnameValid(valid: boolean){
+      dispatch(setSurnameValid({ valid }));
     }
   }
 };

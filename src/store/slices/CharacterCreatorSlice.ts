@@ -7,11 +7,10 @@ import {
 // Types
 
 // Initial state
-// @ts-ignore
 const initialState = {
   isShown: true,
-  isNameValid: null,
-  isSurnameValid: null,
+  isNameValid: null as null | boolean,
+  isSurnameValid: null as null | boolean,
   values: {
     dna: {
       mother: {
@@ -72,7 +71,15 @@ export const characterCreatorSlice = createSlice({
   name: 'characterCreator',
   initialState,
   reducers: {
-
+    setCharacterCreatorVisibility(state, action: PayloadAction<{ visibility: boolean }>) {
+      state.isShown = action.payload.visibility;
+    },
+    setNameValid(state, action: PayloadAction<{ valid: boolean }>){
+      state.isNameValid = action.payload.valid;
+    },
+    setSurnameValid(state, action: PayloadAction<{ valid: boolean }>){
+      state.isSurnameValid = action.payload.valid;
+    }
   }
 });
 
