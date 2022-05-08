@@ -8,7 +8,7 @@ import {
 
 // Initial state
 const initialState = {
-  isShown: true,
+  isShown: false,
   isNameValid: null as null | boolean,
   isSurnameValid: null as null | boolean,
   values: {
