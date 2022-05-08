@@ -2,6 +2,7 @@
 import React from 'react';
 
 // Local modules
+import { Chat } from '@pages/chat/Chat';
 import { CEF } from './CEF';
 
 // UIs
@@ -19,6 +20,7 @@ export const App = () => {
       <Authentication/>
       <SelectCharacter/>
       <CharacterCreator/>
+      <Chat/>
     </>
   );
 };
