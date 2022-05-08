@@ -14,7 +14,8 @@ export const themeConfig = {
       title: '36px',
       subtitle: '24px',
       middle: '18px',
-      small: '14px'
+      small: '14px',
+      extrasmall: '12px'
     },
     fonts: {
       montserrat: {
@@ -55,8 +56,8 @@ export const themeConfig = {
     red: '#FF3E3E',
     orange: '#FFA14A',
     gray: '#817D8E',
-    bluegray: '#1D1C28',
-    darkbluegray: '#1B1A23',
+    bluegray: '#1d1c28',
+    darkbluegray: '#1b1a23',
     darkgray: '#14131b'
   }
 };
