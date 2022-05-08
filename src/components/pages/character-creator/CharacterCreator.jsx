@@ -150,11 +150,13 @@ export const CharacterCreator = () => {
     };
     setFormState(randomizedData);
     global.mp.trigger('client.randomCharacter',  JSON.stringify(randomizedData));
-  }
+  };
+
   const changeTab = (tabName, tabIndex) => {
     setActiveTab(tabName);
     global.mp.trigger('client.changeTab', tabIndex);
   };
+
   const submitCharacter = () => {
     let isNameValid = formState.name.trim().length > 3 && matchToEnglishAlphabet(formState.name.trim());
     let isSurnameValid = formState.surname.trim().length > 3 && matchToEnglishAlphabet(formState.surname.trim());
@@ -178,7 +180,7 @@ export const CharacterCreator = () => {
       dispatch(setSurnameValid({ valid: true }));
       return global.mp.trigger('client.saveCharacter',  JSON.stringify(formState));
     }
-  }
+  };
 
   const MOTHER_INDEX_MAX = useAppSelector(state => state.characterCreator.values.dna.mother.max);
   const FATHER_INDEX_MAX = useAppSelector(state => state.characterCreator.values.dna.father.max);
@@ -195,7 +197,7 @@ export const CharacterCreator = () => {
     face: <Face state={ formState } setState={ setFormState }/>,
     facialStructure: <FacialStructure state={ formState } setState={ setFormState }/>,
     hair: <Hair state={ formState } setState={ setFormState }/>,
-  }
+  };
 
   return (
     <>
