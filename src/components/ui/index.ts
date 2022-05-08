@@ -6,6 +6,7 @@ import { Typography } from './Typography';
 import { MarginContainer } from './MarginContainer';
 import { Relative } from './Relative';
 import { Modal } from './Modal';
+import { Grid } from './Grid';
 
 export {
   Flex,
@@ -14,5 +15,6 @@ export {
   Typography,
   MarginContainer,
   Relative,
-  Modal
+  Modal,
+  Grid
 };

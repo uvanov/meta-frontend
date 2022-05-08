@@ -76,3 +76,14 @@ You can see a global object into window, called "CEF'. There is his methods list
 <br>
 
 **( If `empty` or `blocked` are true, other string-parameters must be empty string and number-parameters must equal 0  )**
+
+<br><br>
+
+### CharacterCreator
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| Visibility | Change visibility of character-creator interface | visibility: `boolean` |
+| SetNameValid | Send the user the validity status of his name  | valid: `boolean` / `null` (null to hide valid-mark) |
+| SetSurnameValid | Send the user the validity status of his surname | valid: `boolean` / `null` (null to hide valid-mark) |
+<br>

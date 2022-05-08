@@ -1,5 +1,5 @@
 // Import modules
-import React, { useEffect } from 'react';
+import React from 'react';
 
 // Local modules
 import { CEF } from './CEF';
@@ -7,6 +7,7 @@ import { CEF } from './CEF';
 // UIs
 import { Authentication } from '@pages/authentication/Authentication';
 import { SelectCharacter } from '@pages/select-character/SelectCharacter';
+import { CharacterCreator } from '@pages/character-creator/CharacterCreator';
 
 window.CEF = CEF;
 
@@ -17,6 +18,7 @@ export const App = () => {
     <>
       <Authentication/>
       <SelectCharacter/>
+      <CharacterCreator/>
     </>
   );
 };

@@ -10,3 +10,16 @@ export function capitalizeFirstLetter(string: string) {
 export function numberWithSpaces(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 };
+
+export function getRandomFromRange(min: number, max: number, round?: true) {
+  let result = Math.random() * (max - min) + min;
+  if (round) {
+    return Math.round(result);
+  } else {
+    return parseFloat(result.toFixed(1));
+  }
+};
+
+export function matchToEnglishAlphabet(string: string) {
+  return /^[a-zA-Z]+$/.test(string);
+};

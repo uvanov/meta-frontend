@@ -27,7 +27,7 @@ interface InitialState {
 
 // Init state
 const initialState: InitialState = {
-  isShown: true,
+  isShown: false,
   selectedCharacterIndex: 0,
   showModal: false,
   characters: []
