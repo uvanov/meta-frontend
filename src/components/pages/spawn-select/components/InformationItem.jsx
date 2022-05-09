@@ -10,13 +10,18 @@ import {
 
 // Styled Components
 const IconWrapper = styled(Flex)`
-  background-color: ${({ theme }) => theme.palette.darkbluegray};
+  height: 40px;
+  width: 40px;
+  background-color: #16151D;
 `
 
 // Exports
 export const InformationItem = ({ Icon, title, body }) => {
   return (
-    <Flex>
+    <Flex
+      alignItems='center'
+      gap='12px'
+    >
       <IconWrapper
         justifyContent='center'
         alignItems='center'
@@ -24,7 +29,9 @@ export const InformationItem = ({ Icon, title, body }) => {
         <Icon/>
       </IconWrapper>
 
-      <Flex>
+      <Flex
+        direction='column'
+      >
         <Typography
           variant='small'
           color='gray'
@@ -36,7 +43,7 @@ export const InformationItem = ({ Icon, title, body }) => {
           color='white'
           bold
         >
-          { body }
+          { body ? body : 'Отсутствует' }
         </Typography>
       </Flex>
     </Flex>

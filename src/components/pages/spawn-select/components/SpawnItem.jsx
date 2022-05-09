@@ -23,10 +23,11 @@ const VerticalButton = styled(Flex)`
 
 const SelectButton = styled(VerticalButton)`
   background-color: #262534;
-  transition: background .3s, box-shadow .3s;
+  transition: background .3s, box-shadow .3s, width .4s;
   cursor: pointer;
   
   &:hover {
+    width: 60px;
     path {
       fill: ${({ theme }) => addHexAlpha(theme.palette.black, 0.4)} !important;
     }
@@ -45,13 +46,19 @@ const BlockedSelectButton = styled(VerticalButton)`
   transform: rotate(180deg);
 `
 
-const SpawnItemWrapper = styled(Flex)`
+const SpawnItemWrapper = styled(Flex, {
+  shouldForwardProp(prop){
+    return prop !== 'blocked';
+  }
+})`
   width: fit-content;
   background: linear-gradient(
     90deg, rgba(29, 28, 40, 0.99) 0%, 
     rgba(29, 28, 40, 0.2079) 100%
   );
   border-radius: 0 38px 38px 0;
+  
+  ${({ blocked }) => !blocked && 'opacity: .5;'}
 `
 
 const SpawnItemBody = styled(Flex)`
@@ -63,6 +70,10 @@ const SpawnImage = styled.img`
   filter: drop-shadow(
     0 4px 150px ${({ shadowColor }) => addHexAlpha(shadowColor ? shadowColor : '#ffffff', .3)}
   );
+`
+
+const Description = styled(Typography)`
+  max-width: 300px;
 `
 
 // Exports
@@ -85,14 +96,6 @@ export const SpawnItem = (
       {
         !blocked
           ? (
-              <SelectButton
-                justifyContent='center'
-                alignItems='center'
-              >
-                <ArrowIcon/>
-              </SelectButton>
-            )
-          : (
               <BlockedSelectButton
                 justifyContent='center'
                 alignItems='center'
@@ -105,20 +108,40 @@ export const SpawnItem = (
                 </Typography>
               </BlockedSelectButton>
             )
+          : (
+            <SelectButton
+              justifyContent='center'
+              alignItems='center'
+              onClick={ () => global.mp.trigger('client.chooseSpawn',  index) }
+            >
+              <ArrowIcon/>
+            </SelectButton>
+          )
       }
 
       <SpawnItemBody
         gap='65px'
       >
         <div>
-          <Typography variant='subtitle' color='white'>
+          <Typography
+            variant='subtitle'
+            color='white'
+          >
             { title }
           </Typography>
-          <Typography variant='small' color='gray'>
-            { description }
-          </Typography>
+          <Description
+            variant='small'
+            color='gray'
+          >
+            { description ? description : 'Отсутствует' }
+          </Description>
           <MarginContainer top='19px'>
-            { children }
+            <Flex
+              direction='column'
+              gap='10px'
+            >
+              { children }
+            </Flex>
           </MarginContainer>
         </div>
         <SpawnImage
