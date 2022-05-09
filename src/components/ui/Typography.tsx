@@ -30,6 +30,10 @@ const BaseTypography = styled.p<Omit<TypographyProps, 'variant'>>`
     font-weight: bold;
   `}
   
+  ${({ semiBold }) => semiBold && css`
+    font-weight: 600;
+  `}
+  
    ${({ fullWidth }) => fullWidth && css`
     width: 100%;
   `}
@@ -55,9 +59,13 @@ const small: VariantFunction = ({ typography: { size } }) => css`
   font-size: ${ size.small };
 `;
 
+const extrasmall: VariantFunction = ({ typography: { size } }) => css`
+  font-size: ${ size.extrasmall };
+`;
+
 // Constants
 const TYPOGRAPHY_VARIANT_MAP = {
-  title, subtitle, middle, small
+  title, subtitle, middle, small, extrasmall
 };
 
 // Types
@@ -72,6 +80,7 @@ interface TypographyProps {
   uppercase?: boolean;
   underline?: boolean;
   bold?: boolean;
+  semiBold?: boolean;
   fullWidth?: boolean;
 }
 
