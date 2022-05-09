@@ -88,7 +88,7 @@ export const CEF = {
       dispatch(setSelectSpawnVisibility({ visibility }));
     },
     SetSpawnPoints(points: SpawnPointsType){
-      dispatch(setSpawnPoints({ points }))
+      dispatch(setSpawnPoints({ points }));
     }
   }
 };
