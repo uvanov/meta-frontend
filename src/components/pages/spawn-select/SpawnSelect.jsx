@@ -9,6 +9,7 @@ import {
 } from '@ui/index';
 import { SpawnItem } from './components/SpawnItem';
 import { InformationItem } from './components/InformationItem';
+import { useAppSelector } from '@hooks/state';
 
 // Assets
 import BackgroundImage from '@images/helicopter-background.jpg';
@@ -24,7 +25,6 @@ import { ReactComponent as HomeTaxIcon } from '@images/spawn-select/home-tax-ico
 import { ReactComponent as NearestRentIcon } from '@images/spawn-select/nearest-rent-icon.svg';
 import { ReactComponent as HeartIcon } from '@images/icons/heart-icon.svg';
 import { ReactComponent as FoodIcon } from '@images/icons/food-icon.svg';
-import { useAppSelector } from '@hooks/state';
 
 // Styled Components
 const SpawnSelectWrapper = styled(Flex)`
@@ -43,7 +43,6 @@ const SpawnSelectWrapper = styled(Flex)`
 
 // Exports
 export const SpawnSelect = () => {
-
   const isShown = useAppSelector(state => state.spawnSelectSlice.isShown);
   const spawnPoints = useAppSelector(state => state.spawnSelectSlice.points);
 
@@ -149,10 +148,6 @@ export const SpawnSelect = () => {
                 }
               })
             }
-
-
-
-
           </SpawnSelectWrapper>
         )
       }

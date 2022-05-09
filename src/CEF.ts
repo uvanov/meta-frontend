@@ -14,7 +14,7 @@ import {
   CharacterType
 } from '@store/slices/SelectCharacterSlice';
 import { characterCreatorSlice } from '@store/slices/CharacterCreatorSlice';
-import { spawnSelectSlice, SpawnPointsType } from '@store/slices/SpawnSelectSlice';
+import { spawnSelectSlice, SpawnPointsArrayType } from '@store/slices/SpawnSelectSlice';
 
 // Destruct actions
 const {
@@ -87,7 +87,7 @@ export const CEF = {
     Visibility(visibility: boolean){
       dispatch(setSelectSpawnVisibility({ visibility }));
     },
-    SetSpawnPoints(points: SpawnPointsType){
+    SetSpawnPoints(points: SpawnPointsArrayType){
       dispatch(setSpawnPoints({ points }));
     }
   }

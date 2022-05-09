@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 
 // Type
-export type SpawnPointsType = typeof initialState.points;
+export type SpawnPointsArrayType = typeof initialState.points;
 
 // Initial state
 const initialState = {

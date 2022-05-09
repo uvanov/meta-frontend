@@ -38,13 +38,14 @@ const SelectButton = styled(VerticalButton)`
     );
     box-shadow: 0 0 59px rgba(255, 107, 67, 0.25);
   }
-`
+`;
+
 const BlockedSelectButton = styled(VerticalButton)`
   background: rgba(255, 255, 255, 0.04);
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
-`
+`;
 
 const SpawnItemWrapper = styled(Flex, {
   shouldForwardProp(prop){
@@ -63,18 +64,17 @@ const SpawnItemWrapper = styled(Flex, {
 
 const SpawnItemBody = styled(Flex)`
   padding: 19px 23px;
-`
+`;
 
 const SpawnImage = styled.img`
-  //filter: drop-shadow(10px 10px 10px white);
   filter: drop-shadow(
     0 4px 150px ${({ shadowColor }) => addHexAlpha(shadowColor ? shadowColor : '#ffffff', .3)}
   );
-`
+`;
 
 const Description = styled(Typography)`
   max-width: 300px;
-`
+`;
 
 // Exports
 export const SpawnItem = (
