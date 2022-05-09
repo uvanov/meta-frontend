@@ -8,6 +8,7 @@ import { CEF } from './CEF';
 import { Authentication } from '@pages/authentication/Authentication';
 import { SelectCharacter } from '@pages/select-character/SelectCharacter';
 import { CharacterCreator } from '@pages/character-creator/CharacterCreator';
+import { SpawnSelect } from '@pages/spawn-select/SpawnSelect';
 
 window.CEF = CEF;
 
@@ -19,6 +20,7 @@ export const App = () => {
       <Authentication/>
       <SelectCharacter/>
       <CharacterCreator/>
+      <SpawnSelect/>
     </>
   );
 };

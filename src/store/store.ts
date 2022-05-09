@@ -5,11 +5,13 @@ import {
 import authenticationSlice from './slices/AuthenticationSlice';
 import selectCharacterSlice from './slices/SelectCharacterSlice';
 import characterCreatorSlice from './slices/CharacterCreatorSlice';
+import spawnSelectSlice from './slices/SpawnSelectSlice';
 
 const rootReducer = combineReducers({
   authentication: authenticationSlice,
   selectCharacter: selectCharacterSlice,
-  characterCreator: characterCreatorSlice
+  characterCreator: characterCreatorSlice,
+  spawnSelectSlice: spawnSelectSlice
 });
 
 export const store = configureStore({
