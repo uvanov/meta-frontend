@@ -14,7 +14,8 @@ export const themeConfig = {
       title: '36px',
       subtitle: '24px',
       middle: '18px',
-      small: '14px'
+      small: '14px',
+      extrasmall: '12px'
     },
     fonts: {
       montserrat: {
