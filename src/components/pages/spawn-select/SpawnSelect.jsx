@@ -24,6 +24,7 @@ import { ReactComponent as HomeTaxIcon } from '@images/spawn-select/home-tax-ico
 import { ReactComponent as NearestRentIcon } from '@images/spawn-select/nearest-rent-icon.svg';
 import { ReactComponent as HeartIcon } from '@images/icons/heart-icon.svg';
 import { ReactComponent as FoodIcon } from '@images/icons/food-icon.svg';
+import { useAppSelector } from '@hooks/state';
 
 // Styled Components
 const SpawnSelectWrapper = styled(Flex)`
@@ -42,6 +43,9 @@ const SpawnSelectWrapper = styled(Flex)`
 
 // Exports
 export const SpawnSelect = () => {
+
+  const spawnPoints = useAppSelector(state => state.spawnSelectSlice.points);
+
   return (
     <SpawnSelectWrapper
       direction='column'
@@ -52,78 +56,99 @@ export const SpawnSelect = () => {
         ВЫБОР СПАВНА
       </Typography>
 
-      <SpawnItem
-        index={ 0 }
-        title='Организация'
-        description='Вы появитесь на последнем местевыхода из игры, скорее всего вы ничего не потеряете'
-        blocked={ true }
-        imageUrl={ OrganizationImage }
-        imageShadowColor='#ffffff'
-      >
-        <InformationItem
-          title='Тип организации'
-          body='Типовая организация'
-          Icon={ OrganizationTypeIcon }
-        />
-        <InformationItem
-          title='Название организации'
-          body='The Empire Street Building'
-          Icon={ OrganizationNameIcon }
-        />
-        <InformationItem
-          title='Текущая должность'
-          body='Top Manager'
-          Icon={ OrganizationPositionIcon }
-        />
-      </SpawnItem>
-      <SpawnItem
-        index={ 1 }
-        title='Дом'
-        description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
-        blocked={ true }
-        imageUrl={ HomeImage }
-        imageShadowColor='#3EFF51'
-      >
-        <InformationItem
-          title='Номер дома'
-          body='458'
-          Icon={ HomeNumberIcon }
-        />
-        <InformationItem
-          title='Класс дома'
-          body='Элитный'
-          Icon={ HomeClassIcon }
-        />
-        <InformationItem
-          title='Задолжность по дому'
-          body='$650 000'
-          Icon={ HomeTaxIcon }
-        />
-      </SpawnItem>
-      <SpawnItem
-        index={ 2 }
-        title='Место выхода'
-        description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
-        blocked={ true }
-        imageUrl={ LastLocationImage }
-        imageShadowColor='#FF3E3E'
-      >
-        <InformationItem
-          title='Ближайшая аренда'
-          body='Billy Eilish Street'
-          Icon={ NearestRentIcon }
-        />
-        <InformationItem
-          title='Ваше здоровье'
-          body='47%'
-          Icon={ HeartIcon }
-        />
-        <InformationItem
-          title='Ваш голод'
-          body='55%'
-          Icon={ FoodIcon }
-        />
-      </SpawnItem>
+      {
+        spawnPoints.map(point => {
+          if(point.index === 2){
+            return (
+              <SpawnItem
+                key={ point.index + Date.now() }
+                index={ point.index }
+                title='Организация'
+                description='Вы появитесь на последнем местевыхода из игры, скорее всего вы ничего не потеряете'
+                blocked={ point.blocked }
+                imageUrl={ OrganizationImage }
+                imageShadowColor='#ffffff'
+              >
+                <InformationItem
+                  title='Тип организации'
+                  body={ point.fractionType }
+                  Icon={ OrganizationTypeIcon }
+                />
+                <InformationItem
+                  title='Название организации'
+                  body={ point.fractionName }
+                  Icon={ OrganizationNameIcon }
+                />
+                <InformationItem
+                  title='Текущая должность'
+                  body={ point.fractionRank }
+                  Icon={ OrganizationPositionIcon }
+                />
+              </SpawnItem>
+            )
+          } else if (point.index === 1){
+            return (
+              <SpawnItem
+                key={ point.index + Date.now() }
+                index={ point.index }
+                title='Дом'
+                description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
+                blocked={ point.blocked }
+                imageUrl={ HomeImage }
+                imageShadowColor='#3EFF51'
+              >
+                <InformationItem
+                  title='Номер дома'
+                  body={ point.houseNumber }
+                  Icon={ HomeNumberIcon }
+                />
+                <InformationItem
+                  title='Класс дома'
+                  body={ point.houseClass }
+                  Icon={ HomeClassIcon }
+                />
+                <InformationItem
+                  title='Задолжность по дому'
+                  body={ point.houseMoney }
+                  Icon={ HomeTaxIcon }
+                />
+              </SpawnItem>
+            )
+          } else if (point.index === 0){
+            return (
+              <SpawnItem
+                key={ point.index + Date.now() }
+                index={ point.index }
+                title='Место выхода'
+                description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
+                blocked={ point.blocked }
+                imageUrl={ LastLocationImage }
+                imageShadowColor='#FF3E3E'
+              >
+                <InformationItem
+                  title='Ближайшая аренда'
+                  body={ point.nearBuis }
+                  Icon={ NearestRentIcon }
+                />
+                <InformationItem
+                  title='Ваше здоровье'
+                  body={ point.health }
+                  Icon={ HeartIcon }
+                />
+                <InformationItem
+                  title='Ваш голод'
+                  body={ point.food }
+                  Icon={ FoodIcon }
+                />
+              </SpawnItem>
+            )
+          }
+        })
+      }
+
+
+
+
     </SpawnSelectWrapper>
   );
 };

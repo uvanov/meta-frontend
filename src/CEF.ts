@@ -14,6 +14,7 @@ import {
   CharacterType
 } from '@store/slices/SelectCharacterSlice';
 import { characterCreatorSlice } from '@store/slices/CharacterCreatorSlice';
+import { spawnSelectSlice, SpawnPointsType } from '@store/slices/SpawnSelectSlice';
 
 // Destruct actions
 const {
@@ -32,6 +33,10 @@ const {
   setSurnameValid,
   setNameValid
 } = characterCreatorSlice.actions;
+const {
+  setSelectSpawnVisibility,
+  setSpawnPoints
+} = spawnSelectSlice.actions;
 
 const dispatch = store.dispatch;
 
@@ -76,6 +81,14 @@ export const CEF = {
     },
     SetSurnameValid(valid: boolean){
       dispatch(setSurnameValid({ valid }));
+    }
+  },
+  SelectSpawn: {
+    Visibility(visibility: boolean){
+      dispatch(setSelectSpawnVisibility({ visibility }));
+    },
+    SetSpawnPoints(points: SpawnPointsType){
+      dispatch(setSpawnPoints({ points }))
     }
   }
 };
