@@ -14,23 +14,23 @@ const initialState = {
     {
       index: 0,
       blocked: true,
-      nearBuis: 'Cafe Crusual-Fix',
-      health: '64%',
-      food: '42%'
+      nearBuis: 'Стандартное значение аренды',
+      health: '0%',
+      food: '0%'
     },
     {
       index: 1,
-      blocked: false,
-      houseNumber: 12,
-      houseClass: 'Люкс',
-      houseMoney: '400$'
+      blocked: true,
+      houseNumber: 1,
+      houseClass: 'Стандартный класс дома',
+      houseMoney: '0$'
     },
     {
       index: 2,
       blocked: true,
-      fractionType: 'Государственная',
-      fractionName: 'LSPD',
-      fractionRank: 'Офицер'
+      fractionType: 'Частная',
+      fractionName: 'Meta Role Play',
+      fractionRank: 'Разработчик. Привет, игрок.'
     }
   ]
 };

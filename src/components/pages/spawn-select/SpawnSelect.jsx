@@ -44,111 +44,118 @@ const SpawnSelectWrapper = styled(Flex)`
 // Exports
 export const SpawnSelect = () => {
 
+  const isShown = useAppSelector(state => state.spawnSelectSlice.isShown);
   const spawnPoints = useAppSelector(state => state.spawnSelectSlice.points);
 
   return (
-    <SpawnSelectWrapper
-      direction='column'
-      justifyContent='center'
-      gap='18px'
-    >
-      <Typography variant='title' color='white'>
-        ВЫБОР СПАВНА
-      </Typography>
-
+    <>
       {
-        spawnPoints.map(point => {
-          if(point.index === 2){
-            return (
-              <SpawnItem
-                key={ point.index + Date.now() }
-                index={ point.index }
-                title='Организация'
-                description='Вы появитесь на последнем местевыхода из игры, скорее всего вы ничего не потеряете'
-                blocked={ point.blocked }
-                imageUrl={ OrganizationImage }
-                imageShadowColor='#ffffff'
-              >
-                <InformationItem
-                  title='Тип организации'
-                  body={ point.fractionType }
-                  Icon={ OrganizationTypeIcon }
-                />
-                <InformationItem
-                  title='Название организации'
-                  body={ point.fractionName }
-                  Icon={ OrganizationNameIcon }
-                />
-                <InformationItem
-                  title='Текущая должность'
-                  body={ point.fractionRank }
-                  Icon={ OrganizationPositionIcon }
-                />
-              </SpawnItem>
-            )
-          } else if (point.index === 1){
-            return (
-              <SpawnItem
-                key={ point.index + Date.now() }
-                index={ point.index }
-                title='Дом'
-                description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
-                blocked={ point.blocked }
-                imageUrl={ HomeImage }
-                imageShadowColor='#3EFF51'
-              >
-                <InformationItem
-                  title='Номер дома'
-                  body={ point.houseNumber }
-                  Icon={ HomeNumberIcon }
-                />
-                <InformationItem
-                  title='Класс дома'
-                  body={ point.houseClass }
-                  Icon={ HomeClassIcon }
-                />
-                <InformationItem
-                  title='Задолжность по дому'
-                  body={ point.houseMoney }
-                  Icon={ HomeTaxIcon }
-                />
-              </SpawnItem>
-            )
-          } else if (point.index === 0){
-            return (
-              <SpawnItem
-                key={ point.index + Date.now() }
-                index={ point.index }
-                title='Место выхода'
-                description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
-                blocked={ point.blocked }
-                imageUrl={ LastLocationImage }
-                imageShadowColor='#FF3E3E'
-              >
-                <InformationItem
-                  title='Ближайшая аренда'
-                  body={ point.nearBuis }
-                  Icon={ NearestRentIcon }
-                />
-                <InformationItem
-                  title='Ваше здоровье'
-                  body={ point.health }
-                  Icon={ HeartIcon }
-                />
-                <InformationItem
-                  title='Ваш голод'
-                  body={ point.food }
-                  Icon={ FoodIcon }
-                />
-              </SpawnItem>
-            )
-          }
-        })
+        isShown && (
+          <SpawnSelectWrapper
+            direction='column'
+            justifyContent='center'
+            gap='18px'
+          >
+            <Typography variant='title' color='white'>
+              ВЫБОР СПАВНА
+            </Typography>
+
+            {
+              spawnPoints.map(point => {
+                if(point.index === 2){
+                  return (
+                    <SpawnItem
+                      key={ point.index + Date.now() }
+                      index={ point.index }
+                      title='Организация'
+                      description='Вы появитесь на последнем местевыхода из игры, скорее всего вы ничего не потеряете'
+                      blocked={ point.blocked }
+                      imageUrl={ OrganizationImage }
+                      imageShadowColor='#ffffff'
+                    >
+                      <InformationItem
+                        title='Тип организации'
+                        body={ point.fractionType }
+                        Icon={ OrganizationTypeIcon }
+                      />
+                      <InformationItem
+                        title='Название организации'
+                        body={ point.fractionName }
+                        Icon={ OrganizationNameIcon }
+                      />
+                      <InformationItem
+                        title='Текущая должность'
+                        body={ point.fractionRank }
+                        Icon={ OrganizationPositionIcon }
+                      />
+                    </SpawnItem>
+                  )
+                } else if (point.index === 1){
+                  return (
+                    <SpawnItem
+                      key={ point.index + Date.now() }
+                      index={ point.index }
+                      title='Дом'
+                      description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
+                      blocked={ point.blocked }
+                      imageUrl={ HomeImage }
+                      imageShadowColor='#3EFF51'
+                    >
+                      <InformationItem
+                        title='Номер дома'
+                        body={ point.houseNumber }
+                        Icon={ HomeNumberIcon }
+                      />
+                      <InformationItem
+                        title='Класс дома'
+                        body={ point.houseClass }
+                        Icon={ HomeClassIcon }
+                      />
+                      <InformationItem
+                        title='Задолжность по дому'
+                        body={ point.houseMoney }
+                        Icon={ HomeTaxIcon }
+                      />
+                    </SpawnItem>
+                  )
+                } else if (point.index === 0){
+                  return (
+                    <SpawnItem
+                      key={ point.index + Date.now() }
+                      index={ point.index }
+                      title='Место выхода'
+                      description='Вы появитесь на последнем месте выхода из игры, скорее всего вы ничего не потеряете'
+                      blocked={ point.blocked }
+                      imageUrl={ LastLocationImage }
+                      imageShadowColor='#FF3E3E'
+                    >
+                      <InformationItem
+                        title='Ближайшая аренда'
+                        body={ point.nearBuis }
+                        Icon={ NearestRentIcon }
+                      />
+                      <InformationItem
+                        title='Ваше здоровье'
+                        body={ point.health }
+                        Icon={ HeartIcon }
+                      />
+                      <InformationItem
+                        title='Ваш голод'
+                        body={ point.food }
+                        Icon={ FoodIcon }
+                      />
+                    </SpawnItem>
+                  )
+                }
+              })
+            }
+
+
+
+
+          </SpawnSelectWrapper>
+        )
       }
-
-
-
-
-    </SpawnSelectWrapper>
+    </>
   );
 };
