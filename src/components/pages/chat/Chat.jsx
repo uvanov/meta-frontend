@@ -1,5 +1,8 @@
 // Import modules
-import React, { useState } from 'react';
+import React, {
+  useState,
+  createContext
+} from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
@@ -21,6 +24,7 @@ import { MessagesArea } from './components/MessagesArea';
 import { ReactComponent as SettingsIcon } from '@images/icons/gear-wheel-icon.svg';
 import { ReactComponent as EyeIcon } from '@images/icons/eye-icon.svg';
 import { ReactComponent as ExpandIcon } from '@images/icons/expand-icon.svg';
+import { ChatHeader } from '@pages/chat/components/ChatHeader';
 
 // Styled Components
 const ChatWindow = styled(Flex, {
@@ -42,49 +46,49 @@ const ChatWindow = styled(Flex, {
   ` }
 `;
 
-const ChatHeader = styled(Flex, {
-  shouldForwardProp(prop) {
-    return prop !== 'showBackground';
+// Constants
+const CHAT_THEMES = {
+  BLACK: {
+    HEADER: '#14131b',
+    MESSAGE_BOX: '#1D1C28'
+  },
+  GREEN: {
+    HEADER: '#05120a',
+    MESSAGE_BOX: '#0E351C'
+  },
+  PURPLE: {
+    HEADER: '#180F28',
+    MESSAGE_BOX: '#180F28'
+  },
+  BLUE: {
+    HEADER: '#21254D',
+    MESSAGE_BOX: '#21254D'
+  },
+  RED: {
+    HEADER: '#3F1410',
+    MESSAGE_BOX: '#3F1410'
   }
-})`
-  padding: 8px 24px;
-  transition: background-color .3s;
-  
-  ${({ showBackground, theme }) => showBackground && css`
-    background-color: ${ theme.palette.bluegray };
-  `}
-`;
+};
+export const ChatThemeContext = createContext(CHAT_THEMES.BLACK);
 
-
+// Exports
 export const Chat = () => {
 
-  const [isChatActive, setIsChatActive] = useState(true);
+  const [isChatFocused, setIsChatFocused] = useState(true);
+  const [chosenChatTheme, setChosenChatTheme] = useState('BLACK');
 
   return (
-    <ChatWindow
-      gap='15px'
-      direction='column'
-      active={ isChatActive }
-    >
-      <ChatHeader
-        alignItems='center'
-        justifyContent='space-between'
-        showBackground={ isChatActive }
+    <ChatThemeContext.Provider value={ CHAT_THEMES[chosenChatTheme] }>
+      <ChatWindow
+        gap='15px'
+        direction='column'
+        active={ isChatFocused }
       >
-        {
-          isChatActive
-            ? <ChatControls/>
-            : <ControlHint
-                Icon={ CHAT_HINTS_CONFIG.VISIBILITY.ICON }
-                text={ CHAT_HINTS_CONFIG.VISIBILITY.TEXT_TO_OPEN }
-                buttonKey={ CHAT_HINTS_CONFIG.VISIBILITY.KEY }
-              />
-        }
-      </ChatHeader>
-
-      <MessagesArea
-        messages={ ['Lorem ipsum.','Lorem ipsum.','Lorem ipsum.','Lorem ipsum.','Lorem ipsum.','Lorem ipsum.',] }
-      />
-    </ChatWindow>
+        <ChatHeader isFocused={ isChatFocused }/>
+        <MessagesArea
+          messages={ ['Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.'] }
+        />
+      </ChatWindow>
+    </ChatThemeContext.Provider>
   );
 };
