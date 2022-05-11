@@ -7,6 +7,7 @@ import { MarginContainer } from './MarginContainer';
 import { Relative } from './Relative';
 import { Modal } from './Modal';
 import { Grid } from './Grid';
+import { Range } from './Range';
 
 export {
   Flex,
@@ -16,5 +17,6 @@ export {
   MarginContainer,
   Relative,
   Modal,
-  Grid
+  Grid,
+  Range
 };
