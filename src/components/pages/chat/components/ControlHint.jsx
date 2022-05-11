@@ -22,7 +22,7 @@ const ControlText = styled(Typography)`
 const ButtonKey = styled(Flex)`
   height: 26px;
   width: 26px;
-  background-color: ${({ theme }) => theme.palette.red};
+  background: ${({ theme }) => theme.gradient.orangeRed(270)};
   border-radius: 4px;
 `
 

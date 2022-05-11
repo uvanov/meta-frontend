@@ -11,6 +11,7 @@ import {
 } from './ChatControls';
 import { ControlHint } from './ControlHint';
 import { Flex } from '@ui/index';
+import { ChatSettings } from '@pages/chat/components/ChatSettings';
 
 // Styled Components
 const StyledChatHeader = styled(Flex, {
@@ -50,6 +51,7 @@ export const ChatHeader = ({ isFocused }) => {
             buttonKey={ CHAT_HINTS_CONFIG.VISIBILITY.KEY }
           />
       }
+      <ChatSettings/>
     </StyledChatHeader>
   );
 };
