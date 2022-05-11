@@ -4,15 +4,17 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 // Local modules
-import { ChatThemeContext } from '../Chat';
+import { ChatContext } from '../Chat';
 import {
   Flex,
-  Typography
+  Grid,
+  Typography,
+  Range
 } from '@ui/index';
 import { addHexAlpha } from '@lib/utils';
 
 // Styled Components
-const StyledChatSettings = styled(Flex)`
+const StyledChatSettings = styled(Grid)`
   position: absolute;
   top: 100%;
   right: 0;
@@ -27,15 +29,54 @@ const StyledChatSettings = styled(Flex)`
   `}
 `
 
+const StyledRange = styled(Range)`
+  width: 100px;
+`
+
+const ThemeSelector = styled.div`
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  border: 1px solid ${({ theme }) => theme.palette.orange};
+  cursor: pointer;
+  transition: box-shadow .3s, border-color .3s;
+  
+  ${({ background }) => background && css`
+    background-color: ${ background }
+  `}
+  
+  ${({ selected, theme }) => selected && css`
+     border-color: transparent;
+     box-shadow: 0 0 7px ${ theme.palette.white };
+  `}
+`;
+
+// Constants
+const THEME_SELECTOR_COLOR_MAP = {
+  BLACK: '#1D1C28',
+  GREEN: '#1DB854',
+  PURPLE: '#623EA0',
+  BLUE: '#2D357D',
+  RED: '#E21805'
+};
+
 // Exports
 export const ChatSettings = () => {
-  const theme = useContext(ChatThemeContext);
+  const {
+    chatTheme,
+    dispatch,
+    state
+  } = useContext(ChatContext);
+
+  const chooseChatTheme = (themeName) => {
+    dispatch({ type: 'setChatTheme', theme: themeName });
+  };
 
   return (
     <StyledChatSettings
-      justifyContent='space-between'
+      columnLayout='1.3fr 2fr 2fr'
       alignItems='center'
-      background={ theme.HEADER }
+      background={ chatTheme.HEADER }
     >
       <Typography
         variant='middle'
@@ -45,8 +86,59 @@ export const ChatSettings = () => {
         Настройки
       </Typography>
 
-      <Flex>
-
+      <Flex
+        alignItems='center'
+        gap='12px'
+      >
+        <Typography
+          variant='small'
+          color='white'
+          semiBold
+          italic
+        >
+          Прозрачность
+        </Typography>
+        <StyledRange
+        />
+      </Flex>
+      <Flex
+        justifyContent='flex-end'
+        alignItems='center'
+        gap='11px'
+      >
+        <Typography
+          variant='small'
+          color='white'
+          semiBold
+          italic
+        >
+          Фон
+        </Typography>
+        <ThemeSelector
+          onClick={ () => chooseChatTheme('BLACK') }
+          selected={ state.chosenChatTheme === 'BLACK' }
+          background={ THEME_SELECTOR_COLOR_MAP.BLACK }
+        />
+        <ThemeSelector
+          onClick={ () => chooseChatTheme('GREEN') }
+          selected={ state.chosenChatTheme === 'GREEN' }
+          background={ THEME_SELECTOR_COLOR_MAP.GREEN }
+        />
+        <ThemeSelector
+          onClick={ () => chooseChatTheme('PURPLE') }
+          selected={ state.chosenChatTheme === 'PURPLE' }
+          background={ THEME_SELECTOR_COLOR_MAP.PURPLE }
+        />
+        <ThemeSelector
+          onClick={ () => chooseChatTheme('BLUE') }
+          selected={ state.chosenChatTheme === 'BLUE' }
+          background={ THEME_SELECTOR_COLOR_MAP.BLUE }
+        />
+        <ThemeSelector
+          onClick={ () => chooseChatTheme('RED') }
+          selected={ state.chosenChatTheme === 'RED' }
+          background={ THEME_SELECTOR_COLOR_MAP.RED }
+        />
       </Flex>
     </StyledChatSettings>
   );

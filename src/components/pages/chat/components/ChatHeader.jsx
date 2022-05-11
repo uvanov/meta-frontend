@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 // Local modules
-import { ChatThemeContext } from '../Chat';
+import { ChatContext } from '../Chat';
 import {
   CHAT_HINTS_CONFIG,
   ChatControls
@@ -33,14 +33,14 @@ const StyledChatHeader = styled(Flex, {
 
 // Exports
 export const ChatHeader = ({ isFocused }) => {
-  const theme = useContext(ChatThemeContext);
+  const { chatTheme } = useContext(ChatContext);
 
   return (
     <StyledChatHeader
       alignItems='center'
       justifyContent='space-between'
       showBackground={ isFocused }
-      background={ theme.HEADER }
+      background={ chatTheme.HEADER }
     >
       {
         isFocused
