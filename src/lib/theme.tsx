@@ -6,6 +6,7 @@ import {
   Theme,
   ThemeProvider
 } from '@emotion/react';
+import { getGradient } from './utils';
 
 // Init Theme Config
 export const themeConfig = {
@@ -59,6 +60,13 @@ export const themeConfig = {
     bluegray: '#1d1c28',
     darkbluegray: '#1b1a23',
     darkgray: '#14131b'
+  },
+  gradient: {
+    orangeRed: (degree?: number) => getGradient(
+      themeConfig.palette.orange,
+      themeConfig.palette.red,
+      degree
+    )
   }
 };
 

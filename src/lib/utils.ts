@@ -23,3 +23,7 @@ export function getRandomFromRange(min: number, max: number, round?: true) {
 export function matchToEnglishAlphabet(string: string) {
   return /^[a-zA-Z]+$/.test(string);
 };
+
+export function getGradient(primary: string, secondary: string, degree?: number){
+  return `linear-gradient(${degree ? degree : 0}deg, ${primary}, ${secondary})`;
+};
