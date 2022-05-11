@@ -1,7 +1,8 @@
 // Import modules
 import React, {
   useState,
-  createContext
+  createContext,
+  useReducer
 } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -9,22 +10,12 @@ import { css } from '@emotion/react';
 // Local modules
 import { addHexAlpha } from '@lib/utils';
 import {
-  Flex,
-  MarginContainer,
-  Typography
+  Flex
 } from '@ui/index';
-import {
-  ChatControls,
-  CHAT_HINTS_CONFIG
-} from './components/ChatControls';
-import { ControlHint } from './components/ControlHint';
+import { ChatHeader } from '@pages/chat/components/ChatHeader';
 import { MessagesArea } from './components/MessagesArea';
 
 // Assets
-import { ReactComponent as SettingsIcon } from '@images/icons/gear-wheel-icon.svg';
-import { ReactComponent as EyeIcon } from '@images/icons/eye-icon.svg';
-import { ReactComponent as ExpandIcon } from '@images/icons/expand-icon.svg';
-import { ChatHeader } from '@pages/chat/components/ChatHeader';
 
 // Styled Components
 const ChatWindow = styled(Flex, {
@@ -69,26 +60,41 @@ const CHAT_THEMES = {
     MESSAGE_BOX: '#3F1410'
   }
 };
-export const ChatThemeContext = createContext(CHAT_THEMES.BLACK);
+export const ChatContext = createContext(CHAT_THEMES.BLACK);
 
 // Exports
 export const Chat = () => {
 
-  const [isChatFocused, setIsChatFocused] = useState(true);
-  const [chosenChatTheme, setChosenChatTheme] = useState('BLACK');
+  const [chatState, dispatch] = useReducer(
+    (state, action) => {
+    if(action.type === 'setChatFocus') return { ...state, isChatFocused: action.focus };
+    if(action.type === 'setChatOpacity') return { ...state, chatOpacity: action.opacity };
+    if(action.type === 'setChatTheme') return { ...state, chosenChatTheme: action.theme };
+    throw new Error();
+  }, {
+    isChatFocused: true,
+    chatOpacity: 0.7,
+    chosenChatTheme: 'BLACK'
+  })
+
+  const context = {
+    chatTheme: CHAT_THEMES[chatState.chosenChatTheme],
+    state: chatState,
+    dispatch: dispatch
+  };
 
   return (
-    <ChatThemeContext.Provider value={ CHAT_THEMES[chosenChatTheme] }>
+    <ChatContext.Provider value={ context }>
       <ChatWindow
         gap='15px'
         direction='column'
-        active={ isChatFocused }
+        active={ chatState.isChatFocused }
       >
-        <ChatHeader isFocused={ isChatFocused }/>
+        <ChatHeader isFocused={ chatState.isChatFocused }/>
         <MessagesArea
           messages={ ['Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.'] }
         />
       </ChatWindow>
-    </ChatThemeContext.Provider>
+    </ChatContext.Provider>
   );
 };
