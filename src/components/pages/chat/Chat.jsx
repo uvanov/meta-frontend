@@ -20,7 +20,11 @@ import { MessagesArea } from './components/MessagesArea';
 // Styled Components
 const ChatWindow = styled(Flex, {
   shouldForwardProp(prop) {
-    return prop !== 'active';
+    return ![
+      'active',
+      'background',
+      'backgroundOpacity'
+    ].includes(prop);
   }
 })`
   width: 100%;
@@ -29,10 +33,10 @@ const ChatWindow = styled(Flex, {
   border-radius: 4px;
   transition: background .3s;
   
-  ${ ({ active, theme }) => active && css`
+  ${ ({ active, background, backgroundOpacity }) => active && css`
     background: linear-gradient(
-      ${ addHexAlpha(theme.palette.bluegray, 0.1) },
-      ${ theme.palette.bluegray }
+      ${ addHexAlpha(background, backgroundOpacity) },
+      ${ background }
     );
   ` }
 `;
@@ -64,7 +68,6 @@ export const ChatContext = createContext(CHAT_THEMES.BLACK);
 
 // Exports
 export const Chat = () => {
-
   const [chatState, dispatch] = useReducer(
     (state, action) => {
     if(action.type === 'setChatFocus') return { ...state, isChatFocused: action.focus };
@@ -75,7 +78,7 @@ export const Chat = () => {
     isChatFocused: true,
     chatOpacity: 0.7,
     chosenChatTheme: 'BLACK'
-  })
+  });
 
   const context = {
     chatTheme: CHAT_THEMES[chatState.chosenChatTheme],
@@ -89,6 +92,8 @@ export const Chat = () => {
         gap='15px'
         direction='column'
         active={ chatState.isChatFocused }
+        background={ CHAT_THEMES[chatState.chosenChatTheme].MESSAGE_BOX }
+        backgroundOpacity={ chatState.chatOpacity }
       >
         <ChatHeader isFocused={ chatState.isChatFocused }/>
         <MessagesArea

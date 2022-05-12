@@ -1,5 +1,5 @@
 // Import modules
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
@@ -72,6 +72,11 @@ export const ChatSettings = () => {
     dispatch({ type: 'setChatTheme', theme: themeName });
   };
 
+  const setChatOpacity = (value) => {
+    let preparedValue = parseFloat(value.toFixed(1));
+    dispatch({ type: 'setChatOpacity', opacity: preparedValue });
+  };
+
   return (
     <StyledChatSettings
       columnLayout='1.3fr 2fr 2fr'
@@ -99,6 +104,11 @@ export const ChatSettings = () => {
           Прозрачность
         </Typography>
         <StyledRange
+          value={ state.chatOpacity }
+          onChange={ values => setChatOpacity(values.x) }
+          min={ 0 }
+          max={ 1 }
+          step={ 0.1 }
         />
       </Flex>
       <Flex
