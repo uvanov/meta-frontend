@@ -20,18 +20,19 @@ const StyledChatSettings = styled(Grid)`
   right: 0;
   left: 0;
   
-  height: 50px;
-  transition: .3s background-color;
+  height: ${({ toggle }) => toggle ? '50px' : '0px'};
+  overflow: hidden;
+  transition: background-color .3s, height .3s ;
   padding: 0 35px;
   
   ${({ background }) => background && css`
      background-color: ${ addHexAlpha(background, 0.8) };
   `}
-`
+`;
 
 const StyledRange = styled(Range)`
   width: 100px;
-`
+`;
 
 const ThemeSelector = styled.div`
   width: 24px;
@@ -82,6 +83,7 @@ export const ChatSettings = () => {
       columnLayout='1.3fr 2fr 2fr'
       alignItems='center'
       background={ chatTheme.HEADER }
+      toggle={ state.settingsOpened }
     >
       <Typography
         variant='middle'

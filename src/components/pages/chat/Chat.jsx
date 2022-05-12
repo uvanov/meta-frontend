@@ -27,17 +27,18 @@ const ChatWindow = styled(Flex, {
     ].includes(prop);
   }
 })`
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  
   width: 100%;
-  max-width: 700px;
+  max-width: 650px;
   height: 500px;
   border-radius: 4px;
   transition: background .3s;
   
   ${ ({ active, background, backgroundOpacity }) => active && css`
-    background: linear-gradient(
-      ${ addHexAlpha(background, backgroundOpacity) },
-      ${ background }
-    );
+    background-color: ${ addHexAlpha(background, backgroundOpacity) };
   ` }
 `;
 
@@ -70,14 +71,16 @@ export const ChatContext = createContext(CHAT_THEMES.BLACK);
 export const Chat = () => {
   const [chatState, dispatch] = useReducer(
     (state, action) => {
-    if(action.type === 'setChatFocus') return { ...state, isChatFocused: action.focus };
-    if(action.type === 'setChatOpacity') return { ...state, chatOpacity: action.opacity };
-    if(action.type === 'setChatTheme') return { ...state, chosenChatTheme: action.theme };
-    throw new Error();
-  }, {
-    isChatFocused: true,
-    chatOpacity: 0.7,
-    chosenChatTheme: 'BLACK'
+      if (action.type === 'setChatFocus') return { ...state, isChatFocused: action.focus };
+      if (action.type === 'setChatOpacity') return { ...state, chatOpacity: action.opacity };
+      if (action.type === 'setChatTheme') return { ...state, chosenChatTheme: action.theme };
+      throw new Error();
+    }, {
+      chatFocused: true,
+      chatOpacity: 0.7,
+      chosenChatTheme: 'BLACK',
+      settingsOpened: false,
+      fullscreen: false
   });
 
   const context = {
@@ -91,11 +94,11 @@ export const Chat = () => {
       <ChatWindow
         gap='15px'
         direction='column'
-        active={ chatState.isChatFocused }
+        active={ chatState.chatFocused }
         background={ CHAT_THEMES[chatState.chosenChatTheme].MESSAGE_BOX }
         backgroundOpacity={ chatState.chatOpacity }
       >
-        <ChatHeader isFocused={ chatState.isChatFocused }/>
+        <ChatHeader isFocused={ chatState.chatFocused }/>
         <MessagesArea
           messages={ ['Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.'] }
         />
