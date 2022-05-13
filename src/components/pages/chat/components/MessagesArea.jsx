@@ -8,19 +8,21 @@ import {
   MarginContainer, Flex
 } from '@ui/index';
 import { addHexAlpha } from '@lib/utils';
-import { useAppSelector } from '@hooks/state';
+import { useAppDispatch, useAppSelector } from '@hooks/state';
+import { chatSlice } from '@store/slices/ChatSlice';
 
 // Styled Components
-const StyledMessagesArea = styled(Flex)`
-  height: 100%;
+const MessagesAreaContainer = styled(MarginContainer)`
+  max-height: 450px;
   overflow-y: scroll;
+  height: 100%;
   
   ::-webkit-scrollbar {
     width: 8px;
   }
   
   &::-webkit-scrollbar-track {
-    background-color: ${({ theme }) => addHexAlpha(theme.palette.black, 0.1)};
+    background-color: transparent;
   }
   
   &::-webkit-scrollbar-thumb {
@@ -29,14 +31,20 @@ const StyledMessagesArea = styled(Flex)`
   }
 `
 
+const StyledMessagesArea = styled(Flex)`
+  height: 100%;
+`
+
 // Constants
 const COLOR_REGEX = /<{(#([a-f0-9]{6})})(.*?)>/gi;
 const BOLD_REGEX = /%(.*?)%/ig;
 const COMMAND_REGEX = /^\/[\w\s]+/;
 
+
+
+
 // Exports
 export const MessagesArea = () => {
-
   const messages = useAppSelector(state => state.chatSlice.messages);
   const [preparedMessageList, setPreparedMessageList] = useState([]);
 
@@ -57,7 +65,6 @@ export const MessagesArea = () => {
 
     return message;
   };
-
   const formatBold = (message) => {
     if(!message.match(BOLD_REGEX)){
       return message;
@@ -75,17 +82,21 @@ export const MessagesArea = () => {
   }
 
   useEffect(() => {
-    const newMessage = messages[messages.length - 1].message;
-    const formattedMessage = formatColor(newMessage);
+    const newMessage = messages[messages.length - 1];
+    const formattedMessage = formatColor(newMessage.message);
 
-    setPreparedMessageList([...preparedMessageList, formattedMessage]);
+    preparedMessageList.unshift({
+      timestamp: newMessage.timestamp,
+      message: formattedMessage
+    });
+
+    setPreparedMessageList([...preparedMessageList]);
   }, [messages]);
 
   return (
-    <MarginContainer
+    <MessagesAreaContainer
       right='35px'
       left='35px'
-      style={ { height: '100%' } }
     >
       <StyledMessagesArea
         direction='column'
@@ -93,17 +104,24 @@ export const MessagesArea = () => {
       >
         {
           preparedMessageList.map(message => (
-            <Typography
-              key={ Date.now() }
-              variant='small'
-              color='black'
-              dangerouslySetInnerHTML={ { __html: message } }
-            >
-
-            </Typography>
+            <Flex gap='15px'>
+              <Typography
+                variant='small'
+                color='#14131B'
+                semiBold
+              >
+                { message.timestamp }
+              </Typography>
+              <Typography
+                key={ Date.now() }
+                variant='small'
+                color='white'
+                dangerouslySetInnerHTML={ { __html: message.message } }
+              />
+            </Flex>
           ))
         }
       </StyledMessagesArea>
-    </MarginContainer>
+    </MessagesAreaContainer>
   );
 };
