@@ -77,7 +77,7 @@ const StyledInputVisibilityControlWrapper = styled.div`
 
 const ErrorHintWrapper = styled(Flex, {
   shouldForwardProp(prop){
-    return prop !== 'isValid';
+    return prop !== 'show';
   }
 })`
   position: absolute;
@@ -119,7 +119,7 @@ const CONFIG = {
 export const Input = (
   {
     variant,
-    label = 'Label',
+    label = '',
     Icon,
     placeholder = 'Placeholder',
     value,
@@ -154,9 +154,13 @@ export const Input = (
         direction='column'
         gap='3px'
       >
-        <StyledInputLabel>
-          { label }
-        </StyledInputLabel>
+        {
+          label && (
+            <StyledInputLabel>
+              { label }
+            </StyledInputLabel>
+          )
+        }
         <StyledInput
           type={ isInputValueHidden ? 'password' : 'text' }
           placeholder={ placeholder ? placeholder : CONFIG.DEFAULT_PLACEHOLDER }
