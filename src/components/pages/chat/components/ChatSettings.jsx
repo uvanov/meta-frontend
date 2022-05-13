@@ -22,7 +22,7 @@ const StyledChatSettings = styled(Grid)`
   
   height: ${({ toggle }) => toggle ? '50px' : '0px'};
   overflow: hidden;
-  transition: background-color .3s, height .3s ;
+  transition: background-color .3s, height .3s;
   padding: 0 35px;
   
   ${({ background }) => background && css`

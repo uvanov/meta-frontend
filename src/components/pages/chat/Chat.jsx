@@ -10,12 +10,14 @@ import { css } from '@emotion/react';
 // Local modules
 import { addHexAlpha } from '@lib/utils';
 import {
-  Flex
+  Flex,
 } from '@ui/index';
 import { ChatHeader } from '@pages/chat/components/ChatHeader';
 import { MessagesArea } from './components/MessagesArea';
+import { ChatInput } from './components/ChatInput';
 
 // Assets
+
 
 // Styled Components
 const ChatWindow = styled(Flex, {
@@ -23,7 +25,8 @@ const ChatWindow = styled(Flex, {
     return ![
       'active',
       'background',
-      'backgroundOpacity'
+      'backgroundOpacity',
+      'fullscreen'
     ].includes(prop);
   }
 })`
@@ -35,11 +38,25 @@ const ChatWindow = styled(Flex, {
   max-width: 650px;
   height: 500px;
   border-radius: 4px;
-  transition: background .3s;
+  transition: background .3s, 
+              height .3s,
+              top .3s, 
+              right .3s, 
+              bottom .3s, 
+              left .3s,
+              transform .3s;
   
-  ${ ({ active, background, backgroundOpacity }) => active && css`
+  ${({ active, background, backgroundOpacity }) => active && css`
     background-color: ${ addHexAlpha(background, backgroundOpacity) };
-  ` }
+  `}
+  
+  ${({ fullscreen }) => fullscreen && css`
+     left: 50%;
+     right: 50%;
+     //bottom: 30px;
+     height: 98%;
+     transform: translateX(-50%);
+  `}
 `;
 
 // Constants
@@ -69,6 +86,7 @@ export const ChatContext = createContext(CHAT_THEMES.BLACK);
 
 // Exports
 export const Chat = () => {
+  const [inputValue, setInputValue] = useState('');
   const [chatState, dispatch] = useReducer(
     (state, action) => {
       if (action.type === 'setChatFocus') return { ...state, isChatFocused: action.focus };
@@ -94,14 +112,15 @@ export const Chat = () => {
       <ChatWindow
         gap='15px'
         direction='column'
+        fullscreen={ chatState.fullscreen }
         active={ chatState.chatFocused }
         background={ CHAT_THEMES[chatState.chosenChatTheme].MESSAGE_BOX }
         backgroundOpacity={ chatState.chatOpacity }
       >
         <ChatHeader isFocused={ chatState.chatFocused }/>
-        <MessagesArea
-          messages={ ['Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.', 'Lorem ipsum.'] }
-        />
+        <MessagesArea />
+
+        <ChatInput/>
       </ChatWindow>
     </ChatContext.Provider>
   );
