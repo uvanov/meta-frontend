@@ -1,21 +1,13 @@
 // Import modules
 import React, {
-  useState,
+  useCallback,
   createContext,
-  useReducer, useEffect
+  useReducer,
+  useEffect
 } from 'react';
-import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
 // Local modules
-import { addHexAlpha } from '@lib/utils';
-import {
-  Flex,
-} from '@ui/index';
-import { ChatHeader } from '@pages/chat/components/ChatHeader';
-import { MessagesArea } from './components/MessagesArea';
-import { ChatInput } from './components/ChatInput';
-import { ChatWindow } from '@pages/chat/components/ChatWindow';
+import { ChatWindow } from './components/ChatWindow';
 
 // Assets
 
@@ -57,7 +49,6 @@ const KEY_CODES = {
 // Exports
 export const Chat = () => {
   // todo: Пофиксить зависимость от регистра клавиш
-  //       Сделать dragndrop
   const [chatState, dispatch] = useReducer(
     (state, action) => {
       if (action.type === 'setChatFocus') return { ...state, chatFocused: action.focus };
@@ -108,20 +99,23 @@ export const Chat = () => {
     dispatch({ type: 'setPosition', position: { x, y } })
   };
 
-  const onMouseMove = event => {
+  const onMouseMove = useCallback(event => {
     console.log('onMouseMove');
     changePosition(event.pageX, event.pageY)
-  }
+  }, [])
 
   const onMouseDown = event => {
     console.log('onMouseDown');
-    // changePosition(event.pageX, event.pageY);
-    document.addEventListener('mousemove', onMouseMove, true)
+    if(chatState.fullscreen || !chatState.chatFocused){
+      return;
+    }
+    window.addEventListener('mousemove', onMouseMove, true)
   };
 
   const onMouseUp = () => {
     console.log('onMouseUp');
-    document.removeEventListener('mousemove', onMouseMove, true)
+
+    window.removeEventListener('mousemove', onMouseMove, true)
   };
 
 
@@ -136,8 +130,8 @@ export const Chat = () => {
   return (
     <ChatContext.Provider value={ context }>
       <ChatWindow
-        onMouseDown={ onMouseDown }
-        onMouseUp={ onMouseUp }
+        mouseDown={ onMouseDown }
+        mouseUp={ onMouseUp }
       />
     </ChatContext.Provider>
   );

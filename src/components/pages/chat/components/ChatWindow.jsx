@@ -18,13 +18,16 @@ const StyledChatWindow = styled(Flex, {
       'active',
       'background',
       'backgroundOpacity',
-      'fullscreen'
+      'fullscreen',
+      'position'
     ].includes(prop);
   }
 })`
   position: absolute;
-  top: 12px;
-  left: 12px;
+  ${({ position }) => position && css`
+    left: ${ position.x }px;
+    top: ${ position.y }px;
+  `}
   
   width: 100%;
   max-width: 650px;
@@ -32,17 +35,19 @@ const StyledChatWindow = styled(Flex, {
   border-radius: 4px;
   transition: background .3s, 
               height .3s,
-              top .3s, 
-              right .3s, 
-              bottom .3s, 
-              left .3s,
-              transform .3s;
+              top .05s, 
+              right .05s, 
+              bottom .05s, 
+              left .05s,
+              transform .01s
+              ;
   
   ${({ active, background, backgroundOpacity }) => active && css`
     background-color: ${ addHexAlpha(background, backgroundOpacity) };
   `}
   
   ${({ fullscreen }) => fullscreen && css`
+     top: 10px;
      left: 50%;
      right: 50%;
      //bottom: 30px;
@@ -52,12 +57,14 @@ const StyledChatWindow = styled(Flex, {
 `;
 
 // Exports
-export const ChatWindow = () => {
+export const ChatWindow = ({ mouseDown, mouseUp, ...remainingProps }) => {
 
   const {
     state,
     chatTheme
   } = useContext(ChatContext);
+
+  console.log(mouseDown, mouseUp);
 
   return (
     <StyledChatWindow
@@ -66,9 +73,15 @@ export const ChatWindow = () => {
       fullscreen={ state.fullscreen }
       active={ state.chatFocused }
       background={ chatTheme.MESSAGE_BOX }
+      position={ state.position }
       backgroundOpacity={ state.chatOpacity }
+      { ...remainingProps }
     >
-      <ChatHeader isFocused={ state.chatFocused }/>
+      <ChatHeader
+        onMouseDown={ mouseDown }
+        onMouseUp={ mouseUp }
+        isFocused={ state.chatFocused }
+      />
       <MessagesArea/>
       <ChatInput/>
     </StyledChatWindow>

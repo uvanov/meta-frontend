@@ -25,6 +25,7 @@ const StyledChatHeader = styled(Flex, {
   position: relative;
   padding: 8px 24px;
   transition: background-color .3s;
+  user-select: none;
   
   ${({ showBackground, background }) => showBackground && css`
     background-color: ${ background };
@@ -32,7 +33,7 @@ const StyledChatHeader = styled(Flex, {
 `;
 
 // Exports
-export const ChatHeader = ({ isFocused }) => {
+export const ChatHeader = ({ isFocused, ...remainingProps }) => {
   const { chatTheme } = useContext(ChatContext);
 
   return (
@@ -41,6 +42,7 @@ export const ChatHeader = ({ isFocused }) => {
       justifyContent='space-between'
       showBackground={ isFocused }
       background={ chatTheme.HEADER }
+      { ...remainingProps }
     >
       {
         isFocused
