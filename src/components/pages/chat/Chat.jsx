@@ -78,8 +78,6 @@ export const Chat = () => {
   const keyDownListener = event => {
     const key = event.key;
 
-    console.log('keyDownListener', key);
-
     if(chatState.blockKeyboardControl){
       return;
     }
@@ -102,19 +100,16 @@ export const Chat = () => {
   }
 
   const changePosition = (x, y) => {
-    console.log('changePosition');
     if(x <= 0){ x = 0 }
     if(y <= 0){ y = 0 }
     dispatch({ type: 'setPosition', position: { x, y } })
   };
 
   const onMouseMove = useCallback(event => {
-    console.log('onMouseMove');
     changePosition(event.pageX, event.pageY)
   }, [])
 
-  const onMouseDown = event => {
-    console.log('onMouseDown');
+  const onMouseDown = () => {
     if(chatState.fullscreen || !chatState.chatFocused){
       return;
     }
@@ -122,8 +117,6 @@ export const Chat = () => {
   };
 
   const onMouseUp = () => {
-    console.log('onMouseUp');
-
     window.removeEventListener('mousemove', onMouseMove, true)
   };
 

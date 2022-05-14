@@ -64,8 +64,6 @@ export const ChatWindow = ({ mouseDown, mouseUp, ...remainingProps }) => {
     chatTheme
   } = useContext(ChatContext);
 
-  console.log(mouseDown, mouseUp);
-
   return (
     <StyledChatWindow
       gap='15px'

@@ -17,7 +17,7 @@ const StyledGrid = styled.div<GridProps>`
           ${props.columnWidth ? props.columnWidth : '1fr'}
         );
       `
-  }
+}
   
   ${(props) => props.rows && css`
     grid-template-rows: repeat(${ props.rows }, 1fr);
