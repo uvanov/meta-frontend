@@ -42,7 +42,7 @@ export const ChatContext = createContext();
 
 const KEY_CODES = {
   SETTINGS: 'F7',
-  CHAT_FOCUS: 'y',
+  CHAT_FOCUS: ['y', 'Y', 'н', 'Н'], // Для независимости от раскладки и регистра
   FULLSCREEN: 'F3'
 };
 
@@ -57,6 +57,7 @@ export const Chat = () => {
       if (action.type === 'setSettingsOpen') return { ...state, settingsOpened: action.open };
       if (action.type === 'setFullscreen') return { ...state, fullscreen: action.fullscreen };
       if (action.type === 'setPosition') return { ...state, position: action.position };
+      if (action.type === 'setControlBlock') return { ...state, blockKeyboardControl: action.block };
       throw new Error();
     }, {
       chatFocused: false,
@@ -64,7 +65,8 @@ export const Chat = () => {
       chosenChatTheme: 'BLACK',
       settingsOpened: false,
       fullscreen: false,
-      position: { x: 10, y: 10 }
+      position: { x: 10, y: 10 },
+      blockKeyboardControl: false
   });
 
   const context = {
@@ -75,9 +77,14 @@ export const Chat = () => {
 
   const keyDownListener = event => {
     const key = event.key;
+
     console.log('keyDownListener', key);
 
-    if(key === KEY_CODES.CHAT_FOCUS){
+    if(chatState.blockKeyboardControl){
+      return;
+    }
+
+    if(KEY_CODES.CHAT_FOCUS.includes(key)){
       dispatch({ type: 'setChatFocus', focus: !chatState.chatFocused })
     }
 
@@ -96,6 +103,8 @@ export const Chat = () => {
 
   const changePosition = (x, y) => {
     console.log('changePosition');
+    if(x <= 0){ x = 0 }
+    if(y <= 0){ y = 0 }
     dispatch({ type: 'setPosition', position: { x, y } })
   };
 
@@ -125,7 +134,7 @@ export const Chat = () => {
     return () => {
       window.removeEventListener('keydown', keyDownListener)
     }
-  }, [chatState.settingsOpened, chatState.chatFocused, chatState.fullscreen]);
+  }, [chatState.settingsOpened, chatState.chatFocused, chatState.fullscreen, chatState.blockKeyboardControl]);
 
   return (
     <ChatContext.Provider value={ context }>
