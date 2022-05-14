@@ -52,6 +52,22 @@ export const ChatInput = () => {
 
   const onMessageSend = () => {
 
+    if(!message.trim().length > 1){
+      return;
+    }
+
+    if(message.match(COMMAND_REGEX)){
+      global.mp.invoke(message);
+    }
+
+    global.mp.trigger('client.chatMessage', message);
+    return setMessage('');
+  };
+
+  const handleEnterDown = (event) => {
+    if (event.key === 'Enter') {
+      onMessageSend();
+    }
   };
 
   return (
@@ -74,8 +90,9 @@ export const ChatInput = () => {
                 onChange={ event => setMessage(event.target.value) }
                 placeholder='Сообщение...'
                 spellCheck='false'
+                onKeyDown={ handleEnterDown }
               />
-              <StyledSendIcon/>
+              <StyledSendIcon onClick={ () => onMessageSend() }/>
             </ChatInputWrapper>
           </MarginContainer>
         )
