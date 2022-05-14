@@ -13,9 +13,8 @@ import { chatSlice } from '@store/slices/ChatSlice';
 
 // Styled Components
 const MessagesAreaContainer = styled(MarginContainer)`
-  max-height: 450px;
-  overflow-y: scroll;
   height: 100%;
+  overflow-y: scroll;
   
   ::-webkit-scrollbar {
     width: 8px;
@@ -56,7 +55,6 @@ export const MessagesArea = () => {
 
     while(message.match(COLOR_REGEX)){
       const messageExec = COLOR_REGEX.exec(message);
-      console.log(messageExec);
       message = message.replace(
         messageExec[0],
         `<span style="color: #${ messageExec[2] }">${ formatBold(messageExec[3]) }</span>`
@@ -104,7 +102,10 @@ export const MessagesArea = () => {
       >
         {
           preparedMessageList.map(message => (
-            <Flex gap='15px'>
+            <Flex
+              key={ Date.now() }
+              gap='15px'
+            >
               <Typography
                 variant='small'
                 color='#14131B'
@@ -113,7 +114,6 @@ export const MessagesArea = () => {
                 { message.timestamp }
               </Typography>
               <Typography
-                key={ Date.now() }
                 variant='small'
                 color='white'
                 dangerouslySetInnerHTML={ { __html: message.message } }
