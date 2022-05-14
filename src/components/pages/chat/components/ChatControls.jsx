@@ -1,5 +1,5 @@
 // Import modules
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Local modules
 import {
@@ -7,6 +7,7 @@ import {
   Typography
 } from '@ui/index';
 import { ControlHint } from './ControlHint';
+import { ChatContext } from '../Chat';
 
 // Assets
 import { ReactComponent as EyeIcon } from '@images/icons/eye-icon.svg';
@@ -36,6 +37,11 @@ export const CHAT_HINTS_CONFIG = {
 
 // Exports
 export const ChatControls = () => {
+
+  const {
+    state
+  } = useContext(ChatContext);
+
   return (
     <>
       <Typography
@@ -60,7 +66,11 @@ export const ChatControls = () => {
         />
         <ControlHint
           Icon={ CHAT_HINTS_CONFIG.FULLSCREEN.ICON }
-          text={ CHAT_HINTS_CONFIG.FULLSCREEN.TEXT_TO_EXPAND }
+          text={
+            state.fullscreen
+            ? CHAT_HINTS_CONFIG.FULLSCREEN.TEXT_TO_DECREASE
+            : CHAT_HINTS_CONFIG.FULLSCREEN.TEXT_TO_EXPAND
+          }
           buttonKey={ CHAT_HINTS_CONFIG.FULLSCREEN.KEY }
         />
       </Flex>
