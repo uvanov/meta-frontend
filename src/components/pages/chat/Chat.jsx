@@ -2,7 +2,7 @@
 import React, {
   useState,
   createContext,
-  useReducer
+  useReducer, useEffect
 } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -15,49 +15,13 @@ import {
 import { ChatHeader } from '@pages/chat/components/ChatHeader';
 import { MessagesArea } from './components/MessagesArea';
 import { ChatInput } from './components/ChatInput';
+import { ChatWindow } from '@pages/chat/components/ChatWindow';
 
 // Assets
 
 
 // Styled Components
-const ChatWindow = styled(Flex, {
-  shouldForwardProp(prop) {
-    return ![
-      'active',
-      'background',
-      'backgroundOpacity',
-      'fullscreen'
-    ].includes(prop);
-  }
-})`
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  
-  width: 100%;
-  max-width: 650px;
-  height: 500px;
-  border-radius: 4px;
-  transition: background .3s, 
-              height .3s,
-              top .3s, 
-              right .3s, 
-              bottom .3s, 
-              left .3s,
-              transform .3s;
-  
-  ${({ active, background, backgroundOpacity }) => active && css`
-    background-color: ${ addHexAlpha(background, backgroundOpacity) };
-  `}
-  
-  ${({ fullscreen }) => fullscreen && css`
-     left: 50%;
-     right: 50%;
-     //bottom: 30px;
-     height: 98%;
-     transform: translateX(-50%);
-  `}
-`;
+
 
 // Constants
 const CHAT_THEMES = {
@@ -82,23 +46,34 @@ const CHAT_THEMES = {
     MESSAGE_BOX: '#3F1410'
   }
 };
-export const ChatContext = createContext(CHAT_THEMES.BLACK);
+export const ChatContext = createContext();
+
+const KEY_CODES = {
+  SETTINGS: 'F7',
+  CHAT_FOCUS: 'y',
+  FULLSCREEN: 'F3'
+};
 
 // Exports
 export const Chat = () => {
-  const [inputValue, setInputValue] = useState('');
+  // todo: Пофиксить зависимость от регистра клавиш
+  //       Сделать dragndrop
   const [chatState, dispatch] = useReducer(
     (state, action) => {
-      if (action.type === 'setChatFocus') return { ...state, isChatFocused: action.focus };
+      if (action.type === 'setChatFocus') return { ...state, chatFocused: action.focus };
       if (action.type === 'setChatOpacity') return { ...state, chatOpacity: action.opacity };
       if (action.type === 'setChatTheme') return { ...state, chosenChatTheme: action.theme };
+      if (action.type === 'setSettingsOpen') return { ...state, settingsOpened: action.open };
+      if (action.type === 'setFullscreen') return { ...state, fullscreen: action.fullscreen };
+      if (action.type === 'setPosition') return { ...state, position: action.position };
       throw new Error();
     }, {
-      chatFocused: true,
+      chatFocused: false,
       chatOpacity: 0.7,
       chosenChatTheme: 'BLACK',
       settingsOpened: false,
-      fullscreen: false
+      fullscreen: false,
+      position: { x: 10, y: 10 }
   });
 
   const context = {
@@ -107,21 +82,63 @@ export const Chat = () => {
     dispatch: dispatch
   };
 
+  const keyDownListener = event => {
+    const key = event.key;
+    console.log('keyDownListener', key);
+
+    if(key === KEY_CODES.CHAT_FOCUS){
+      dispatch({ type: 'setChatFocus', focus: !chatState.chatFocused })
+    }
+
+    if(chatState.chatFocused){
+      if(key === KEY_CODES.SETTINGS){
+        dispatch({ type: 'setSettingsOpen', open: !chatState.settingsOpened })
+      }
+
+      if(key === KEY_CODES.FULLSCREEN){
+        dispatch({ type: 'setFullscreen', fullscreen: !chatState.fullscreen })
+      }
+    } else {
+      return;
+    }
+  }
+
+  const changePosition = (x, y) => {
+    console.log('changePosition');
+    dispatch({ type: 'setPosition', position: { x, y } })
+  };
+
+  const onMouseMove = event => {
+    console.log('onMouseMove');
+    changePosition(event.pageX, event.pageY)
+  }
+
+  const onMouseDown = event => {
+    console.log('onMouseDown');
+    // changePosition(event.pageX, event.pageY);
+    document.addEventListener('mousemove', onMouseMove, true)
+  };
+
+  const onMouseUp = () => {
+    console.log('onMouseUp');
+    document.removeEventListener('mousemove', onMouseMove, true)
+  };
+
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyDownListener);
+
+    return () => {
+      window.removeEventListener('keydown', keyDownListener)
+    }
+  }, [chatState.settingsOpened, chatState.chatFocused, chatState.fullscreen]);
+
   return (
     <ChatContext.Provider value={ context }>
       <ChatWindow
-        gap='15px'
-        direction='column'
-        fullscreen={ chatState.fullscreen }
-        active={ chatState.chatFocused }
-        background={ CHAT_THEMES[chatState.chosenChatTheme].MESSAGE_BOX }
-        backgroundOpacity={ chatState.chatOpacity }
-      >
-        <ChatHeader isFocused={ chatState.chatFocused }/>
-        <MessagesArea />
-
-        <ChatInput/>
-      </ChatWindow>
+        onMouseDown={ onMouseDown }
+        onMouseUp={ onMouseUp }
+      />
     </ChatContext.Provider>
   );
 };
