@@ -1,5 +1,5 @@
 // Import modules
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
 // Local modules
@@ -46,17 +46,30 @@ const MESSAGE_REGEX = /<{(#([a-f0-9]{6})})(.*?!*)>/gi;
 export const ChatInput = () => {
   const {
     chatTheme,
-    state
+    state,
+    dispatch
   } = useContext(ChatContext);
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    if(message.length > 0){
+      if(!state.blockKeyboardControl){
+        dispatch({ type: 'setControlBlock', block: true });
+      }
+    } else {
+      if(state.blockKeyboardControl){
+        dispatch({ type: 'setControlBlock', block: false });
+      }
+    }
+  }, [message])
+
   const onMessageSend = () => {
 
-    if(!message.trim().length > 1){
+    if (!message.trim().length > 1) {
       return;
     }
 
-    if(message.match(COMMAND_REGEX)){
+    if (message.match(COMMAND_REGEX)) {
       global.mp.invoke(message);
     }
 
@@ -68,6 +81,10 @@ export const ChatInput = () => {
     if (event.key === 'Enter') {
       onMessageSend();
     }
+  };
+
+  const onInputChange = (event) => {
+    setMessage(event.target.value);
   };
 
   return (
@@ -87,7 +104,7 @@ export const ChatInput = () => {
             >
               <StyledChatInput
                 value={ message }
-                onChange={ event => setMessage(event.target.value) }
+                onChange={ onInputChange }
                 placeholder='Сообщение...'
                 spellCheck='false'
                 onKeyDown={ handleEnterDown }
