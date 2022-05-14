@@ -51,17 +51,13 @@ export const ChatInput = () => {
   } = useContext(ChatContext);
   const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    if(message.length > 0){
-      if(!state.blockKeyboardControl){
-        dispatch({ type: 'setControlBlock', block: true });
-      }
-    } else {
-      if(state.blockKeyboardControl){
-        dispatch({ type: 'setControlBlock', block: false });
-      }
-    }
-  }, [message])
+  const onFocus = () => {
+    dispatch({ type: 'setControlBlock', block: true });
+  }
+
+  const onFocusOut = () => {
+    dispatch({ type: 'setControlBlock', block: false });
+  }
 
   const onMessageSend = () => {
 
@@ -77,14 +73,14 @@ export const ChatInput = () => {
     return setMessage('');
   };
 
+  const onInputChange = (event) => {
+    setMessage(event.target.value);
+  };
+
   const handleEnterDown = (event) => {
     if (event.key === 'Enter') {
       onMessageSend();
     }
-  };
-
-  const onInputChange = (event) => {
-    setMessage(event.target.value);
   };
 
   return (
@@ -105,6 +101,8 @@ export const ChatInput = () => {
               <StyledChatInput
                 value={ message }
                 onChange={ onInputChange }
+                onFocus={ onFocus }
+                onBlur={ onFocusOut }
                 placeholder='Сообщение...'
                 spellCheck='false'
                 onKeyDown={ handleEnterDown }
