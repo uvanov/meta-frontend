@@ -16,7 +16,7 @@ import { addHexAlpha } from '@lib/utils';
 // Styled Components
 const StyledChatSettings = styled(Grid)`
   position: absolute;
-  top: 100%;
+  top: 42px;
   right: 0;
   left: 0;
   

@@ -101,9 +101,9 @@ export const MessagesArea = () => {
         gap='16px'
       >
         {
-          preparedMessageList.map(message => (
+          preparedMessageList.map((message, index) => (
             <Flex
-              key={ Date.now() }
+              key={ index }
               gap='15px'
             >
               <Typography

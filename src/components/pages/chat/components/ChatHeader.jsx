@@ -27,9 +27,9 @@ const StyledChatHeader = styled(Flex, {
   transition: background-color .3s;
   user-select: none;
   
-  ${({ showBackground, background }) => showBackground && css`
+  ${ ({ showBackground, background }) => showBackground && css`
     background-color: ${ background };
-  `}
+  ` }
 `;
 
 // Exports
@@ -37,23 +37,25 @@ export const ChatHeader = ({ isFocused, ...remainingProps }) => {
   const { chatTheme } = useContext(ChatContext);
 
   return (
-    <StyledChatHeader
-      alignItems='center'
-      justifyContent='space-between'
-      showBackground={ isFocused }
-      background={ chatTheme.HEADER }
-      { ...remainingProps }
-    >
-      {
-        isFocused
-          ? <ChatControls/>
-          : <ControlHint
-            Icon={ CHAT_HINTS_CONFIG.VISIBILITY.ICON }
-            text={ CHAT_HINTS_CONFIG.VISIBILITY.TEXT_TO_OPEN }
-            buttonKey={ CHAT_HINTS_CONFIG.VISIBILITY.KEY }
-          />
-      }
+    <>
+      <StyledChatHeader
+        alignItems='center'
+        justifyContent='space-between'
+        showBackground={ isFocused }
+        background={ chatTheme.HEADER }
+        { ...remainingProps }
+      >
+        {
+          isFocused
+            ? <ChatControls/>
+            : <ControlHint
+              Icon={ CHAT_HINTS_CONFIG.VISIBILITY.ICON }
+              text={ CHAT_HINTS_CONFIG.VISIBILITY.TEXT_TO_OPEN }
+              buttonKey={ CHAT_HINTS_CONFIG.VISIBILITY.KEY }
+            />
+        }
+      </StyledChatHeader>
       <ChatSettings/>
-    </StyledChatHeader>
+    </>
   );
 };
