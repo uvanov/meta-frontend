@@ -105,6 +105,7 @@ You can see a global object into window, called "CEF'. There is his methods list
 | Method | Description | Parameters |   
 | --- | --- | --- |   
 | AddMessage | Add message to client's chat window | message: { timestamp: `string`, message: `string` } |
+
 Messages support a little markdown-system: <br>
 `<{#ffffff} To colorize text >` <br>
 `% Wrap by percent-symbol to make it bold % `
