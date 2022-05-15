@@ -6,10 +6,18 @@ import { css } from '@emotion/react';
 // Styled Components
 const StyledGrid = styled.div<GridProps>`
   display: grid;
-  grid-template-columns: repeat(
-      ${(props) => props.columns}, 
-      ${(props) => props.columnWidth ? props.columnWidth : '1fr'}
-  );
+  // TODO: Написать нормальную систему кастомных столбцов, например ['40px', '1fr', '20px']
+  ${(props) => props.columnLayout
+    ? css`
+        grid-template-columns: ${props.columnLayout};
+      `
+    : css`
+        grid-template-columns: repeat(
+          ${props.columns}, 
+          ${props.columnWidth ? props.columnWidth : '1fr'}
+        );
+      `
+}
   
   ${(props) => props.rows && css`
     grid-template-rows: repeat(${ props.rows }, 1fr);
@@ -37,8 +45,9 @@ const StyledGrid = styled.div<GridProps>`
 
 // Types
 interface GridProps {
-  columns: number;
+  columns?: number;
   columnWidth?: string;
+  columnLayout?: string;
   rows?: number;
   columnGap?: number;
   rowGap?: number;

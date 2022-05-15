@@ -15,6 +15,10 @@ import {
 } from '@store/slices/SelectCharacterSlice';
 import { characterCreatorSlice } from '@store/slices/CharacterCreatorSlice';
 import { spawnSelectSlice, SpawnPointsArrayType } from '@store/slices/SpawnSelectSlice';
+import {
+  chatSlice,
+  MessageType
+} from '@store/slices/ChatSlice';
 
 // Destruct actions
 const {
@@ -37,6 +41,10 @@ const {
   setSelectSpawnVisibility,
   setSpawnPoints
 } = spawnSelectSlice.actions;
+const {
+  addMessage,
+  setChatVisibility
+} = chatSlice.actions;
 
 const dispatch = store.dispatch;
 
@@ -89,6 +97,14 @@ export const CEF = {
     },
     SetSpawnPoints(points: SpawnPointsArrayType){
       dispatch(setSpawnPoints({ points }));
+    }
+  },
+  Chat: {
+    // Visibility(visibility: boolean){
+    //   dispatch(setChatVisibility({ visibility }));
+    // },
+    AddMessage(message: MessageType){
+      dispatch(addMessage(message));
     }
   }
 };

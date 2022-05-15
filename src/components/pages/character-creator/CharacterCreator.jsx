@@ -174,7 +174,7 @@ export const CharacterCreator = () => {
         dispatch(setSurnameValid({ valid: true }));
       }
 
-      return console.log({isNameValid, isSurnameValid});
+      return;
     } else {
       dispatch(setNameValid({ valid: true }));
       dispatch(setSurnameValid({ valid: true }));

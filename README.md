@@ -88,7 +88,7 @@ You can see a global object into window, called "CEF'. There is his methods list
 | SetSurnameValid | Send the user the validity status of his surname | valid: `boolean` / `null` (null to hide valid-mark) |
 <br>
 
-<br><br>
+<br>
 
 ### SelectSpawn
 
@@ -96,4 +96,17 @@ You can see a global object into window, called "CEF'. There is his methods list
 | --- | --- | --- |   
 | Visibility | Change visibility of select-spawn interface | visibility: `boolean` |
 | SetSpawnPoints | Show the available spawn point to user  | points: [ <br>{ index: 0, blocked: `boolean`, nearBuis: `string`, health: `string`, food: `string` }, <br>{ index: 1, blocked: `boolean`, houseNumber: `number`, houseClass: `string`, houseMoney: `string` }, <br>{ index: 2, blocked: `boolean`, fractionType: `string`, fractionName: `string`, fractionRank: `string` } <br>] |
+<br>
+
+
+
+### Chat
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| AddMessage | Add message to client's chat window | message: { timestamp: `string`, message: `string` } |
+
+Messages support a little markdown-system: <br>
+`<{#ffffff} To colorize text >` <br>
+`% Wrap by percent-symbol to make it bold % `
 <br>

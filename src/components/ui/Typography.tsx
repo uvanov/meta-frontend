@@ -30,6 +30,10 @@ const BaseTypography = styled.p<Omit<TypographyProps, 'variant'>>`
     font-weight: bold;
   `}
   
+  ${({ italic }) => italic && css`
+    font-style: italic;
+  `}
+  
   ${({ semiBold }) => semiBold && css`
     font-weight: 600;
   `}
@@ -80,6 +84,7 @@ interface TypographyProps {
   uppercase?: boolean;
   underline?: boolean;
   bold?: boolean;
+  italic?: boolean;
   semiBold?: boolean;
   fullWidth?: boolean;
 }

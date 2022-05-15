@@ -9,7 +9,7 @@ export type SpawnPointsArrayType = typeof initialState.points;
 
 // Initial state
 const initialState = {
-  isShown: true,
+  isShown: false,
   points: [
     {
       index: 0,
