@@ -8,8 +8,7 @@ import {
   MarginContainer, Flex
 } from '@ui/index';
 import { addHexAlpha } from '@lib/utils';
-import { useAppDispatch, useAppSelector } from '@hooks/state';
-import { chatSlice } from '@store/slices/ChatSlice';
+import { useAppSelector } from '@hooks/state';
 
 // Styled Components
 const MessagesAreaContainer = styled(MarginContainer)`
@@ -37,10 +36,6 @@ const StyledMessagesArea = styled(Flex)`
 // Constants
 const COLOR_REGEX = /<{(#([a-f0-9]{6})})(.*?)>/gi;
 const BOLD_REGEX = /%(.*?)%/ig;
-const COMMAND_REGEX = /^\/[\w\s]+/;
-
-
-
 
 // Exports
 export const MessagesArea = () => {

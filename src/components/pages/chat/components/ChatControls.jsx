@@ -37,7 +37,6 @@ export const CHAT_HINTS_CONFIG = {
 
 // Exports
 export const ChatControls = () => {
-
   const {
     state
   } = useContext(ChatContext);

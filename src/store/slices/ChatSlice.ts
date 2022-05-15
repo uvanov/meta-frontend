@@ -13,16 +13,7 @@ export interface MessageType {
 // Initial state
 const initialState = {
   isShown: true,
-  messages: [
-    {
-      timestamp: '11:28',
-      message: '<{#ffffff}%Nickname%: ><{#FF3E3E}ALERT!>'
-    },
-    {
-      timestamp: '11:23',
-      message: '<{#ffffff}Alex: >Здарова, чернь. Как твои дела? У меня всё прекрасно. Знаешь почему? Сейчас расскажу.'
-    },
-  ] as MessageType[]
+  messages: [] as MessageType[]
 };
 
 

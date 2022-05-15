@@ -58,7 +58,6 @@ const StyledChatWindow = styled(Flex, {
 
 // Exports
 export const ChatWindow = ({ mouseDown, mouseUp, ...remainingProps }) => {
-
   const {
     state,
     chatTheme

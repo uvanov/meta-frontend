@@ -1,5 +1,5 @@
 // Import modules
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 
 // Local modules
@@ -40,7 +40,6 @@ const StyledSendIcon = styled(SendIcon)`
 
 // Constants
 const COMMAND_REGEX = /^\/[\w\s]+/;
-const MESSAGE_REGEX = /<{(#([a-f0-9]{6})})(.*?!*)>/gi;
 
 // Exports
 export const ChatInput = () => {

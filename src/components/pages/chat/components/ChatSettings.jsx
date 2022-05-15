@@ -1,5 +1,5 @@
 // Import modules
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 

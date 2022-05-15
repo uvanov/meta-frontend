@@ -9,12 +9,6 @@ import React, {
 // Local modules
 import { ChatWindow } from './components/ChatWindow';
 
-// Assets
-
-
-// Styled Components
-
-
 // Constants
 const CHAT_THEMES = {
   BLACK: {
@@ -38,6 +32,7 @@ const CHAT_THEMES = {
     MESSAGE_BOX: '#3F1410'
   }
 };
+
 export const ChatContext = createContext();
 
 const KEY_CODES = {
@@ -48,7 +43,6 @@ const KEY_CODES = {
 
 // Exports
 export const Chat = () => {
-  // todo: Пофиксить зависимость от регистра клавиш
   const [chatState, dispatch] = useReducer(
     (state, action) => {
       if (action.type === 'setChatFocus') return { ...state, chatFocused: action.focus };
@@ -94,8 +88,6 @@ export const Chat = () => {
       if(key === KEY_CODES.FULLSCREEN){
         dispatch({ type: 'setFullscreen', fullscreen: !chatState.fullscreen })
       }
-    } else {
-      return;
     }
   }
 
@@ -119,7 +111,6 @@ export const Chat = () => {
   const onMouseUp = () => {
     window.removeEventListener('mousemove', onMouseMove, true)
   };
-
 
   useEffect(() => {
     window.addEventListener('keydown', keyDownListener);
