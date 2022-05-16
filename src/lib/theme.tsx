@@ -114,6 +114,7 @@ export const Provider: React.FC<Props> = ({ children, theme = themeConfig }) => 
             width: 100%;
             height: 100vh;
             position: relative;
+            background-color: gray;
           }
           
           ul, input{
