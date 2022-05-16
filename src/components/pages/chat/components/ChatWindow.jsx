@@ -23,6 +23,7 @@ const StyledChatWindow = styled(Flex, {
     ].includes(prop);
   }
 })`
+  z-index: 5;
   position: absolute;
   ${({ position }) => position && css`
     left: ${ position.x }px;
