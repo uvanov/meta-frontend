@@ -11,6 +11,7 @@ import {
   Typography,
   MarginContainer
 } from '@ui/index';
+import { IconProgressBar } from '@pages/hud/components/IconProgressBar';
 
 // Assets
 import { ReactComponent as TurnSignalIcon } from '@images/hud/speedometer/turn-signal-left-icon.svg'
@@ -19,11 +20,14 @@ import { ReactComponent as ShortLightIcon } from '@images/hud/speedometer/short-
 import { ReactComponent as SeatBeltIcon } from '@images/hud/speedometer/seat-belt-icon.svg'
 import { ReactComponent as KeyIcon } from '@images/hud/speedometer/key-icon.svg'
 import { ReactComponent as DoorIcon } from '@images/hud/speedometer/door-icon.svg'
-import { ReactComponent as FuelIcon } from '@images/hud/speedometer/fuel-icon.svg'
-import { ReactComponent as EngineIcon } from '@images/hud/speedometer/engine-icon.svg'
+import FuelIcon from '@images/hud/speedometer/fuel-icon.svg'
+import FilledFuelIcon from '@images/hud/speedometer/filled-fuel-icon.svg'
+import EngineIcon from '@images/hud/speedometer/engine-icon.svg'
+import FilledEngineIcon from '@images/hud/speedometer/filled-engine-icon.svg'
 
 // Styled Components
 const SpeedometerWrapper = styled(Flex)`
+  position: relative;
   width: 416px;
   height: 416px;
   margin-bottom: -40px;
@@ -71,6 +75,19 @@ const CarNavigationWrapper = styled(Flex)`
   top: 85%;
 `
 
+const FuelBarWrapper = styled.div`
+  position:absolute;
+  left: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+`
+const EngineBarWrapper = styled.div`
+  position:absolute;
+  right: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+`
+
 const StyledTurnSignalIcon = styled(TurnSignalIcon, {
   shouldForwardProp(prop){
     return prop !== 'active'
@@ -99,18 +116,6 @@ const DetailStatusMark = styled.div`
   transition: background-color .2s;
   background-color: ${({ toggle, theme }) => toggle ? '#23e568' : theme.palette.red};
 `;
-
-const StyledEngine = styled(EngineIcon)`
-  overflow: hidden;
-  
-  &::before{
-    display:block;
-    width: 50px;
-    height: 50px;
-    background-color: green;
-  }
-`
-
 
 // Hooks
 const usePreparedSpeed = (speed, maxSpeed) => {
@@ -206,6 +211,21 @@ export const Speedometer = (
           />
         </CarNavigationWrapper>
       </Relative>
+      <FuelBarWrapper>
+        <IconProgressBar
+          backgroundIcon={ FuelIcon }
+          fillIcon={ FilledFuelIcon }
+          progress={ 50 }
+        />
+      </FuelBarWrapper>
+
+      <EngineBarWrapper>
+        <IconProgressBar
+          backgroundIcon={ EngineIcon }
+          fillIcon={ FilledEngineIcon }
+          progress={ 50 }
+        />
+      </EngineBarWrapper>
     </SpeedometerWrapper>
   );
 };
