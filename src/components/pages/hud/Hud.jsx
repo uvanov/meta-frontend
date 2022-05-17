@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { Header } from './components/Header';
 import { Hints } from './components/Hints';
 import { Information } from '@pages/hud/components/Information';
+import { useAppSelector } from '@hooks/state';
 
 // Styled Components
 const StyledHud = styled.div`
@@ -15,11 +16,12 @@ const StyledHud = styled.div`
 
 // Exports
 export const Hud = () => {
+
   return (
     <StyledHud>
       <Header />
-      <Hints fromBottom='25%' />
-      <Information fromLeft='20%' />
+      <Hints />
+      <Information />
     </StyledHud>
   );
 };

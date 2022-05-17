@@ -10,7 +10,9 @@ import {
   MarginContainer,
   Typography
 } from '@ui/index';
-import { Speedometer } from '@pages/hud/components/Speedometer';
+import { Speedometer } from './Speedometer';
+import { useAppSelector } from '@hooks/state';
+import { numberWithSpaces } from '@lib/utils';
 
 // Assets
 import { ReactComponent as MicrophoneIcon } from '@images/hud/information/microphone-icon.svg';
@@ -36,9 +38,10 @@ const StyledInformation = styled(Flex, {
 
 // Exports
 
-export const Information = ({ fromLeft }) => {
+export const Information = () => {
 
-  const [speed, setSpeed] = useState(1);
+  const fromLeft = useAppSelector(state => state.hudSlice.safeZone.fromLeft);
+  const informationState = useAppSelector(state => state.hudSlice.information);
 
   return (
     <StyledInformation
@@ -65,7 +68,7 @@ export const Information = ({ fromLeft }) => {
               color='white'
               semiBold
             >
-              money
+              { numberWithSpaces(informationState.money) }
             </Typography>
           </Flex>
           <Flex
@@ -78,7 +81,7 @@ export const Information = ({ fromLeft }) => {
               color='white'
               semiBold
             >
-              food
+              { informationState.food } %
             </Typography>
           </Flex>
           <Flex
@@ -91,20 +94,20 @@ export const Information = ({ fromLeft }) => {
               color='white'
               semiBold
             >
-              date
+              { informationState.date.day }
             </Typography>
             <MarginContainer left='20px'>
               <Typography
                 variant='small'
                 color='white'
               >
-                time
+                { informationState.date.time }
               </Typography>
             </MarginContainer>
           </Flex>
         </Flex>
       </Flex>
-      <Speedometer speed={ speed } maxSpeed={ 234 }/>
+      <Speedometer />
     </StyledInformation>
   );
 };

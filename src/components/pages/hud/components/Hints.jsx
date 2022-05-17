@@ -1,10 +1,14 @@
 // Import modules
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 // Local components
-import { Flex, Typography } from '@ui/index';
+import {
+  Flex,
+  Typography
+} from '@ui/index';
+import { useAppSelector } from '@hooks/state';
 
 // Styled Components
 const HintButtonWrapper = styled(Flex, {
@@ -84,7 +88,31 @@ const Hint = ({ isPrimary, button, text }) => (
   </Flex>
 );
 
-export const Hints = ({ fromBottom }) => {
+export const Hints = () => {
+
+  const fromBottom = useAppSelector(state => state.hudSlice.safeZone.fromBottom);
+  const [isHintsOpenedFromKeyboard, setIsHintsOpenedFromKeyboard] = useState(false);
+  const isHintsOpenedFromServer = useAppSelector(state => state.hudSlice.hints.opened);
+
+  const keyDownHandler = useCallback((event) => {
+    const { key } = event;
+
+    if(key === 'F1'){
+      event.preventDefault();
+      setIsHintsOpenedFromKeyboard(prevState => !prevState);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keyDownHandler);
+    }
+  }, [])
+
+  // Сделать управление с клавиатуры
+
   return (
     <StyledHints
       direction='column'
@@ -94,7 +122,7 @@ export const Hints = ({ fromBottom }) => {
       <HintsSection
         direction='column'
         gap='5px'
-        opened={ false }
+        opened={ isHintsOpenedFromKeyboard || isHintsOpenedFromServer }
       >
         <Hint
           button='F2'

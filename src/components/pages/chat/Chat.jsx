@@ -77,15 +77,18 @@ export const Chat = () => {
     }
 
     if(KEY_CODES.CHAT_FOCUS.includes(key)){
+      event.preventDefault();
       dispatch({ type: 'setChatFocus', focus: !chatState.chatFocused })
     }
 
     if(chatState.chatFocused){
       if(key === KEY_CODES.SETTINGS){
+        event.preventDefault();
         dispatch({ type: 'setSettingsOpen', open: !chatState.settingsOpened })
       }
 
       if(key === KEY_CODES.FULLSCREEN){
+        event.preventDefault();
         dispatch({ type: 'setFullscreen', fullscreen: !chatState.fullscreen })
       }
     }

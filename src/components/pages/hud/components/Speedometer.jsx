@@ -24,13 +24,15 @@ import FuelIcon from '@images/hud/speedometer/fuel-icon.svg'
 import FilledFuelIcon from '@images/hud/speedometer/filled-fuel-icon.svg'
 import EngineIcon from '@images/hud/speedometer/engine-icon.svg'
 import FilledEngineIcon from '@images/hud/speedometer/filled-engine-icon.svg'
+import { useAppSelector } from '@hooks/state';
 
 // Styled Components
 const SpeedometerWrapper = styled(Flex)`
-  position: relative;
+  position: absolute;
   width: 416px;
   height: 416px;
-  margin-bottom: -40px;
+  bottom: 0;
+  right: 10px;
   border-radius: 100%;
   user-select: none;
   background: linear-gradient(
@@ -135,97 +137,111 @@ const CarDetailStatus = ({ Icon, toggle }) => (
   </Flex>
 );
 
-export const Speedometer = (
-  {
-    speed,
-    maxSpeed,
-    leftTurnSignal,
-    rightTurnSignal
-  }) => {
-  const preparedSpeed = usePreparedSpeed(speed, maxSpeed);
+export const Speedometer = () => {
+  const visible = useAppSelector(state => state.hudSlice.vehicle.visible);
+  const maximumVehicleSpeed = useAppSelector(state => state.hudSlice.vehicle.maximumVehicleSpeed);
+
+  const speedometerState = useAppSelector(state => state.hudSlice.vehicle.speedometer);
+  const speed = speedometerState.speed;
+  const engineTurnedOn = speedometerState.engine.turnedOn;
+  const engineHealth = speedometerState.engine.health;
+  const fuelLevel = speedometerState.fuel;
+  const isDoorsUnlocked = speedometerState.doors;
+  const headlights = speedometerState.headlights;
+  const seatBelt = speedometerState.seatBelt;
+
+
+  // Создаётся из-за особенности библиотеки прогресс-баров. Она, для значения прогресса требует значение от 0.0 до 1.0
+  const preparedSpeed = usePreparedSpeed(speed, maximumVehicleSpeed);
 
   return (
-    <SpeedometerWrapper
-      alignItems='center'
-      justifyContent='center'
-    >
-      <Relative>
-        <StyledSpeedometer
-          size={ 300 }
-          progress={ preparedSpeed }
-          thickness={ 10 }
-          lineCap='square'
-          fillColor='#FFA14A'
-          emptyColor='rgba(255, 255, 255, 0.5)'
-          speed={ 50 }
-        />
-        <SpeedWrapper
-          justifyContent='space-between'
-          alignItems='center'
-        >
-          <StyledTurnSignalIcon
-            active={ leftTurnSignal }
-          />
-          <Speed
-            variant='small'
-            color='#D5D4D2'
-            semiBold
+    <>
+      {
+        visible && (
+          <SpeedometerWrapper
+            alignItems='center'
+            justifyContent='center'
           >
-            { speed }
-          </Speed>
-          <RotatedTurnSignal
-            active={ rightTurnSignal }
-          />
-        </SpeedWrapper>
-        <CarNavigationWrapper
-          alignItems='flex-start'
-          justifyContent='center'
-          gap='12px'
-          fullWidth
-        >
-          <CarDetailStatus
-            Icon={ LongLightIcon }
-            toggle={ false }
-          />
-          <MarginContainer top='20px'>
-            <CarDetailStatus
-              Icon={ ShortLightIcon }
-              toggle={ false }
-            />
-          </MarginContainer>
-          <MarginContainer top='30px'>
-            <CarDetailStatus
-              Icon={ SeatBeltIcon }
-              toggle={ false }
-            />
-          </MarginContainer>
-          <MarginContainer top='20px'>
-            <CarDetailStatus
-              Icon={ KeyIcon }
-              toggle={ false }
-            />
-          </MarginContainer>
-          <CarDetailStatus
-            Icon={ DoorIcon }
-            toggle={ false }
-          />
-        </CarNavigationWrapper>
-      </Relative>
-      <FuelBarWrapper>
-        <IconProgressBar
-          backgroundIcon={ FuelIcon }
-          fillIcon={ FilledFuelIcon }
-          progress={ 50 }
-        />
-      </FuelBarWrapper>
+            <Relative>
+              <StyledSpeedometer
+                size={ 300 }
+                progress={ preparedSpeed }
+                thickness={ 10 }
+                lineCap='square'
+                fillColor='#FFA14A'
+                emptyColor='rgba(255, 255, 255, 0.5)'
+                speed={ 50 }
+              />
+              <SpeedWrapper
+                justifyContent='space-between'
+                alignItems='center'
+              >
+                <StyledTurnSignalIcon
+                  active={ headlights === 'left' || headlights === 'both' }
+                />
+                <Speed
+                  variant='small'
+                  color='#D5D4D2'
+                  semiBold
+                >
+                  { speed }
+                </Speed>
+                <RotatedTurnSignal
+                  active={ headlights === 'right' || headlights === 'both' }
+                />
+              </SpeedWrapper>
+              <CarNavigationWrapper
+                alignItems='flex-start'
+                justifyContent='center'
+                gap='12px'
+                fullWidth
+              >
+                <CarDetailStatus
+                  Icon={ LongLightIcon }
+                  toggle={ headlights === 'low' }
+                />
+                <MarginContainer top='20px'>
+                  <CarDetailStatus
+                    Icon={ ShortLightIcon }
+                    toggle={ headlights === 'high' }
+                  />
+                </MarginContainer>
+                <MarginContainer top='30px'>
+                  <CarDetailStatus
+                    Icon={ SeatBeltIcon }
+                    toggle={ seatBelt }
+                  />
+                </MarginContainer>
+                <MarginContainer top='20px'>
+                  <CarDetailStatus
+                    Icon={ KeyIcon }
+                    toggle={ engineTurnedOn }
+                  />
+                </MarginContainer>
+                <CarDetailStatus
+                  Icon={ DoorIcon }
+                  toggle={ isDoorsUnlocked }
+                />
+              </CarNavigationWrapper>
+            </Relative>
+            <FuelBarWrapper>
+              <IconProgressBar
+                backgroundIcon={ FuelIcon }
+                fillIcon={ FilledFuelIcon }
+                progress={ fuelLevel }
+              />
+            </FuelBarWrapper>
 
-      <EngineBarWrapper>
-        <IconProgressBar
-          backgroundIcon={ EngineIcon }
-          fillIcon={ FilledEngineIcon }
-          progress={ 50 }
-        />
-      </EngineBarWrapper>
-    </SpeedometerWrapper>
+            <EngineBarWrapper>
+              <IconProgressBar
+                backgroundIcon={ EngineIcon }
+                fillIcon={ FilledEngineIcon }
+                progress={ engineHealth }
+              />
+            </EngineBarWrapper>
+          </SpeedometerWrapper>
+        )
+      }
+    </>
   );
 };
