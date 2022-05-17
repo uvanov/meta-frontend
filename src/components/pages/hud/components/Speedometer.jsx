@@ -8,7 +8,8 @@ import ArcProgress from 'react-arc-progress';
 import {
   Relative,
   Flex,
-  Typography
+  Typography,
+  MarginContainer
 } from '@ui/index';
 
 // Assets
@@ -63,6 +64,11 @@ const Speed = styled(Typography)`
     font-size: ${({ theme }) => theme.typography.size.small};
     color: ${({ theme }) => theme.palette.white};
   }
+`;
+
+const CarNavigationWrapper = styled(Flex)`
+  position: absolute;
+  top: 85%;
 `
 
 const StyledTurnSignalIcon = styled(TurnSignalIcon, {
@@ -80,15 +86,31 @@ const StyledTurnSignalIcon = styled(TurnSignalIcon, {
       fill: #e1c868;
     }
   `}
-`
+`;
 
 const RotatedTurnSignal = styled(StyledTurnSignalIcon)`
   transform: rotate(180deg);
 `;
 
 const DetailStatusMark = styled.div`
-  background-color: ${({ toggle, theme }) => toggle ? '#1DB854' : theme.palette.red};
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  transition: background-color .2s;
+  background-color: ${({ toggle, theme }) => toggle ? '#23e568' : theme.palette.red};
+`;
+
+const StyledEngine = styled(EngineIcon)`
+  overflow: hidden;
+  
+  &::before{
+    display:block;
+    width: 50px;
+    height: 50px;
+    background-color: green;
+  }
 `
+
 
 // Hooks
 const usePreparedSpeed = (speed, maxSpeed) => {
@@ -96,13 +118,14 @@ const usePreparedSpeed = (speed, maxSpeed) => {
 };
 
 // Exports
-const CarDetailStatus = (Icon, toggle) => (
+const CarDetailStatus = ({ Icon, toggle }) => (
   <Flex
     direction='column'
     justifyContent='center'
+    alignItems='center'
+    gap='5px'
   >
     <Icon/>
-
     <DetailStatusMark toggle={ toggle }/>
   </Flex>
 );
@@ -149,6 +172,39 @@ export const Speedometer = (
             active={ rightTurnSignal }
           />
         </SpeedWrapper>
+        <CarNavigationWrapper
+          alignItems='flex-start'
+          justifyContent='center'
+          gap='12px'
+          fullWidth
+        >
+          <CarDetailStatus
+            Icon={ LongLightIcon }
+            toggle={ false }
+          />
+          <MarginContainer top='20px'>
+            <CarDetailStatus
+              Icon={ ShortLightIcon }
+              toggle={ false }
+            />
+          </MarginContainer>
+          <MarginContainer top='30px'>
+            <CarDetailStatus
+              Icon={ SeatBeltIcon }
+              toggle={ false }
+            />
+          </MarginContainer>
+          <MarginContainer top='20px'>
+            <CarDetailStatus
+              Icon={ KeyIcon }
+              toggle={ false }
+            />
+          </MarginContainer>
+          <CarDetailStatus
+            Icon={ DoorIcon }
+            toggle={ false }
+          />
+        </CarNavigationWrapper>
       </Relative>
     </SpeedometerWrapper>
   );

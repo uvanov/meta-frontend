@@ -10,13 +10,13 @@ import {
   MarginContainer,
   Typography
 } from '@ui/index';
+import { Speedometer } from '@pages/hud/components/Speedometer';
 
 // Assets
 import { ReactComponent as MicrophoneIcon } from '@images/hud/information/microphone-icon.svg';
 import { ReactComponent as WalletIcon } from '@images/hud/information/wallet-icon.svg';
 import { ReactComponent as FoodIcon } from '@images/hud/information/food-icon.svg';
 import CalendarImage from '@images/hud/information/calendar-icon.png';
-import { Speedometer } from '@pages/hud/components/Speedometer';
 
 // Styled Components
 const StyledInformation = styled(Flex, {
