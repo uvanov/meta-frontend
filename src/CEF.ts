@@ -48,7 +48,7 @@ const {
 } = spawnSelectSlice.actions;
 const {
   addMessage,
-  setChatVisibility
+  // setChatVisibility
 } = chatSlice.actions;
 const {
   setSpeed,
