@@ -1,3 +1,6 @@
+const COLOR_TAG_REGEX = /<{(#([a-f0-9]{6})})(.*?)>/gi;
+const BOLD_TAG_REGEX = /%(.*?)%/ig;
+
 export function addHexAlpha(color: string, opacity: number) {
   let hex = color.replace('#', '');
 
@@ -41,3 +44,42 @@ export function matchToEnglishAlphabet(string: string) {
 export function getGradient(primary: string, secondary: string, degree?: number){
   return `linear-gradient(${degree ? degree : 0}deg, ${primary}, ${secondary})`;
 };
+
+export function formatBoldTags(message: string){
+  if(!message.match(BOLD_TAG_REGEX)){
+    return message;
+  }
+
+  while (message.match(BOLD_TAG_REGEX)) {
+    const messageExec = BOLD_TAG_REGEX.exec(message);
+    message = message.replace(
+      // @ts-ignore
+      messageExec[0],
+      // @ts-ignore
+      `<strong>${ messageExec[1] }</strong>`
+    );
+  }
+
+  return message;
+}
+
+export function formatColorTags(message: string){
+
+  if(!message.match(COLOR_TAG_REGEX)){
+    return formatBoldTags(message);
+  }
+
+  while(message.match(COLOR_TAG_REGEX)){
+    const messageExec = COLOR_TAG_REGEX.exec(message);
+    message = message.replace(
+      // @ts-ignore
+      messageExec[0],
+      // @ts-ignore
+      `<span style="color: #${ messageExec[2] }">${ messageExec[3] }</span>`
+    );
+  }
+
+  return formatBoldTags(message);
+};
+
+

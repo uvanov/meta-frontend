@@ -7,7 +7,10 @@ import {
   Typography,
   MarginContainer, Flex
 } from '@ui/index';
-import { addHexAlpha } from '@lib/utils';
+import {
+  addHexAlpha,
+  formatColorTags
+} from '@lib/utils';
 import { useAppSelector } from '@hooks/state';
 
 // Styled Components
@@ -42,42 +45,11 @@ export const MessagesArea = () => {
   const messages = useAppSelector(state => state.chatSlice.messages);
   const [preparedMessageList, setPreparedMessageList] = useState([]);
 
-  const formatColor = (message) => {
-
-    if(!message.match(COLOR_REGEX)){
-      return formatBold(message);
-    }
-
-    while(message.match(COLOR_REGEX)){
-      const messageExec = COLOR_REGEX.exec(message);
-      message = message.replace(
-        messageExec[0],
-        `<span style="color: #${ messageExec[2] }">${ formatBold(messageExec[3]) }</span>`
-      );
-    }
-
-    return message;
-  };
-  const formatBold = (message) => {
-    if(!message.match(BOLD_REGEX)){
-      return message;
-    }
-
-    while (message.match(BOLD_REGEX)) {
-      const messageExec = BOLD_REGEX.exec(message);
-      message = message.replace(
-        messageExec[0],
-        `<strong>${ messageExec[1] }</strong>`
-      );
-    }
-
-    return message;
-  }
-
   useEffect(() => {
     if(messages.length){
       const newMessage = messages[messages.length - 1];
-      const formattedMessage = formatColor(newMessage.message);
+      console.log(newMessage);
+      const formattedMessage = formatColorTags(newMessage.message);
 
       preparedMessageList.unshift({
         timestamp: newMessage.timestamp,
