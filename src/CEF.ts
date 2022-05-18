@@ -23,7 +23,7 @@ import {
   hudSlice,
   HeadlightsType,
   TurnSignalsType
-} from "@store/slices/HudSlice";
+} from '@store/slices/HudSlice';
 
 // Destruct actions
 const {
@@ -135,7 +135,7 @@ export const CEF = {
     }
   },
   Hud: {
-    SetHudVisibility(visibility: boolean){
+    Visibility(visibility: boolean){
       dispatch(setHudVisibility({ visibility }));
     },
     SetSafeZoneFromLeft(fromLeft: string){

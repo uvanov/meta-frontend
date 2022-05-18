@@ -110,3 +110,48 @@ Messages support a little markdown-system: <br>
 `<{#ffffff} To colorize text >` <br>
 `% Wrap by percent-symbol to make it bold % `
 <br>
+
+### Hud
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| Visibility | Change visibility of hud interface | visibility: `boolean` |
+| SetSafeZoneFromLeft | Set horizontal space for mini-map | fromLeft: `string` |
+| SetSafeZoneFromBottom | Set vertical space for mini-map | fromBottom: `string` |
+| SetPlayerId | Set player id to display | id: `number` |
+| SetServerOnline | Set server online to display | online: `number` |
+<br>
+
+#### Hud.Hints
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| SetOpened | Set the hint visibility state  | opened: `boolean` |
+<br>
+
+#### Hud.Information
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| SetMoney | Set player's money to display  | money: `number` |
+| SetFood | Set player's satiety to display  | food: `number` |
+| SetDateDay | Set game-world date ( 00.00.0000 )  | day: `string` |
+| SetDateTime | Set game-world time ( 00:00 )  | time: `string` |
+<br>
+
+#### Hud.Speedometer
+
+| Method | Description | Parameters |   
+| --- | --- | --- |   
+| Visibility | Set the speedometer visibility status  | visibility: `boolean` |
+| SetMaximumSpeed | Set the maximum possible speed of vehicle for correct speedometer render  | speed: `number` |
+| SetSpeed | Set speed to show on speedometer  | speed: `number` |
+| SetFuel | Set fuel level to display  | fuel: `number` |
+| SetEngineHealth | Set engine health to display  | health: `number` |
+|  |   |  |
+| SetEngineTurnedOn | Set engine turned state  | turnedOn: `boolean` |
+| SetDoorsUnlocked | Set doors openness state  | unlocked: `boolean` |
+| SetSeatBelt | Set seatbelt active state  | seatBelt: `boolean` |
+| SetHeadlights | Set headlight working mod  | headlights: `string` (`high (Ближний)`, `low (Дальний)`, `off`) |
+| SetTurnSignals | Set turn signals | headlights: `string` (`left`,`right`,`both`,`off`) |
+<br>
