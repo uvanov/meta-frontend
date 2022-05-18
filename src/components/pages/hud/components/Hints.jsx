@@ -57,7 +57,7 @@ const HintsSection = styled(Flex, {
   ${({ opened }) => opened && css`
     transform: translateX(0);
   `}
-`
+`;
 
 // Exports
 const Hint = ({ isPrimary, button, text }) => (
@@ -110,8 +110,6 @@ export const Hints = () => {
       window.removeEventListener('keydown', keyDownHandler);
     }
   }, [])
-
-  // Сделать управление с клавиатуры
 
   return (
     <StyledHints

@@ -1,7 +1,6 @@
 // Import modules
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import ArcProgress from 'react-arc-progress';
 import { css } from '@emotion/react';
 
 // Local modules
@@ -39,7 +38,6 @@ const StyledInformation = styled(Flex, {
 // Exports
 
 export const Information = () => {
-
   const fromLeft = useAppSelector(state => state.hudSlice.safeZone.fromLeft);
   const informationState = useAppSelector(state => state.hudSlice.information);
 
