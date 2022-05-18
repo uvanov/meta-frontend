@@ -19,6 +19,11 @@ import {
   chatSlice,
   MessageType
 } from '@store/slices/ChatSlice';
+import {
+  hudSlice,
+  HeadlightsType,
+  TurnSignalsType
+} from '@store/slices/HudSlice';
 
 // Destruct actions
 const {
@@ -43,8 +48,30 @@ const {
 } = spawnSelectSlice.actions;
 const {
   addMessage,
-  setChatVisibility
+  // setChatVisibility
 } = chatSlice.actions;
+const {
+  setSpeed,
+  setDateDay,
+  setDateTime,
+  setDoorsUnlocked,
+  setEngineHealth,
+  setEngineTurnedOn,
+  setFood,
+  setFuel,
+  setHeadlights,
+  setHintsOpened,
+  setHudVisibility,
+  setMaximumSpeed,
+  setMoney,
+  setPlayerId,
+  setSafeZoneFromBottom,
+  setSafeZoneFromLeft,
+  setSeatBelt,
+  setServerOnline,
+  setSpeedometerVisibility,
+  setTurnSignals
+} = hudSlice.actions;
 
 const dispatch = store.dispatch;
 
@@ -105,6 +132,74 @@ export const CEF = {
     // },
     AddMessage(message: MessageType){
       dispatch(addMessage(message));
+    }
+  },
+  Hud: {
+    Visibility(visibility: boolean){
+      dispatch(setHudVisibility({ visibility }));
+    },
+    SetSafeZoneFromLeft(fromLeft: string){
+      dispatch(setSafeZoneFromLeft({ fromLeft }));
+    },
+    SetSafeZoneFromBottom(fromBottom: string){
+      dispatch(setSafeZoneFromBottom({ fromBottom }));
+    },
+    SetPlayerId(id: number){
+      dispatch(setPlayerId({ id }));
+    },
+    SetServerOnline(online: number){
+      dispatch(setServerOnline({ online }));
+    },
+    Hints: {
+      SetOpened(opened: boolean){
+        dispatch(setHintsOpened({ opened }));
+      }
+    },
+    Information: {
+      SetMoney(money: number){
+        dispatch(setMoney({ money }));
+      },
+      SetFood(food: number){
+        dispatch(setFood({ food }));
+      },
+      SetDateDay(day: string){
+        dispatch(setDateDay({ day }));
+      },
+      SetDateTime(time: string){
+        dispatch(setDateTime({ time }));
+      }
+    },
+    Speedometer: {
+      Visibility(visibility: boolean){
+        dispatch(setSpeedometerVisibility({ visibility }));
+      },
+      SetMaximumSpeed(speed: number){
+        dispatch(setMaximumSpeed({ speed }));
+      },
+      SetSpeed(speed: number){
+        dispatch(setSpeed({ speed }));
+      },
+      SetFuel(fuel: number){
+        dispatch(setFuel({ fuel }));
+      },
+      SetEngineHealth(health: number){
+        dispatch(setEngineHealth({ health }));
+      },
+      SetEngineTurnedOn(turnedOn: boolean){
+        dispatch(setEngineTurnedOn({ turnedOn }));
+      },
+      SetDoorsUnlocked(unlocked: boolean){
+        dispatch(setDoorsUnlocked({ unlocked }));
+      },
+      SetSeatBelt(seatBelt: boolean){
+        dispatch(setSeatBelt({ seatBelt }));
+      },
+      SetHeadlights(headlights: HeadlightsType){
+        dispatch(setHeadlights({ headlights }));
+      },
+      SetTurnSignals(turnSignals: TurnSignalsType){
+        dispatch(setTurnSignals({ turnSignals }));
+      }
     }
   }
 };

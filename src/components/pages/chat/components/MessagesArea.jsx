@@ -75,15 +75,17 @@ export const MessagesArea = () => {
   }
 
   useEffect(() => {
-    const newMessage = messages[messages.length - 1];
-    const formattedMessage = formatColor(newMessage.message);
+    if(messages.length){
+      const newMessage = messages[messages.length - 1];
+      const formattedMessage = formatColor(newMessage.message);
 
-    preparedMessageList.unshift({
-      timestamp: newMessage.timestamp,
-      message: formattedMessage
-    });
+      preparedMessageList.unshift({
+        timestamp: newMessage.timestamp,
+        message: formattedMessage
+      });
 
-    setPreparedMessageList([...preparedMessageList]);
+      setPreparedMessageList([...preparedMessageList]);
+    }
   }, [messages]);
 
   return (

@@ -10,6 +10,7 @@ import { SelectCharacter } from '@pages/select-character/SelectCharacter';
 import { CharacterCreator } from '@pages/character-creator/CharacterCreator';
 import { SpawnSelect } from '@pages/spawn-select/SpawnSelect';
 import { Chat } from '@pages/chat/Chat';
+import { Hud } from '@pages/hud/Hud';
 
 window.CEF = CEF;
 
@@ -18,11 +19,12 @@ export const App = () => {
 
   return (
     <>
-      <Authentication/>
-      <SelectCharacter/>
-      <CharacterCreator/>
-      <SpawnSelect/>
-      <Chat/>
+      <Authentication />
+      <SelectCharacter />
+      <CharacterCreator />
+      <SpawnSelect />
+      <Chat />
+      <Hud />
     </>
   );
 };
