@@ -11,6 +11,7 @@ import { CharacterCreator } from '@pages/character-creator/CharacterCreator';
 import { SpawnSelect } from '@pages/spawn-select/SpawnSelect';
 import { Chat } from '@pages/chat/Chat';
 import { Hud } from '@pages/hud/Hud';
+import { Notifications } from '@pages/notifications/Notifications';
 
 window.CEF = CEF;
 
@@ -25,6 +26,7 @@ export const App = () => {
       <SpawnSelect />
       <Chat />
       <Hud />
+      <Notifications />
     </>
   );
 };

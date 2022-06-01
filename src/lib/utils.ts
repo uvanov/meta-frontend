@@ -64,7 +64,7 @@ export function formatBoldTags(message: string){
 }
 
 export function formatColorTags(message: string){
-
+  console.log(message)
   if(!message.match(COLOR_TAG_REGEX)){
     return formatBoldTags(message);
   }
